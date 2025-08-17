@@ -1,0 +1,448 @@
+\documentclass[a4paper,12pt,openany]{article} 
+
+
+\usepackage[table]{xcolor}
+\usepackage[final]{pdfpages} 
+
+\usepackage{times} 
+% this is for the margin for binding in the case of two side printing
+\usepackage[hmarginratio=2:2]{geometry}
+
+\usepackage{amsmath, amssymb, latexsym}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+%\usepackage{subfigure}
+%\captionsetup[subtable]{position=bottom}
+%\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage[utf8]{inputenc}
+\usepackage{epsfig}
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{colonequals}
+\usepackage{tikz}
+\usepackage{xspace}
+\usepackage{paralist}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,positioning,fit,trees,shapes,shadows,automata,calc,decorations.markings,patterns} 
+\tikzset{>=latex}
+
+
+\usepackage{protocolj,arydshln}
+
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+\usepackage[hyphens]{url}
+\usepackage{multirow}
+%\usepackage[center, font={small,it}]{caption}
+\usepackage[font={small},skip=3pt,belowskip=-7pt]{caption}
+
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\usepackage[bookmarks=true]{hyperref}
+
+\usepackage{array}
+\usepackage{rotating}   
+\usepackage{makecell}
+\usepackage{colortbl}
+
+\usepackage{emptypage}
+\usepackage{diagbox}
+
+\usepackage{subfloat}
+
+\usepackage{pifont}
+
+\usepackage{hyperref} % draft for non-clickable links
+\usepackage[nameinlink,capitalize]{cleveref}
+%\usepackage{graphicx}
+
+\textwidth          150mm
+\textheight         225mm
+%\oddsidemargin      +6mm
+%\evensidemargin     +6mm
+%\oddsidemargin      +10mm
+%\evensidemargin     +10mm
+%\topmargin          -15mm
+\topmargin          -5mm
+
+%\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\SetKwInput{KwInput}{Input}                % Set the Input
+\SetKwInput{KwOutput}{Output}              % set the Output
+
+\newcommand{\diff}[1]{\textcolor{red}{#1}}
+
+\newcommand{\myparagraph}[1]{\vspace{0.1cm}\noindent{\bf #1.}}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\Z}{\ensuremath{Z}}
+\newcommand{\Zt}{\ensuremath{\Z_t}}
+\newcommand{\Zp}{\ensuremath{\Z_p}}
+\newcommand{\Zq}{\ensuremath{\Z_q}}
+\newcommand{\ZN}{\ensuremath{\Z_N}}
+\newcommand{\Zps}{\ensuremath{\Z_p^*}}
+\newcommand{\ZNs}{\ensuremath{\Z_N^*}}
+\newcommand{\calL}{\ensuremath{\mathcal{L}}}
+\newcommand{\calR}{\ensuremath{\mathcal{R}}}
+\newcommand{\Prove}{\ensuremath{\mathsf{Prove}}}
+\newcommand{\Vrfy}{\ensuremath{\mathsf{Vrfy}}}
+\newcommand{\Sim}{\ensuremath{\mathsf{Sim}}}
+\newcommand{\Ext}{\ensuremath{\mathsf{Ext}}}
+\newcommand{\stmt}{\ensuremath{\mathsf{stmt}}}
+\newcommand{\wits}{\ensuremath{\mathsf{wits}}}
+\newcommand{\resp}{\ensuremath{\mathsf{resp}}}
+\newcommand{\chlg}{\ensuremath{\mathsf{chlg}}}
+\newcommand{\mask}{\ensuremath{\mathsf{mask}}}
+
+\newcommand{\Hzk}{\ensuremath{\mathsf{H}_{\mathsf{zk}}}}
+
+\iffalse
+
+	\usepackage[
+	automake,
+	%acronym, % Create "acronym" glossary, so it can be printed separately
+	nogroupskip, % The vertical gaps are caused by a change in letter group. Use nogroupskip to omit them
+	nonumberlist, % The number list can be suppressed using the nonumberlist option.
+	]{glossaries-extra}
+	
+	% ############################ Glossaries #####################################
+	% Has to be outside preamble to work with latexmkrc
+	%\usepackage{makeidx}dbb0a64436904c97afe3e4b28e4f149c4bf93a91
+	\usepackage[
+	%acronym, % Create "acronym" glossary, so it can be printed separately
+	nogroupskip, % The vertical gaps are caused by a change in letter group. Use nogroupskip to omit them
+	nonumberlist, % The number list can be suppressed using the nonumberlist option.
+	]{glossaries-extra}
+	
+	\makeindex{}
+	\makeglossaries{}
+	
+	% https://tex.stackexchange.com/questions/437345/acronyms-will-only-display-short-version-in-main-text-even-the-first-time-they
+	% First time acronym is used, use long version, afterwards short
+	\setabbreviationstyle[acronym]{long-short}
+	
+	\loadglsentries{glossaries}
+	
+	% Automatically index the location of entry in the glossary
+	% for those entries that are in the "general" category:
+	% This indexes every glossary entry by name
+	\glssetcategoryattribute{general}{dualindex}{true}
+	
+	% Emphasize only first use of glossary component
+	% https://www.dickimaw-books.com/gallery/index.php?label=mixed-glossary-emph2
+	% \renewcommand{\glsxtrregularfont}[1]{\glsxtrifwasfirstuse{\emph{#1}}{#1}}
+	\renewcommand{\glsxtrregularfont}[1]{\glsxtrifwasfirstuse{\textit{#1}}{#1}}
+	% \renewcommand{\glsxtrabbreviationfont}[1]{\glsxtrifwasfirstuse{\emph{#1}}{#1}}
+	%\renewcommand{\glsxtrabbreviationfont}[1]{\glsxtrifwasfirstuse{\textit{#1}}{#1}}
+	
+	% ########################## End Glossaries ###################################
+\fi
+
+%%%% -----------------------------------------------------------------------
+%%%% Ryzi Nashovo ekvilibrium
+\newcommand{\pnes}{s^{*}}
+
+\newcommand{\gls}[1]{#1}
+
+%%%% -----------------------------------------------------------------------
+%%%% Hrac honest a malicious
+\newcommand{\phon}{P_{hon}}
+\newcommand{\pmal}{P_{grd}}
+\newcommand{\halfhalf}{(\frac{1}{2}, \frac{1}{2})}
+\newcommand{\bracks}[2]{\left( #1, #2 \right)}
+
+\newtheorem{claim}{Claim}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+
+\newtheorem{lemma}{Lemma}
+
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+
+\newcommand{\varDash}[1]{{\operatorname{\mathit{#1}}}}
+
+\newtheorem{theorem1}{Security Claim}
+\newenvironment{proof1} {\begin{proof}[Justification]} {\end{proof}}
+
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+\newcommand{\pluseq}{\mathrel{{+}{=}}}
+\newcommand{\plusplus}[1]{\mathrel{{#1}{+}{+}}}
+
+
+%%%% -----------------------------------------------------------------------
+%%%% Genericka tabulka zisku v bazove hre
+\newcommand{\bazka}[4]{
+	\begin{tabular}[t]{c|c|c}
+		$\phon$/$\pmal$ & \gls{honest} & \gls{greedy} \\
+		\hline
+		\gls{honest} & (#1,#1) & (#2,#3) \\
+		\hline
+		\gls{greedy} & (#3,#2) & (#4,#4) \\
+\end{tabular}}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{hypothesis}{Hypothesis}
+
+
+\newcommand{\goes}[1]{\xrightarrow{#1}}
+
+\newcommand{\reducetool}[0]{\textsc{Reduce}}
+
+\newcommand{\specialcell}[2][c]{%
+	\begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
+\usepackage[normalem]{ulem}
+\newcommand{\cmark}{\textcolor{black}{\ding{51}}}
+\newcommand{\xmark}{\textcolor{black}{\ding{55}}}
+\newcommand{\trot}[1]{\multicolumn{1}{l}{\rlap{\rotatebox{25}{#1}~}}}
+
+
+\algrenewcommand\algorithmiccomment[1]{\hfill \textcolor{gray}{$\triangleright$ \textit{#1}}}
+
+
+\algnewcommand{\IIf}[1]{\State\algorithmicif\ #1\ \algorithmicthen}
+\algnewcommand{\EElse}[1]{\State\algorithmicelse\ #1\ }
+\algnewcommand{\EndIIf}{\unskip}
+\algrenewcommand\algorithmicindent{1.2em}%
+
+\newcommand*{\dittoclosing}{---''---}
+
+
+\newcommand{\familymc}{\ensuremath{\mathfrak{D}}}
+\newcommand{\init}{\ensuremath{s_0}}
+\newcommand{\semantics}[1]{[\![\, #1 \, ]\!]}
+%\newcommand{\nils}[1]{\color{blue}Nils: #1\color{black}\xspace}
+\newcommand{\pathset}{\mathsf{Paths}}
+\newcommand{\paths}[2]{\pathset(#1,\allowbreak\,#2)}
+\newcommand{\pathsfin}{\pathset_{\mathit{fin}}}
+\newcommand{\pathsinf}{\pathset_{\mathit{inf}}}
+\newcommand{\act}{\ensuremath{a}}
+\newcommand{\Act}{\ensuremath{\mathit{Act}}}
+\newcommand{\last}[1]{\mathrm{last}(#1)}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\successors}{succ}
+\newcommand{\Distr}{\mathit{Distr}}
+\newcommand{\subDistr}{\mathit{subDistr}}
+\newcommand{\distDom}{X}
+%\newcommand{\distDomFin}{\DistDom=\{x_1,\, \ldots,\, x_n}
+\newcommand{\distFunc}{\mu}
+\newcommand{\distDomElem}{x}
+\newcommand{\true}{\texttt{true}\xspace}
+\newcommand{\false}{\texttt{false}\xspace}
+\newcommand{\probOneG}{\mathit{p1G}}
+\newcommand{\probPosG}{\mathit{pPG}}
+\newcommand{\quotientstates}{\ensuremath{S^\mathfrak{D}_\sim}}
+\newcommand{\abs}{\text{abs}}
+\newcommand{\queue}{\ensuremath{Q}}
+\newcommand{\submc}[2]{\ensuremath{{#1}\!\downarrow\!{#2}}}
+
+
+\newcommand{\dtmc}{\ensuremath{D}}
+\newcommand{\mdp}{\ensuremath{M}}
+\newcommand{\probdtmc}{\ensuremath{P}}
+\newcommand{\probfam}{\ensuremath{\mathfrak{P}}}
+\newcommand{\sched}{\ensuremath{\sigma}}
+\newcommand{\induced}[2]{\ensuremath{{#1}_{#2}}}
+\newcommand{\Succ}{\ensuremath{\mathsf{Succ}}}
+
+\newcommand{\Option}{\mathsf{Option}}
+\newcommand{\Sketch}{\mathfrak{S}_H}
+\newcommand{\ProgHoles}{\mathfrak{P}_H}
+\newcommand{\program}[2]{\mathfrak{#1}_{#2}}
+\newcommand{\SketchConstraints}{\ensuremath{\Gamma}}
+\newcommand{\OptionPrices}{\ensuremath{\mathsf{cost}}}
+
+\newcommand{\Assignments}[1]{\mathcal{A}_{#1}}
+\newcommand{\var}{\xi}
+\newcommand{\dom}{\textsl{dom}}
+
+\newcommand{\actionof}[1]{\mathrm{act}(#1)}
+\newcommand{\varHigh}{\xi}
+\newcommand{\Vars}{\mathrm{Var}}
+\newcommand{\modules}{\mathcal{M}}
+\newcommand{\enabled}{\mathsf{enabled}}
+\newcommand{\Prob}{\mathsf{Prob}}
+\newcommand{\fixdeadlock}{\mathsf{fixdl}}
+
+\newcommand{\crn}{\mathcal{N}}
+\newcommand{\concMC}{\gamma(\crn)}
+\newcommand{\absMC}{\alpha(\crn)}
+\newcommand{\absIMC}{\alpha(\crn)}
+
+\newcommand{\pspace}{\mathcal{P}}
+\newcommand{\tspace}{\mathcal{T}}
+\newcommand{\uspace}{\mathcal{U}}
+\newcommand{\fspace}{\mathcal{F}}
+\newcommand{\rspace}{\mathcal{R}}
+
+\newcommand{\model}{\ensuremath{\mathcal{C}}}
+
+\newcommand{\distr}{\pi}
+\newcommand{\tmat}{\mathbf{R}}
+\newcommand{\states}{S}
+\newcommand{\state}{s}
+\newcommand{\pmat}{\mathbf{P}}
+\newcommand{\propQM}{=?}
+
+\newcommand{\propTrue}{\mbox{\tt true}}
+\newcommand{\propFalse}{\mbox{\tt false}}
+
+\newcommand{\pathF}{\ensuremath{\phi}}
+\newcommand{\stateF}{\ensuremath{\Phi}}
+
+
+\newcommand{\propP}{\mbox{P}}
+\newcommand{\propU}{\mbox{U}}
+\newcommand{\propG}{\mbox{G}}
+\newcommand{\propF}{\mbox{F}}
+\newcommand{\propC}{\mbox{C}}
+\newcommand{\propI}{\mbox{I}}
+\newcommand{\propR}{\mbox{R}}
+\newcommand{\propX}{\mbox{X}}
+
+\newcommand{\satfun}{\ensuremath{\Lambda}}
+
+\newcommand{\CTMC}{\ensuremath{\mathcal{C}=(S,\pi_0, \mathbf{R}, L)}}
+\newcommand{\pp}{\ensuremath{\gamma}}
+\newcommand{\ddistr}{\tau}
+
+\newcommand{\Path}{\mbox{Path}}
+
+\newcommand{\toolname}{PRISM-PSY}
+
+
+\usepackage{listings}
+
+\include{prismstyle}
+
+
+\usepackage{nicefrac}
+
+
+\newcommand{\ih}[1]{\textcolor{blue}{\footnotesize [IH: #1]}}
+
+\hyphenation{block-chain block-chains Smart-OTPs free-ness Strong-Chain gree-dy}
+
+\newcommand{\name}{CHANGE-ME\xspace}%
+
+
+\begin{document} 
+
+\input{title.tex}
+
+\pagenumbering{roman}
+
+\input{abstract.tex}
+\clearpage
+%\input{ack.tex}
+
+\newtheorem{mydef}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{myproof}{Proof}
+\newtheorem{myproposition}{Proposition}
+\newtheorem{mytheorem}{Theorem}
+\newtheorem{myexample}{Example}
+\newtheorem{myproblem}{Problem}
+\newtheorem{mycorollary}{Corollary}
+\newtheorem{mymethod}{Approach}
+\newtheorem{remark}{Remark}
+
+
+\renewcommand{\tableautorefname}{Table}
+\renewcommand{\algorithmautorefname}{Algorithm}
+\renewcommand{\figureautorefname}{Figure}
+\renewcommand{\equationautorefname}{Equation}
+\renewcommand{\sectionautorefname}{Appendix}
+
+\renewcommand{\chapterautorefname}{Chapter}
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Section}
+\renewcommand{\subsubsectionautorefname}{Section}
+\renewcommand{\paragraphautorefname}{ Section}
+\renewcommand{\tablename}{Table}
+\renewcommand{\figurename}{Figure}
+%\newcommand{\subfigureautorefname}{\figureautorefname}
+
+\newcommand{\mysubsubsection}[1]{\smallskip\subsubsection{#1}}
+
+
+\tableofcontents
+
+\newcommand{\squishlist}{
+   \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{5pt}    \setlength{\parsep}{0pt}
+      \setlength{\topsep}{5pt}     \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{1.35em} \setlength{\labelwidth}{1em}
+      \setlength{\labelsep}{0.5em} } }
+
+\newcommand{\squishend}{
+    \end{list}  }
+
+
+\clearpage
+\pagenumbering{arabic}
+
+
+
+%\part{COMMENTARY}
+%\part{COMMENTED RESEARCH}
+
+\section{Introduction and Required Cryptographic Constructs}\label{sec:intro}
+\input{./sec/intro.tex}
+\newpage
+
+\section{Consensus Protocols \& Blockchains}\label{sec:consensus-protocols-blockchains}
+\input{./sec/2-consensus-protocols.tex}
+\newpage
+
+\section{Bitcoin (Part I)}\label{chapter-3-bitcoin-part-1}
+\input{./sec/3-bitcoin-I.tex}
+\newpage
+
+\section{Bitcoin (Part II)}\label{chapter-3-bitcoin-part-2}
+\input{./sec/4-bitcoin-II.tex}
+\newpage
+
+\section{Ethereum v1.0 (PoW) and Smart Contracts}\label{chapter-4-Eth1}
+\input{./sec/5-ethereum-I.tex}
+\newpage
+
+\section{Smart Contract Programming}\label{chapter-6-smart-contract-programming}
+\input{./sec/6-ethereum-II.tex}
+
+
+%\chapter{tmp}\label{chapter:intro}
+%BLA BLA~\cite{homoliak2019security}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\addcontentsline{toc}{chapter}{\\Bibliography}
+\bibliographystyle{alpha}
+\bibliography{./refs/ref,./refs/ref2,./refs/ref3,./refs/ref4,./refs/ref5,./refs/ref6,./refs/ref7,./refs/ref8,./refs/ref9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\pagenumbering{gobble}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

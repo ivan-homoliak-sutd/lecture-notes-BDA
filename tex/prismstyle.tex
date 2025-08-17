@@ -1,0 +1,55 @@
+
+% tikzstyles
+\definecolor{prismgreen}{HTML}{009900}
+\definecolor{prismred}{HTML}{cc0000}
+\definecolor{prismblue}{HTML}{0000cc}
+
+
+
+% PRISM syntax highlighting
+\lstdefinelanguage{Prism}{
+        basicstyle=\color{prismred}\scriptsize\ttfamily,
+        literate=*	{0}{{\textcolor{prismblue}{0}}}{1}
+			{1}{{\textcolor{prismblue}{1}}}{1}
+			{2}{{\textcolor{prismblue}{2}}}{1}
+			{3}{{\textcolor{prismblue}{3}}}{1}
+			{4}{{\textcolor{prismblue}{4}}}{1}
+			{5}{{\textcolor{prismblue}{5}}}{1}
+			{6}{{\textcolor{prismblue}{6}}}{1}
+			{7}{{\textcolor{prismblue}{7}}}{1}
+			{8}{{\textcolor{prismblue}{8}}}{1}
+			{9}{{\textcolor{prismblue}{9}}}{1}
+			{.0}{{\textcolor{prismblue}{.0}}}{2}
+			{.1}{{\textcolor{prismblue}{.1}}}{2}
+			{.2}{{\textcolor{prismblue}{.2}}}{2}
+			{.3}{{\textcolor{prismblue}{.3}}}{2}
+			{.4}{{\textcolor{prismblue}{.4}}}{2}
+			{.5}{{\textcolor{prismblue}{.5}}}{2}
+			{.6}{{\textcolor{prismblue}{.6}}}{2}
+			{.7}{{\textcolor{prismblue}{.7}}}{2}
+			{.8}{{\textcolor{prismblue}{.8}}}{2}
+			{.9}{{\textcolor{prismblue}{.9}}}{2}
+			{[}{{\textcolor{black}{[}}}{1}
+			{]}{{\textcolor{black}{]}}}{1}
+			{+}{{\textcolor{black}{+}}}{1}
+			{-}{{\textcolor{black}{-}}}{1}
+			{=}{{\textcolor{black}{=}}}{1}
+			{<}{{\textcolor{black}{<}}}{1}
+			{>}{{\textcolor{black}{>}}}{1}
+			{\&}{{\textcolor{black}{\&}}}{1}
+			{|}{{\textcolor{black}{|}}}{1}
+			{:}{{\textcolor{black}{:}}}{1}
+			{;}{{\textcolor{black}{;}}}{1}
+			{(}{{\textcolor{black}{(}}}{1}
+			{)}{{\textcolor{black}{)}}}{1}
+			{..}{{\textcolor{black}{..}}}{2},
+        keywords= {bool,ceil,const,ctmc,double,dtmc,endinit,endmodule,endrewards, endsystem,F,false,floor,formula,G,global,I,init,int,label,max,mdp,min,module,nondeterministic,P,Pmin,Pmax,prob,probabilistic,rate,rewards,Rmin,Rmax,S,stochastic,system,true,U, option, either, assignment, relation, operation, hole, variable},
+        keywordstyle={\bfseries\color{black}},
+        numberstyle=\footnotesize\color{black},
+        comment=[l] {//}, morecomment=[s]{/*}{*/},
+        commentstyle= \color{prismgreen},
+        tabsize=4,
+        captionpos=b,
+        escapechar=^,
+        moredelim=[is][\color{orange}]{@}{@},
+}
