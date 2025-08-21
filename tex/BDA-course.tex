@@ -39,6 +39,12 @@
 \providecommand{\tightlist}{%
 \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+\usepackage{longtable,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+
 
 \usepackage[hyphens]{url}
 \usepackage{multirow}
@@ -423,6 +429,11 @@
 \section{Smart Contract Programming}\label{chapter-6-smart-contract-programming}
 \input{./sec/6-ethereum-II.tex}
 
+\section{Anonymity and Privacy}\label{chapter-6-anonoymity}
+\input{./sec/7-anonymity.tex}
+
+\section{Scalability and Throughput}\label{chapter-6-scalability}
+\input{./sec/8-scalability.tex}
 
 %\chapter{tmp}\label{chapter:intro}
 %BLA BLA~\cite{homoliak2019security}
