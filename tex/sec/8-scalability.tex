@@ -164,18 +164,16 @@ The difference in throughput between traditional blockchains and
 centralized systems is stark, highlighting the need for scaling
 solutions.
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule\noalign{}
-System & Throughput (TPS) \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Bitcoin & \textasciitilde3 - 8 TPS \\
-Ethereum & \textasciitilde15 - 30 TPS \\
-Solana & \textasciitilde5,000 TPS (lab tested) \\
-VISA & \textasciitilde11,000 - 25,000 TPS \\
-\end{longtable}
+\begin{tabular}{ll}
+	\toprule
+	System & Throughput (TPS) \\
+	\midrule
+	Bitcoin & \textasciitilde3 - 8 TPS \\
+	Ethereum & \textasciitilde15 - 30 TPS \\
+	Solana & \textasciitilde5,000 TPS (lab tested) \\
+	VISA & \textasciitilde11,000 - 25,000 TPS \\
+	\bottomrule
+\end{tabular}
 
 \subsubsection{1.4: The Blockchain Stacked
 Model}\label{the-blockchain-stacked-model}
@@ -230,18 +228,19 @@ after the transaction's block, a concept known as \textbf{finality}.
 Finality is the time it takes for a transaction to be considered
 irreversible. Different systems have vastly different finality times:
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule\noalign{}
-System & Finality Time \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Bitcoin & \textasciitilde60 min (6 blocks) \\
-Ethereum PoW & \textasciitilde3 min (12 blocks) \\
-Ethereum PoS & \textasciitilde12 min (2 epochs) \\
-Algorand \& BFT & Instant \\
-\end{longtable}
+\begin{center}
+\begin{tabular}{ll}
+	\toprule
+	System & Finality Time \\
+	\midrule
+	Bitcoin & \textasciitilde60 min (6 blocks) \\
+	Ethereum PoW & \textasciitilde3 min (12 blocks) \\
+	Ethereum PoS & \textasciitilde12 min (2 epochs) \\
+	Algorand & Instant \\
+	\bottomrule
+		
+\end{tabular}
+\end{center}
 
 \subsubsection{2.3: Blockchain Metrics}\label{blockchain-metrics}
 
