@@ -33,7 +33,7 @@
 %
 %\begin{document}
 
-This chapter confronts one of the most formidable challenges in the
+This section confronts one of the most formidable challenges in the
 evolution of blockchain technology: scalability. As decentralized
 networks gain mainstream adoption, their ability to process a high
 volume of transactions in a timely and cost-effective manner becomes
@@ -55,7 +55,7 @@ blockchain structure.
 Furthermore, we will consider the role of permissioned blockchains and
 Trusted Execution Environments (TEEs) in achieving scalability,
 acknowledging the trade-offs they entail in terms of decentralization.
-By the end of this chapter, you will have a nuanced understanding of the
+By the end of this section, you will have a nuanced understanding of the
 complex and multifaceted challenge of blockchain scalability and the
 diverse range of solutions that are being developed to address it.
 
@@ -88,10 +88,10 @@ diverse range of solutions that are being developed to address it.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Section 1: The Scalability
+\subsection{The Scalability
 Challenge}\label{section-1-the-scalability-challenge}
 
-\subsubsection{1.1: Defining Scalability}\label{defining-scalability}
+\subsubsection{Defining Scalability}\label{defining-scalability}
 
 Scalability in the context of blockchain can be defined in two primary
 ways:
@@ -111,7 +111,7 @@ ways:
   degrade as more nodes join the network.
 \end{enumerate}
 
-\subsubsection{1.2: The Blockchain
+\subsubsection{The Blockchain
 Trilemma}\label{the-blockchain-trilemma}
 
 The blockchain trilemma is a conceptual model, popularized by Ethereum
@@ -133,12 +133,7 @@ fully satisfy two of the following three properties at any given time:
   33\% for BFT).
 \end{itemize}
 
-\begin{figure}
-\centering
 
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Blockchain Trilemma}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_004.jpg}}
-\caption{Blockchain Trilemma}
-\end{figure}
 
 This trilemma leads to different classes of solutions, each making a
 specific trade-off:
@@ -175,17 +170,12 @@ solutions.
 	\bottomrule
 \end{tabular}
 
-\subsubsection{1.4: The Blockchain Stacked
+\subsubsection{The Blockchain Stacked
 Model}\label{the-blockchain-stacked-model}
 
 Scalability can be addressed at different layers of the blockchain
 stack:
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Blockchain Stacked Model}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_010.png}}
-\caption{Blockchain Stacked Model}
-\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -202,28 +192,28 @@ stack:
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Section 2: Forks, Finality, and
+\subsection{Forks, Finality, and
 Metrics}\label{section-2-forks-finality-and-metrics}
 
-\subsubsection{2.1: Forks in PoW
+\subsubsection{Forks in PoW
 Blockchains}\label{forks-in-pow-blockchains}
 
 Forks occur when two or more miners find a block at roughly the same
 time, creating temporary branches in the chain. This leads to ``stale''
 or ``orphaned'' blocks that are eventually discarded.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Fork illustration}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_012.jpg}}
-\caption{Fork illustration}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Fork illustration}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_012.jpg}}
+%\caption{Fork illustration}
+%\end{figure}
 
 Forks create the risk of \textbf{double-spending}, where a value spent
 in one branch is spent again in another. This is why transaction
 confirmation requires waiting for a certain number of blocks to be added
 after the transaction's block, a concept known as \textbf{finality}.
 
-\subsubsection{2.2: Finality}\label{finality}
+\subsubsection{Finality}\label{finality}
 
 Finality is the time it takes for a transaction to be considered
 irreversible. Different systems have vastly different finality times:
@@ -242,7 +232,7 @@ irreversible. Different systems have vastly different finality times:
 \end{tabular}
 \end{center}
 
-\subsubsection{2.3: Blockchain Metrics}\label{blockchain-metrics}
+\subsubsection{Blockchain Metrics}\label{blockchain-metrics}
 
 Several metrics are used to evaluate the performance and scalability of
 a blockchain:
@@ -268,13 +258,13 @@ a blockchain:
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Section 3: Layer 1 Scaling
+\subsection{Layer 1 Scaling
 Solutions}\label{section-3-layer-1-scaling-solutions}
 
 Layer 1 scaling solutions involve making fundamental changes to the core
 protocol of the blockchain.
 
-\subsubsection{3.1: Naive Improvements and Their
+\subsubsection{Naive Improvements and Their
 Limitations}\label{naive-improvements-and-their-limitations}
 
 The most intuitive approaches to improving scalability involve simply
@@ -288,33 +278,33 @@ drawbacks.
   leading to a higher stale block rate and favoring miners with better
   network connections, thus increasing centralization.
 
-  \begin{figure}
-  \centering
-%  \pandocbounded{\includegraphics[keepaspectratio,alt={Increased Block Size Problem}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_024.png}}
-  \caption{Increased Block Size Problem}
-  \end{figure}
+%  \begin{figure}
+%  \centering
+%%  \pandocbounded{\includegraphics[keepaspectratio,alt={Increased Block Size Problem}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_024.png}}
+%  \caption{Increased Block Size Problem}
+%  \end{figure}
 \item
   \textbf{Decreasing the Block Creation Time:} This also increases the
   theoretical TPS but leads to more frequent forks and a higher stale
   block rate, which wastes resources and weakens security.
 
-  \begin{figure}
-  \centering
-%  \pandocbounded{\includegraphics[keepaspectratio,alt={Decreased Block Time Problem}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_029.png}}
-  \caption{Decreased Block Time Problem}
-  \end{figure}
+%  \begin{figure}
+%  \centering
+%%  \pandocbounded{\includegraphics[keepaspectratio,alt={Decreased Block Time Problem}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_029.png}}
+%  \caption{Decreased Block Time Problem}
+%  \end{figure}
 \end{itemize}
 
 As shown in the graph below, decreasing the block creation time
 dramatically increases the orphan block rate.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Orphan Block Rate vs.~Block Time}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_030.png}}
-\caption{Orphan Block Rate vs.~Block Time}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Orphan Block Rate vs.~Block Time}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_030.png}}
+%\caption{Orphan Block Rate vs.~Block Time}
+%\end{figure}
 
-\subsubsection{3.2: Bitcoin-NG (Next
+\subsubsection{Bitcoin-NG (Next
 Generation)}\label{bitcoin-ng-next-generation}
 
 Bitcoin-NG is a more sophisticated Layer 1 scaling solution that
@@ -329,11 +319,11 @@ elected leader then serially publishes transactions in smaller
 ``microblocks'' without needing to perform PoW for each one. This
 continues until a new leader mines a new key block.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Bitcoin-NG Principle}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_035.jpg}}
-\caption{Bitcoin-NG Principle}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Bitcoin-NG Principle}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_035.jpg}}
+%\caption{Bitcoin-NG Principle}
+%\end{figure}
 
 This approach allows for much higher transaction throughput, as it is
 limited only by the network's propagation capacity and the leader's
@@ -344,13 +334,13 @@ target for Denial-of-Service (DoS) attacks.
 \textbf{Evaluation:} Bitcoin-NG shows significantly better scalability
 than Bitcoin, although it does not achieve perfect linear scaling.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Bitcoin-NG Evaluation}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_041.jpg}}
-\caption{Bitcoin-NG Evaluation}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Bitcoin-NG Evaluation}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_041.jpg}}
+%\caption{Bitcoin-NG Evaluation}
+%\end{figure}
 
-\subsubsection{3.3: Sharding}\label{sharding}
+\subsubsection{Sharding}\label{sharding}
 
 Sharding is a powerful technique for scaling blockchains that is
 borrowed from the world of distributed databases. It involves
@@ -361,13 +351,13 @@ network. This allows for parallel transaction processing, which can lead
 to a linear increase in throughput as the number of nodes in the network
 grows.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Horizontal Sharding}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_046.jpg}}
-\caption{Horizontal Sharding}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Horizontal Sharding}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_046.jpg}}
+%\caption{Horizontal Sharding}
+%\end{figure}
 
-\paragraph{3.3.1: Elastico}\label{elastico}
+\paragraph{Elastico}\label{elastico}
 
 Elastico was the first practical sharding protocol proposed for open
 blockchains.
@@ -383,24 +373,19 @@ transactions and reaches consensus using a BFT-like protocol. 4.
 blocks from each shard and broadcasts a final, unified block to the
 network.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Elastico Committee Formation}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_058.jpg}}
-\caption{Elastico Committee Formation}
-\end{figure}
 
 \textbf{Evaluation:} Elastico demonstrated that throughput could scale
 nearly linearly with the number of nodes. However, a significant amount
 of time was spent on committee formation, and it lacked a mechanism for
 secure cross-shard transactions.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Elastico Evaluation}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_073.png}}
-\caption{Elastico Evaluation}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Elastico Evaluation}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_073.png}}
+%\caption{Elastico Evaluation}
+%\end{figure}
 
-\paragraph{3.3.2: OmniLedger}\label{omniledger}
+\paragraph{OmniLedger}\label{omniledger}
 
 OmniLedger builds upon Elastico with several key improvements.
 
@@ -416,34 +401,34 @@ multiple shards either commit atomically or abort completely. *
 \textbf{ByzCoinX:} A robust and efficient intra-shard BFT consensus
 protocol.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={OmniLedger Architecture}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_080.png}}
-\caption{OmniLedger Architecture}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={OmniLedger Architecture}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_080.png}}
+%\caption{OmniLedger Architecture}
+%\end{figure}
 
 \textbf{Evaluation:} OmniLedger demonstrated significant performance
 gains over previous systems, achieving high throughput with low latency.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={OmniLedger Throughput}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_087.jpg}}
-\caption{OmniLedger Throughput}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={OmniLedger Throughput}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_087.jpg}}
+%\caption{OmniLedger Throughput}
+%\end{figure}
 
-\paragraph{3.3.3: RapidChain}\label{rapidchain}
+\paragraph{RapidChain}\label{rapidchain}
 
 RapidChain aims for \textbf{full sharding}, partitioning not only
 computation but also storage and communication. This approach promises
 even greater scalability by minimizing redundancy across the network.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={RapidChain Comparison}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_093.png}}
-\caption{RapidChain Comparison}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={RapidChain Comparison}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_093.png}}
+%\caption{RapidChain Comparison}
+%\end{figure}
 
-\subsubsection{3.4: DAG-Based Protocols}\label{dag-based-protocols}
+\subsubsection{DAG-Based Protocols}\label{dag-based-protocols}
 
 Directed Acyclic Graph (DAG) based protocols represent a fundamental
 departure from the linear chain structure of traditional blockchains. In
@@ -452,11 +437,11 @@ transactions, creating a graph-like structure. This allows for parallel
 transaction processing and can result in significantly higher throughput
 and lower confirmation times.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={PHANTOM DAG}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_100.png}}
-\caption{PHANTOM DAG}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={PHANTOM DAG}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_100.png}}
+%\caption{PHANTOM DAG}
+%\end{figure}
 
 However, DAGs introduce new challenges, such as achieving a total
 ordering of transactions, which is an NP-hard problem. Protocols like
@@ -470,18 +455,18 @@ structure. The DAG can split into more parallel chains when transaction
 demand is high and merge back together when demand is low, dynamically
 adjusting the level of parallelism.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Sycomore Self-Adaptivity}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_106.jpg}}
-\caption{Sycomore Self-Adaptivity}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Sycomore Self-Adaptivity}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_106.jpg}}
+%\caption{Sycomore Self-Adaptivity}
+%\end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Section 4: Layer 2 and Other Scaling
+\subsection{Layer 2 and Other Scaling
 Solutions}\label{section-4-layer-2-and-other-scaling-solutions}
 
-\subsubsection{4.1: Layer 2 Scaling}\label{layer-2-scaling}
+\subsubsection{Layer 2 Scaling}\label{layer-2-scaling}
 
 Layer 2 solutions operate on top of an existing Layer 1 blockchain,
 handling transactions off-chain to reduce the load on the main chain.
@@ -493,11 +478,11 @@ handling transactions off-chain to reduce the load on the main chain.
   numerous transactions off-chain within that channel, only settling the
   final balance on the main chain when the channel is closed.
 
-  \begin{figure}
-  \centering
-%  \pandocbounded{\includegraphics[keepaspectratio,alt={Layer 2 Payment Channels}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_107.png}}
-  \caption{Layer 2 Payment Channels}
-  \end{figure}
+%  \begin{figure}
+%  \centering
+%%  \pandocbounded{\includegraphics[keepaspectratio,alt={Layer 2 Payment Channels}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_107.png}}
+%  \caption{Layer 2 Payment Channels}
+%  \end{figure}
 \item
   \textbf{ZK-Rollups:} Transactions are processed off-chain, and a
   cryptographic proof (a ZK-SNARK) is generated to attest to their
@@ -506,7 +491,7 @@ handling transactions off-chain to reduce the load on the main chain.
   on-chain transaction.
 \end{itemize}
 
-\subsubsection{4.2: Permissioned
+\subsubsection{Permissioned
 Blockchains}\label{permissioned-blockchains}
 
 Permissioned blockchains offer a different approach to scalability by
@@ -522,7 +507,7 @@ Byzantine Fault Tolerance (BFT).
   membership providers, and smart contract execution.
 \end{itemize}
 
-\subsubsection{4.3: Trusted Execution Environments
+\subsubsection{Trusted Execution Environments
 (TEEs)}\label{trusted-execution-environments-tees}
 
 A Trusted Execution Environment (TEE) is a secure and isolated area of a
@@ -532,17 +517,17 @@ create hybrid blockchain solutions that offload some of the
 computational work from the main blockchain to a trusted hardware
 environment, improving scalability and privacy.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Intel SGX}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_119.png}}
-\caption{Intel SGX}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Intel SGX}]{../../../Input/BDA-09-Scalability-Throughut-10.-4.-2025_files/Image_119.png}}
+%\caption{Intel SGX}
+%\end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{Summary / Key Takeaways}\label{summary-key-takeaways}
 
-This chapter has provided a comprehensive overview of the critical
+This section has provided a comprehensive overview of the critical
 challenge of blockchain scalability. We have established that there is
 no single, perfect solution, but rather a spectrum of approaches that
 involve different trade-offs between scalability, security, and
@@ -613,18 +598,18 @@ of performance, security, and decentralization.
 \begin{itemize}
 \tightlist
 \item
-  \textbf{The Blockchain Trilemma}:
-  https://vitalik.ca/general/2021/04/07/sharding.html
+  \textbf{The Blockchain Trilemma}:\\
+  \url{https://vitalik.ca/general/2021/04/07/sharding.html}
 \item
-  \textbf{Bitcoin-NG: A Scalable Blockchain Protocol}:
-  https://www.usenix.org/system/files/conference/nsdi16/nsdi16-paper-eyal.pdf
+  \textbf{Bitcoin-NG: A Scalable Blockchain Protocol}: \\
+  \url{https://www.usenix.org/system/files/conference/nsdi16/nsdi16-paper-eyal.pdf}
 \item
-  \textbf{Elastico: A Secure Sharding Protocol for Open Blockchains}:
-  https://www.comp.nus.edu.sg/\textasciitilde loiluu/papers/elastico.pdf
+  \textbf{Elastico: A Secure Sharding Protocol for Open Blockchains}: \\
+  \url{https://www.comp.nus.edu.sg/\textasciitilde loiluu/papers/elastico.pdf}
 \item
-  \textbf{OmniLedger: A Secure, Scale-Out, Decentralized Ledger}:
-  https://eprint.iacr.org/2017/406.pdf
+  \textbf{OmniLedger: A Secure, Scale-Out, Decentralized Ledger}: \\
+  \url{https://eprint.iacr.org/2017/406.pdf}
 \item
-  \textbf{RapidChain: A Secure, Fast and Scalable Blockchain}:
-  https://www.usenix.org/conference/usenixsecurity19/presentation/zamani
+  \textbf{RapidChain: A Secure, Fast and Scalable Blockchain}: \\
+  \url{https://www.usenix.org/conference/usenixsecurity19/presentation/zamani}
 \end{itemize}
