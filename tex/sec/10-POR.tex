@@ -1,0 +1,398 @@
+This section delves into the landscape of alternative consensus
+mechanisms designed to address the limitations of traditional
+Proof-of-Work (PoW), such as Bitcoin that we dealt with in the previous sections. While PoW, the backbone of Bitcoin, is lauded for
+its security, it faces significant criticism for its immense energy
+consumption, the centralization of mining power through
+Application-Specific Integrated Circuits (ASICs), and the inherently
+``useless'' nature of its computations.
+
+Here, we will explore the broader category of \textbf{Proof-of-Resource (PoR)} protocols (also encompassing PoW), which leverage alternative resources like memory and storage
+to achieve consensus. The central goal is to design mining processes
+that are more equitable and energy-efficient. % and resistant to the centralization that  PoW. 
+We will examine memory-hard functions
+like \textbf{scrypt} and \textbf{Argon2}, investigate the concept of Proof-of-Useful-Work
+through projects like \textbf{PrimeCoin}, and dissect the various forms of
+\textbf{Proof-of-Storage}, including \textbf{Proof-of-Retrievability} and
+\textbf{Proof-of-Replication}, as seen in protocols like Permacoin.
+
+\subsection{Learning Objectives}\label{learning-objectives}
+
+\begin{itemize}
+	\tightlist
+	\item
+	Understand the fundamental drawbacks of Proof-of-Work (PoW) and the
+	primary motivations for developing alternative consensus protocols.
+	\item
+	Identify and explain the essential requirements for a robust
+	Proof-of-Resource (PoR) protocol, including fast verification,
+	adjustable difficulty, fairness, and memorylessness.
+	\item
+	Analyze the concept of ASIC resistance and its critical role in
+	fostering decentralization.
+	\item
+	Differentiate between memory-hard and memory-bound mining and
+	understand their application in algorithms like scrypt and Argon2.
+	\item
+	Explore the potential of Proof-of-Useful-Work to generate value beyond
+	network security.
+	\item
+	Distinguish between different Proof-of-Storage models, such as
+	Proof-of-Retrievability, Proof-of-Replication, Proof-of-Space, and
+	Proof-of-Spacetime.
+	\item
+	Gain familiarity with influential altcoins that pioneered these
+	alternative consensus mechanisms.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{PoW vs. PoR}\label{section-1-the-case-against-proof-of-work}
+
+\subsubsection{Limitations of PoW}\label{limitations-of-pow}
+
+The Proof-of-Work model, while foundational to blockchain technology,
+presents several significant challenges:
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Extreme Energy Consumption}: The computational arms race in
+	PoW mining has led to an energy footprint comparable to that of entire
+	countries. 
+	\ih{Put example from PoUW paper.}
+	\item
+	\textbf{Centralization via ASICs}: The efficiency of ASICs has
+	rendered mining with commodity hardware (like CPUs and GPUs)
+	unprofitable, concentrating power in the hands of a few large-scale
+	mining operators / centralized mining pools. This undermines the core principle of decentralization.
+	\item
+	\textbf{Wasted Computational Effort}: The hashing computations in PoW
+	are performed solely to secure the network and have no external value,
+	representing a massive expenditure of resources on problems with no
+	intrinsic utility.
+\end{itemize}
+
+These issues have spurred a wave of innovation aimed at creating more
+sustainable, decentralized, and efficient consensus mechanisms.
+
+\subsubsection{Core Requirements for Proof-of-Resource (PoR)
+	Protocols}\label{core-requirements-for-proof-of-resource-por-protocols}
+
+Any viable alternative to PoW must satisfy a set of core principles to
+ensure the integrity and functionality of the blockchain:
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Fast Verification}: While finding a solution may be difficult,
+	verifying its correctness must be computationally trivial for all
+	nodes.
+	\item
+	\textbf{Adjustable Difficulty}: The protocol must be able to
+	dynamically adjust the difficulty of the puzzle to maintain a
+	consistent block time, regardless of fluctuations in total network
+	resource commitment.
+	\item
+	\textbf{Fairness}: The probability of successfully mining a block
+	should be directly proportional to the amount of the specified
+	resource a miner contributes.
+	\item
+	\textbf{Independence of Solutions}: Finding one solution should not
+	provide any information or advantage in finding subsequent solutions.
+	\item
+	\textbf{Memorylessness}: The time it takes to find a solution should
+	follow an exponential distribution, meaning the probability of finding
+	a solution is independent of the time already spent searching. This
+	ensures that even miners with fewer resources have a chance to
+	succeed.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Memory-Hard Mining and ASIC
+	Resistance}\label{section-2-memory-hard-mining-and-asic-resistance}
+
+A primary objective in designing alternative PoR protocols is achieving
+\textbf{ASIC resistance}. The idea is to create a puzzle that is
+difficult and expensive to implement in specialized hardware, thereby
+allowing commodity hardware like CPUs and GPUs to remain competitive.
+This fosters greater decentralization by lowering the barrier to entry
+for miners.
+
+\subsubsection{Memory-Hard and Memory-Bound
+	Functions}\label{memory-hard-and-memory-bound-functions}
+
+Two key concepts in achieving ASIC resistance are:
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Memory-Hard Mining}: This approach makes the mining process
+	dependent on having a large amount of memory (RAM). The difficulty is
+	tied to the \emph{quantity} of memory available.
+	\item
+	\textbf{Memory-Bound Mining}: This focuses on the \emph{speed} of
+	memory access. The mining algorithm is designed such that performance
+	is limited by how quickly data can be read from and written to memory.
+\end{itemize}
+
+Combining these two concepts makes building cost-effective ASICs
+significantly more challenging, as high-capacity, high-speed memory is
+expensive to integrate into custom chips.
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./figs/scrypt.png}
+	\caption{The scrypt algorithm, illustrating the time-memory trade-off.}\label{fig:scrypt}
+\end{figure}
+
+\subsubsection{Scrypt}\label{scrypt}
+
+Scrypt \ih{todo citation} is a \textbf{password-based key derivation function (PBKDF)} designed in
+2009 and later adopted as an IETF standard (RFC 7914). Unlike other
+PBKDFs, it was explicitly designed to have high memory requirements to
+defend against brute-force attacks.
+
+The algorithm generates a large, pseudo-random vector of data that must
+be held in RAM for efficient computation (see \autoref{fig:scrypt}). Accessing elements of this
+vector in a pseudo-random order is core to the algorithm. This creates a
+\textbf{time-memory trade-off}:
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{With sufficient RAM}: The algorithm has a linear time
+	complexity, O(N).
+	\item
+	\textbf{Without sufficient RAM}: The elements must be re-generated
+	on-the-fly, leading to a quadratic time complexity, O(N²), making the
+	process prohibitively slow.
+\end{itemize}
+
+
+
+While adopted by cryptocurrencies like Litecoin and Dogecoin to resist
+ASICs, specialized scrypt ASICs were eventually developed, demonstrating
+the persistent difficulty of achieving long-term ASIC resistance.
+
+\subsubsection{Argon2}\label{argon2}
+
+Argon2 \ih{citation}, the winner of the 2015 Password Hashing Competition, is a more
+modern and robust memory-hard function. It is optimized for modern CPU
+architectures and their cache/memory systems.
+
+Based on the password $P$ and salt $S$, Argon2 fills a large memory array with compression function $G$:
+\begin{eqnarray}
+	B[0] &=& H(P, S) \\
+	for ~~~j~ &=&~ [1,\ldots, t] \\
+	&&B[j] = G(B[\phi_1(j)], B[\phi_2(j)], \ldots, B[\phi_k(j	)]),
+\end{eqnarray}
+where $\phi$ represents indexing function.
+Argon2 and has two main variants, based on the indexing function $\phi$:
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Argon2d}: Uses \textbf{data-dependent} memory access. It's
+	faster but vulnerable to side-channel attacks, making it suitable for
+	applications like cryptocurrencies where the ``password'' (the block
+	header and nonce) is public.
+	\item
+	\textbf{Argon2i}: Uses \textbf{data-independent} memory access. It's
+	slower but resistant to side-channel attacks, making it ideal for
+	traditional password hashing and password-based key derivation functions.
+\end{itemize}
+See the sequential and parallel mode of operation of Argon2 in \autoref{fig:argon2}.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./figs/argon2.png}
+	\caption{The parallel and sequential modes of the Argon2 algorithm.}\label{fig:argon2}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Proof-of-Useful-Work}\label{section-3-proof-of-useful-work}
+
+The concept of Proof-of-Useful-Work (PoUW) aims to harness the immense
+computational power of a blockchain network for tasks that have
+intrinsic value beyond securing the ledger. Instead of solving arbitrary
+puzzles, miners contribute to solving real-world scientific or
+mathematical problems.
+
+A notable example is \textbf{PrimeCoin}\ih{citation}, which uses its mining process
+to search for special sequences of prime numbers known as
+\textbf{Cunningham chains}. While these chains have applications in
+number theory, a significant challenge in PoUW is integrating a secure
+and fair authentication mechanism to prove \emph{who} found the
+solution, a step that is not inherent in many scientific computations, which keeps this proposal flawed.
+
+In particular, the algorithm of mining requires three parameters $m, n, k$.
+For the previous block hash $x$, take $m$ bits of $x$ and consider any $k$-long chain in which the first prime in the chain is an $n$-bit prime with $m$ leading bits (i.e., the same prefix as $x$).
+
+Found several world records that are depicted in \autoref{fig:primecoin}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\textwidth]{./figs/primecoin.png}
+	\caption{World records of Cunningham chains found by Primecoin.}\label{fig:primecoin}
+\end{figure}
+
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Proof-of-Storage}\label{section-4-proof-of-storage}
+
+Proof-of-Storage (PoS) protocols shift the resource requirement from
+computation to data storage. Miners must prove they are dedicating
+storage space to the network.
+
+\subsubsection{Key Concepts in
+	Proof-of-Storage}\label{key-concepts-in-proof-of-storage}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Proof-of-Retrievability (PoRet)}: A prover demonstrates to a
+	verifier that they possess a specific file and can correctly retrieve
+	it. The proofs often leak small pieces of the data, allowing for
+	eventual reconstruction.
+	\item
+	\textbf{Proof-of-Replication (PoRep)}: A more robust form that ensures
+	a prover is storing a \emph{unique physical copy} of the data,
+	preventing them from pretending to store multiple copies while only
+	holding one (a form of Sybil attack).
+	\item
+	\textbf{Proof-of-Space (PoSpace)}: A prover convinces a verifier that
+	they have allocated a certain amount of storage, where the data itself
+	does not need to be useful.
+	\item
+	\textbf{Proof-of-Spacetime}: An extension where the prover shows they
+	have used a certain amount of storage \emph{over a specific duration}.
+\end{itemize}
+
+\subsubsection{Permacoin: A Proof-of-Retrievability
+	System}\label{permacoin-a-proof-of-retrievability-system}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.99\textwidth]{./figs/permacoin1.png}
+	\caption{A simplified ``strawman'' approach to Permacoin, which is
+		vulnerable to outsourcing.}\label{fig:permacoin1}	
+\end{figure}
+
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./figs/permacoin2.png}
+	\caption{The improved Permacoin lottery, which ties the puzzle to the miner's private.}\label{fig:permacoin2}	
+\end{figure}
+
+Permacoin \ih{citation} is a protocol designed to repurpose mining efforts for
+long-term, distributed data archiving. The core idea is that miners
+collectively store a large, valuable dataset (e.g., a web archive).
+
+To prevent outsourcing (where a miner fetches data from another source
+on-demand) and ensure fair play, Permacoin's design ties the puzzle
+solution to a miner's private key and requires sequential, pseudo-random
+access to the stored data. This makes it computationally expensive and
+slow to generate proofs without possessing the data locally.
+
+Differences of PermaCoin in contrast to simplified PoR are as follows:
+\begin{compactitem}
+	\item Verifier $V$ is entire Permacoin network.
+	\item  Challenge $c[r1, ..., rk]$ generated non-interactively.
+	\item Every node can act as prover $P$.
+	\item $F$ is large, so miners store portions of $F$ in a distributed manner.
+	\item If $F$ is useful then miners’ equipment is useful.
+\end{compactitem}
+
+\medskip
+The strawman approach of Permacoin does not resolve outsourcing (i.e., no erasure encoding) and it is depicted in \autoref{fig:permacoin1}.
+The improvement of PermaCoin that incorporates erasure coding to boost
+data recoverability while binding private key to the puzzle solution is depicted in \autoref{fig:permacoin2}.
+Such a binding would require sharing of the private key with the outsourcing party, and thus giving a full control of the earned rewards to such a party, rendering outsourcing attacks economically infeasible.
+
+
+
+
+
+
+%\begin{figure}
+%\centering
+%\pandocbounded{\includegraphics[keepaspectratio,alt={The improved Permacoin lottery, which ties the puzzle to the miner's private key and local data.}]{../../../Input/BDA-10-Proof-of-Resource protocols-17.-4.-2025_files/Image_024.png}}
+%\caption{The improved Permacoin lottery, which ties the puzzle to the
+	%miner's private key and local data.}
+%\end{figure}
+
+%\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Summary / Key Takeaways}\label{summary-key-takeaways}
+
+This section provided an overview of the motivations,
+designs, and challenges of Proof-of-Resource protocols. We moved from
+the limitations of PoW to the requirements for viable alternatives,
+focusing on the critical goal of ASIC resistance. We analyzed
+memory-hard functions like scrypt and Argon2, which leverage RAM to
+level the playing field for miners. We also explored the innovative
+concepts of Proof-of-Useful-Work and the various forms of
+Proof-of-Storage, which aim to make the resources spent on consensus
+more productive. The evolution of these protocols, as seen in pioneering
+altcoins, highlights the ongoing quest for a consensus mechanism that is
+secure, decentralized, and sustainable.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Keywords}\label{keywords}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Proof-of-Resource (PoR)}: A class of consensus algorithms
+	where miners dedicate resources other than computation (e.g., memory,
+	storage) to secure the network.
+	\item
+	\textbf{ASIC Resistance}: A design goal for mining algorithms to
+	prevent them from being efficiently implemented on specialized
+	hardware, thus promoting decentralization.
+	\item
+	\textbf{Memory-Hard Function}: A function whose computational cost is
+	dominated by the amount of memory required, not CPU speed.
+	\item
+	\textbf{Time-Memory Trade-off}: A computational scenario where an
+	algorithm's execution time can be reduced at the cost of increased
+	memory usage, and vice-versa.
+	\item
+	\textbf{Proof-of-Useful-Work (PoUW)}: A protocol where the
+	computational work performed by miners has intrinsic value beyond
+	securing the blockchain.
+	\item
+	\textbf{Proof-of-Storage (PoS)}: A protocol where miners prove they
+	are dedicating a certain amount of digital storage.
+	\item
+	\textbf{Erasure Coding}: A method of data protection that transforms
+	data into a longer form, allowing the original data to be recovered
+	even if parts of the longer form are lost.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Further Reading}\label{further-reading}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{scrypt: A new key derivation function}: \\
+	\url{https://www.tarsnap.com/scrypt/scrypt.pdf}
+	\item
+	\textbf{Argon2: the memory-hard function for password hashing and
+		other applications}:\\
+	\url{https://github.com/P-H-C/phc-winner-argon2/blob/master/argon2-specs.pdf}
+	\item
+	\textbf{Permacoin: Repurposing Bitcoin Work for Long-Term Data
+		Preservation}: \\
+	\url{https://www.cs.umd.edu/\textasciitilde amiller/permacoin.pdf}
+\end{itemize}
