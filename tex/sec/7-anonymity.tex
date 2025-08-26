@@ -1,4 +1,4 @@
-This chapter delves into the critical and often misunderstood concepts
+This section delves into the critical and often misunderstood concepts
 of privacy and anonymity in the context of blockchain technology. While
 public blockchains are frequently lauded for their transparency, this
 very transparency can pose significant challenges to user privacy. We
@@ -14,7 +14,7 @@ compromised through various de-anonymization techniques. We will examine
 several of these techniques, including address clustering and
 network-level analysis, to understand how the privacy of blockchain
 users can be undermined.
-
+%
 In response to these privacy challenges, a range of privacy-enhancing
 technologies has been developed. We will explore several of these
 technologies in detail, including:
@@ -34,7 +34,7 @@ technologies in detail, including:
   any information beyond the statement's truthfulness.
 \end{itemize}
 
-By the end of this chapter, you will have a comprehensive understanding
+By the end of this section, you will have understanding
 of the privacy landscape of blockchain technology, from the inherent
 challenges of public ledgers to the cutting-edge cryptographic
 techniques that are being used to build a more private and anonymous
@@ -55,32 +55,32 @@ future.
   enhance privacy.
 \item
   Understand the principles of ring signatures and their application in
-  privacy-focused cryptocurrencies like Monero.
+  privacy-focused cryptocurrencies like Monero~\cite{moser2017empirical}.
 \item
   Learn about zero-knowledge proofs and their role in enabling private
   transactions.
 \item
   Gain insight into the workings of privacy-focused protocols like
-  Zerocoin and Zerocash, and their implementation in Zcash.
+  Zerocoin~\cite{miers2013zerocoin} and Zerocash~\cite{sasson2014zerocash}, and their implementation in Zcash~\cite{kappos2018empirical}.
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Section 1: The Landscape of Anonymity and
+\subsection{The Landscape of Anonymity and
 Privacy}\label{section-1-the-landscape-of-anonymity-and-privacy}
 
-\subsubsection{1.1: Defining Anonymity, Privacy, and
+\subsubsection{Defining Anonymity, Privacy, and
 Unlinkability}\label{defining-anonymity-privacy-and-unlinkability}
 
 In the context of blockchain technology, the terms anonymity and privacy
 are often used interchangeably, but they refer to distinct, albeit
 related, concepts.
-
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Anonymity vs Privacy}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_3.png}}
-\caption{Anonymity vs Privacy}
-\end{figure}
+%
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Anonymity vs Privacy}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_3.png}}
+%\caption{Anonymity vs Privacy}
+%\end{figure}
 
 \begin{itemize}
 \item
@@ -120,67 +120,87 @@ Instead, they offer \textbf{pseudonymity}, where users are identified by
 cryptographic addresses. The combination of pseudonymity and
 unlinkability is what constitutes anonymity on a blockchain.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Anonymity, Pseudonymity, Unlinkability}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_4.png}}
-\caption{Anonymity, Pseudonymity, Unlinkability}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Anonymity, Pseudonymity, Unlinkability}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_4.png}}
+%\caption{Anonymity, Pseudonymity, Unlinkability}
+%\end{figure}
 
-\subsubsection{1.2: The Anonymity Set}\label{the-anonymity-set}
+\subsubsection{The Anonymity Set}\label{the-anonymity-set}
 
 The \textbf{Anonymity Set} is a crucial concept in this domain. It
 refers to the set of transactions that an adversary cannot distinguish
-from your specific transaction. The larger the anonymity set, the
+from a specific transaction. The larger the anonymity set, the
 greater the privacy, as it becomes harder to single out any individual
 transaction. This concept is particularly important when we discuss
 techniques like mixing and ring signatures.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Unlinkability \& Anonymity Set}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_5.png}}
-\caption{Unlinkability \& Anonymity Set}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Unlinkability \& Anonymity Set}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_5.png}}
+%\caption{Unlinkability \& Anonymity Set}
+%\end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Section 2: De-anonymization
+\subsection{De-anonymization
 Techniques}\label{section-2-de-anonymization-techniques}
 
 The pseudonymity of public blockchains can be compromised through a
 variety of de-anonymization techniques, which aim to link blockchain
 addresses to real-world identities.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={De-anonymization}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_6.png}}
-\caption{De-anonymization}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={De-anonymization}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_6.png}}
+%\caption{De-anonymization}
+%\end{figure}
 
-\subsubsection{2.1: Address Clustering and
+\subsubsection{Address Clustering and
 Linking}\label{address-clustering-and-linking}
 
 This technique involves analyzing the transaction graph to identify
 addresses that are likely controlled by the same entity.
+
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{./figs/deanon1.png}
+		\caption{Multiple input addresses controlled by the same user.}		
+		\label{fig:deanon1}
+	\end{center}	
+\end{figure}
 
 \begin{itemize}
 \tightlist
 \item
   \textbf{Common-input-ownership heuristic}: If multiple addresses (and
   their corresponding UTXOs) are used as inputs in a single transaction,
-  it is highly probable that they belong to the same user.
+  it is highly probable that they belong to the same user (see \autoref{fig:deanon1}).
 \item
   \textbf{Change Addresses}: When a user sends a transaction and the
   input amount is greater than the output, the remaining ``change'' is
   sent back to a new address. This change address is controlled by the
   same user, creating a link between the input addresses and the new
-  change address.
+  change address (see \autoref{fig:deanon2}).
 \end{itemize}
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Linking Addresses Example}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_7.png}}
-\caption{Linking Addresses Example}
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{./figs/deanon2.png}
+		\caption{The change address controlled by the same user.}		
+		\label{fig:deanon2}
+	\end{center}	
 \end{figure}
+
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Linking Addresses Example}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_7.png}}
+%\caption{Linking Addresses Example}
+%\end{figure}
 
 Once a cluster of addresses has been identified, it can be linked to a
 real-world identity through various means:
@@ -204,7 +224,7 @@ real-world identity through various means:
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Clustering and Linking to Identities}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_8.png}}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Linking to Individuals}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_9.png}}
 
-\subsubsection{2.2: Network-level
+\subsubsection{Network-level
 De-anonymization}\label{network-level-de-anonymization}
 
 A more sophisticated de-anonymization technique involves monitoring
@@ -218,29 +238,29 @@ broadcast this transaction is likely the originator.
 The solution to this is to use network-layer anonymization tools like
 Tor, JonDonym, or VPNs to obscure the user's real IP address.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Network-level De-anonymization}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_10.png}}
-\caption{Network-level De-anonymization}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Network-level De-anonymization}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_10.png}}
+%\caption{Network-level De-anonymization}
+%\end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Section 3: Privacy-Enhancing
+\subsection{Privacy-Enhancing
 Technologies}\label{section-3-privacy-enhancing-technologies}
 
-\subsubsection{3.1: Mixing Services
+\subsubsection{Mixing Services
 (Tumblers)}\label{mixing-services-tumblers}
 
 Mixing services are designed to obscure the link between the sender and
 receiver of a transaction by mixing a user's coins with those of other
 users.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Mixing Services}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_11.png}}
-\caption{Mixing Services}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Mixing Services}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_11.png}}
+%\caption{Mixing Services}
+%\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -253,20 +273,20 @@ users.
   to steal their funds or to keep logs of their transactions.
 \end{itemize}
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Centralized Mixing}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_12.png}}
-\caption{Centralized Mixing}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Centralized Mixing}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_12.png}}
+%\caption{Centralized Mixing}
+%\end{figure}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Decentralized Mixers (CoinJoin)}: To address the trust issue
+  \textbf{Decentralized Mixers (e.g., CoinJoin)}: To address the trust issue
   of centralized mixers, decentralized mixing protocols like CoinJoin
   have been developed. CoinJoin is a peer-to-peer protocol that allows
   multiple users to collaboratively create a single transaction that
-  combines their inputs and outputs. This makes it difficult for an
+  combines their inputs and outputs (see \autoref{fig:coinjoin}). This makes it difficult for an
   external observer to determine the exact mapping between the inputs
   and outputs, thereby enhancing the privacy of the participants. The
   process involves finding peers, exchanging input/output addresses
@@ -274,93 +294,158 @@ users.
   participants sign it.
 \end{itemize}
 
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{./figs/coinjoin.png}
+		\caption{A single transaction of CoinJoin.}		
+		\label{fig:coinjoin}
+	\end{center}	
+\end{figure}
+
 %\pandocbounded{\includegraphics[keepaspectratio,alt={CoinJoin}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_13.png}}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={CoinJoin Process}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_14.png}}
 
-\subsubsection{3.2: Ring Signatures}\label{ring-signatures}
+\subsubsection{Ring Signatures}\label{ring-signatures}
 
 A ring signature is a cryptographic technique that allows a member of a
 group to sign a message on behalf of the group, without revealing which
 member of the group produced the signature. This provides a high degree
 of sender anonymity.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Ring Signatures}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_15.png}}
-\caption{Ring Signatures}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Ring Signatures}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_15.png}}
+%\caption{Ring Signatures}
+%\end{figure}
 
-The key properties are: * The actual signer declares an arbitrary set of
-possible signers (the ``ring''), which includes themselves. * The
+The key properties are: (A) The actual signer declares an arbitrary set of
+possible signers (the ``ring''), which includes themselves. (B) The
 signature is constructed using the signer's private key and the public
-keys of all other ring members. * No interaction is required between the
-ring members. * An adversary cannot distinguish which member of the ring
+keys of all other ring members. (C) No interaction is required between the
+ring members. (D) An adversary cannot distinguish which member of the ring
 is the true signer.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Ring Signature Properties}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_17.png}}
-\caption{Ring Signature Properties}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Ring Signature Properties}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_17.png}}
+%\caption{Ring Signature Properties}
+%\end{figure}
 
 \paragraph{Generating and Verifying a Ring
-Signature}\label{generating-and-verifying-a-ring-signature}
+Signature.}\label{generating-and-verifying-a-ring-signature}
 
-The process, illustrated with an RSA example, involves several steps: 1.
-The signer hashes the message \texttt{m} to create a symmetric key
-\texttt{k}. 2. A random value \texttt{v} is generated. 3. For all other
-ring members, random values \texttt{xi} are generated, and corresponding
-\texttt{yi} values are computed using a trapdoor function (e.g.,
-\texttt{yi\ =\ xi\^{}ei\ mod\ ni} in RSA). 4. A combining function
-\texttt{Ck,v} is used to create a loop, and the signer solves for their
-own \texttt{ys} value to make the equation hold true
-(\texttt{Ck,v(...)\ =\ v}). 5. The signer uses their private key to
-compute their \texttt{xs} from \texttt{ys}. 6. The final signature
-consists of the public keys of all ring members, the value \texttt{v},
-and all the \texttt{x} values.
+The process, illustrated with an RSA example, involves several steps: 
+\begin{enumerate}
+	\item The signer hashes the message \texttt{m} to create a symmetric key
+	\texttt{k}.
+	
+	\item A random value \texttt{v} is generated by signer. 
+	
+	\item  For all other ring members, signer generates random values \texttt{$x_i$} and corresponding
+	$y_i = g_i(x_i)$ values are computed using a \textbf{trapdoor} function (e.g.,
+	$y_i\ =\ x_i^{e_i}\ mod\ n_i$ in RSA). 
+	
+	\item  Given a symmetric encryption algorithm $E_k$, we define a combining function
+	$C_{k,v}$ that is used to create a loop, and the signer solves for their
+	own $y_s$ value by fitting the equation 
+	($C_{k,v}(...)\ =\ v$).  
+	See also \autoref{fig:ring} and \autoref{fig:ring2}. 
+	
+	\item The signer computes their private key  $x_s = g_{s^{-1}}(y_s)$ using the knowledge of trapdoor from $y_s$. 
+	E.g. in RSA: $x_s = y_{s}^{d_s}\ mod\ n_s$ 
+	 
+	 \item  The final signature consists of the public keys of all ring members, the value \texttt{v}, and all the \texttt{x} values, i.e., ($P_1, P_2, \ldots, P_r, v, x_1, x_2, \ldots, x_s, \ldots, x_r$). 
+	
+\end{enumerate}
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{./figs/ring-sig.png}
+		\caption{Combining function in a ring signature.}		
+		\label{fig:ring}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{./figs/ring2.png}
+		\caption{Combining function equal to $v$ in a ring signature.}		
+		\label{fig:ring2}
+	\end{center}	
+\end{figure}
 
 Verification involves checking that the equation holds true using the
 public keys and the provided signature components.
+In particular, given a message \textbf{m} and alleged signature ($P_1, P_2, \ldots, P_r, v, x_1, x_2, \ldots, x_s, \ldots, x_r$), the signature is verified as follows:
+
+\begin{enumerate}
+	\item For $i = 1,2,3, \ldots, r$, the verifier computes $y_i = g_i (x_i)$.
+	
+	\item The verifier hashes the message to obtain the symmetric encryption key $k = H(m)$.
+	
+	\item The verifier checks that the $y_i$’s computed in 1) satisfy the equation $C_{k,v}(y_1, y_2, …, y_r) = v$
+	
+\end{enumerate}
+	
+
 
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Generating a Ring Signature 1}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_18.png}}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Generating a Ring Signature 2}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_19.png}}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Generating a Ring Signature 3}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_20.png}}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Verifying a Ring Signature}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_21.png}}
 
-\paragraph{Monero}\label{monero}
-
+\paragraph{Monero.}\label{monero}
 The privacy-focused cryptocurrency Monero is the most well-known
-application of ring signatures. * It uses two key pairs: \textbf{viewing
-keys} and \textbf{spending keys}. * \textbf{Stealth addresses} are used
+application of ring signatures. 
+It uses two key pairs: \textbf{viewing
+keys} and \textbf{spending keys}. \textbf{Stealth addresses} are used
 for recipient anonymity; a new one-time address is generated for each
-transaction. * \textbf{Key images} are used to prevent double-spending.
+transaction. \textbf{Key images} are used to prevent double-spending.
 A unique key image is derived from each output, and the blockchain
-maintains a list of spent key images. * \textbf{RingCT (Ring
+maintains a list of spent key images. \textbf{RingCT (Ring
 Confidential Transactions)} hides transaction amounts using Pedersen
 commitments and zero-knowledge range proofs.
+
+
 
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Monero}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_22.png}}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Monero Details}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_23.png}}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Monero Key Images \& RingCT}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_24.png}}
 
-\subsubsection{3.3: Zero-Knowledge Proofs}\label{zero-knowledge-proofs}
+\subsubsection{Zero-Knowledge Proofs}\label{zero-knowledge-proofs}
 
 A zero-knowledge proof (ZKP) is a powerful cryptographic protocol that
 allows one party (the prover) to prove to another party (the verifier)
 that a statement is true, without revealing any information beyond the
 validity of the statement itself.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Zero-Knowledge Proofs}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_25.png}}
-\caption{Zero-Knowledge Proofs}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Zero-Knowledge Proofs}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_25.png}}
+%\caption{Zero-Knowledge Proofs}
+%\end{figure}
 
 The classic ``Ali Baba Cave'' example illustrates the concept of an
-interactive proof. However, for blockchains, non-interactive proofs are
+interactive proof (see \autoref{fig:alibaba}). However, for blockchains, non-interactive proofs are
 needed. The \textbf{Fiat-Shamir heuristic} is a technique to convert
 interactive proofs into non-interactive ones by replacing the verifier's
-challenge with the output of a hash function.
+challenge with the output of a hash function~\cite{fiat1986prove}.
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{./figs/alibaba.png}
+		\caption{Interactive zero-knowledge proof example of Alibaba cave Verifier has to repeat the query multiple times to decrease a chance of prover to guess it.}		
+		\label{fig:alibaba}
+	\end{center}	
+\end{figure}
+
 
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Ali Baba Cave}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_26.png}}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={Schnorr's Protocol (Interactive)}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_27.png}}
@@ -369,28 +454,60 @@ challenge with the output of a hash function.
 \paragraph{zk-SNARKs}\label{zk-snarks}
 
 \textbf{Zero-Knowledge Succinct Non-interactive ARguments of Knowledge
-(zk-SNARKs)} are a specific type of ZKP ideal for blockchains because
+(zk-SNARKs).} are a specific type of ZKP ideal for blockchains because
 their proofs are very small (``succinct'') and quick to verify. They
 allow a party to prove the correctness of a complex computation without
 revealing the inputs and without requiring the verifier to re-run the
 entire computation.
+%
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={zk-SNARKs}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_29.png}}
+%\caption{zk-SNARKs}
+%\end{figure}
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={zk-SNARKs}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_29.png}}
-\caption{zk-SNARKs}
+\subsubsection{Schnorr's Prtocol -- Discrete Log. Problem}\label{sec:schnorr}
+Schnorr's protocol represents interactive proving of knowledge of discrete logarithm.
+In particular, prover wants to prove the knowledge of discrete logarithm $x$ of
+$h = g^x \in G$, where $G$ is a group of prime order $q$ (see \autoref{fig:schnorr-inter}).
+
+\begin{figure}[h]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{./figs/schnor-inter.png}
+		\caption{Schnorr's interactive protocol.}		
+		\label{fig:schnorr-inter}
+	\end{center}	
 \end{figure}
 
-\subsubsection{3.4: Zcash (Zerocoin and Zerocash
+
+\medskip
+\textbf{Non-Interactive Variant.} 
+Using Fiat-Shamir heuristic, we can convert interactive Schnorr's protocol to non-interactive protocol in random oracle model. 
+In particular, the challenge $c$ is replaced by the hash cryptographicaly secure hash function (see \autoref{fig:schnorr-noninter}).
+\begin{figure}[h]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{./figs/schnor-noninter.png}
+		\caption{Schnorr's non-interactive protocol.}		
+		\label{fig:schnorr-noninter}
+	\end{center}	
+\end{figure}
+
+
+
+
+
+\subsubsection{Zcash (Zerocoin and Zerocash
 Protocols)}\label{zcash-zerocoin-and-zerocash-protocols}
 
 Zcash is a cryptocurrency that implements these advanced ZKP concepts.
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Zcash}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_30.png}}
-\caption{Zcash}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Zcash}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_30.png}}
+%\caption{Zcash}
+%\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -401,11 +518,11 @@ Zcash is a cryptocurrency that implements these advanced ZKP concepts.
   ownership.
 \end{itemize}
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Zerocoin Protocol}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_31.png}}
-\caption{Zerocoin Protocol}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Zerocoin Protocol}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_31.png}}
+%\caption{Zerocoin Protocol}
+%\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -420,11 +537,11 @@ Zcash is a cryptocurrency that implements these advanced ZKP concepts.
   distribute this trust.
 \end{itemize}
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Zerocash Protocol}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_32.png}}
-\caption{Zerocash Protocol}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Zerocash Protocol}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_32.png}}
+%\caption{Zerocash Protocol}
+%\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -443,17 +560,17 @@ Zcash is a cryptocurrency that implements these advanced ZKP concepts.
   \end{itemize}
 \end{itemize}
 
-\begin{figure}
-\centering
-%\pandocbounded{\includegraphics[keepaspectratio,alt={Zcash Blockchain}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_33.png}}
-\caption{Zcash Blockchain}
-\end{figure}
+%\begin{figure}
+%\centering
+%%\pandocbounded{\includegraphics[keepaspectratio,alt={Zcash Blockchain}]{../Input/BDA-07-Anonymity-and-privacy-28.-3.-2024_files/slide_33.png}}
+%\caption{Zcash Blockchain}
+%\end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{Summary / Key Takeaways}\label{summary-key-takeaways}
 
-This chapter has provided a comprehensive overview of the complex and
+This section has provided an overview of the complex and
 often misunderstood topics of privacy and anonymity in the context of
 blockchain technology. We have established that while public blockchains
 are transparent by design, they are not inherently anonymous, but rather
@@ -541,29 +658,31 @@ of research and innovation.
 \tightlist
 \item
   \textbf{A Fistful of Bitcoins: Characterizing Payments Among Men with
-  No Names}: \url{https://cseweb.ucsd.edu/~smeiklejohn/files/imc13.pdf}
+  No Names}: \\
+\url{https://cseweb.ucsd.edu/~smeiklejohn/files/imc13.pdf}
+
 \item
   \textbf{How to leak a secret: Theory and applications of ring
-  signatures}:
+  signatures}: \\
   \url{https://link.springer.com/chapter/10.1007/11957454_11}
 \item
-  \textbf{Traceable ring signature}:
+  \textbf{Traceable ring signature}:\\
   \url{https://link.springer.com/chapter/10.1007/978-3-540-70930-7_12}
 \item
-  \textbf{Ring confidential transactions}:
+  \textbf{Ring confidential transactions}:\\
   \url{https://ledger.pitt.edu/ojs/ledger/article/view/1/1}
 \item
-  \textbf{Why and how zk-SNARK works}:
+  \textbf{Why and how zk-SNARK works}:\\
   \url{https://arxiv.org/pdf/1906.07221.pdf}
 \item
-  \textbf{Zcash Technology}: \url{https://z.cash/technology/}
+  \textbf{Zcash Technology}:\\ \url{https://z.cash/technology/}
 \item
-  \textbf{Zero-to-Monero}:
+  \textbf{Zero-to-Monero}:\\
   \url{https://www.getmonero.org/library/Zero-to-Monero-2-0-0.pdf}
 \item
-  \textbf{Zerocoin: Anonymous distributed e-cash from bitcoin}:
+  \textbf{Zerocoin: Anonymous distributed e-cash from bitcoin}:\\
   \url{https://ieeexplore.ieee.org/document/6547123}
 \item
-  \textbf{Zerocash: Decentralized Anonymous Payments from Bitcoin}:
+  \textbf{Zerocash: Decentralized Anonymous Payments from Bitcoin}:\\
   \url{https://ieeexplore.ieee.org/document/6847623}
 \end{itemize}
