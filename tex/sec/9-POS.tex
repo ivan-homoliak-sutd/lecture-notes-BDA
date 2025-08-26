@@ -1,0 +1,514 @@
+This section provides a comprehensive examination of Proof-of-Stake
+(PoS) consensus mechanisms, which have emerged as a significant
+alternative to the energy-intensive Proof-of-Work (PoW) systems. We will
+explore the foundational principles of PoS, where the right to
+validate transactions and create new blocks is granted based on the
+quantity of cryptocurrency a participant holds and is willing to
+``stake'' as collateral. This economic-driven approach to consensus
+offers notable advantages in terms of energy efficiency and scalability,
+but also introduces a unique set of security challenges and economic
+considerations.
+
+The section will begin by discussing the primary motivations for the
+development of PoS, focusing on the well-documented energy consumption
+issues associated with PoW. We will then delve into the core concepts of
+PoS, including the roles of validators, the process of staking, and the
+mechanisms for leader election. A balanced analysis of the advantages
+and disadvantages of PoS will be presented, addressing its potential for
+both decentralization and wealth concentration.
+
+A significant portion of the section is dedicated to analysis
+of the security vulnerabilities inherent in PoS protocols. We will
+dissect critical issues such as the \textbf{``nothing-at-stake'' problem,
+grinding attacks, DoS on leaders, and long-range attacks}, and discuss
+the various countermeasures that have been proposed and implemented to
+mitigate these risks.
+
+We will then survey several prominent PoS protocols that have been
+deployed in real-world blockchain systems, including \textbf{Peercoin, Algorand,
+Ouroboros, and Ethereum's Casper and Gasper}. Finally, we will explore
+the related challenge of blockchain \textbf{oracles} and how systems can securely
+access external data, covering solutions like \textbf{TownCrier, TLS-N, and
+PDFS}. Through this exploration, readers will gain a nuanced
+understanding of the theoretical underpinnings and practical
+implementations of Proof-of-Stake and its surrounding ecosystem.
+
+\subsection{Learning Objectives}\label{learning-objectives}
+
+\begin{itemize}
+	\tightlist
+	\item
+	Understand the fundamental motivations for the development of
+	Proof-of-Stake (PoS) as an alternative to Proof-of-Work (PoW).
+	\item
+	Grasp the core concepts of PoS, including staking, validators, leader
+	election, and the role of economic incentives in securing the network.
+	\item
+	Analyze the advantages and disadvantages of PoS, including its energy
+	efficiency, potential for scalability, and the risk of stake
+	centralization.
+	\item
+	Identify and understand the security challenges specific to PoS, such
+	as the nothing-at-stake problem, grinding attacks, DoS on leaders, and
+	long-range attacks.
+	\item
+	Explore the design and implementation of prominent PoS protocols,
+	including Peercoin, Algorand, Ouroboros, and Ethereum's Casper.
+	\item
+	Evaluate the various countermeasures developed to address the security
+	vulnerabilities of PoS systems.
+	\item
+	Understand the ``oracle problem'' and evaluate different approaches
+	for providing external data to smart contracts.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Introduction to
+	Proof-of-Stake}\label{section-1-introduction-to-proof-of-stake}
+
+\subsubsection{The Motivation for
+	Proof-of-Stake}\label{the-motivation-for-proof-of-stake}
+
+The primary impetus for the creation of Proof-of-Stake consensus
+mechanisms was the growing concern over the immense energy consumption
+of Proof-of-Work (PoW) blockchains.
+%
+%\pandocbounded{\includegraphics[keepaspectratio,alt={PoW Energy Consumption}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_004.jpg}}
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+%		\includegraphics[width=0.9\textwidth]{./figs/btc-energy-consumption.png}
+	\ih{todo}
+	\caption{A visual representation of Bitcoin's energy consumption over time.}
+		\label{fig:btc-energy-consumption}
+	\end{center}	
+\end{figure}
+
+%
+PoS was conceived as a more energy-efficient alternative, shifting the
+basis of consensus from computational power to economic stake. In a PoW
+system, miners compete to solve a computationally intensive puzzle. This
+process, while effective, requires vast amounts of electricity and
+specialized hardware. PoS, in contrast, eliminates this computational
+race. Instead, participants, known as validators, lock up a certain
+amount of their cryptocurrency as a ``stake'' in the network. This
+``virtual mining'' approach dramatically reduces the energy footprint of
+the blockchain.
+
+%\pandocbounded{\includegraphics[keepaspectratio,alt={PoR vs.~PoS}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_008.png}}
+%\emph{A diagram comparing the resource requirements of Proof-of-Resource
+	%(PoR) and Proof-of-Stake (PoS).}
+
+\subsubsection{Core Concepts of
+	Proof-of-Stake}\label{core-concepts-of-proof-of-stake}
+
+The operation of a Proof-of-Stake system is defined by several key
+concepts:
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Goal}: To translate any Proof-of-Resource (PoR) into a
+	``Proof-of-Money.'' Instead of buying hardware, miners buy stake and
+	vote with it to earn interest.
+	\item
+	\textbf{Sybil Resistance}: Achieved by requiring a financial stake,
+	making it prohibitively expensive to create numerous fake identities.
+	\item
+	\textbf{Efficiency}: PoS is both energy-friendly and more efficient in
+	terms of transaction throughput.
+	\item
+	\textbf{Participation}: In theory, any token holder can be a
+	``stakeholder.'' In practice, this often involves delegated staking
+	due to availability and computational resource requirements.
+	\item
+	\textbf{Decentralization}: PoS offers partially-reduced centralization
+	compared to the ASIC-dominated landscape of PoW.
+	\item
+	\textbf{Low Operational Costs}: The low operational costs mean
+	validators can wait longer for rewards.
+\end{itemize}
+
+\subsubsection{Advantages and Disadvantages of
+	PoS}\label{advantages-and-disadvantages-of-pos}
+
+\textbf{Advantages:}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Energy Efficiency}: PoS is orders of magnitude more
+	energy-efficient than PoW.
+	\item
+	\textbf{Reduced Barriers to Entry}: PoS does not require investment in
+	specialized, high-cost mining hardware.
+	\item
+	\textbf{Higher Throughput}: Faster block creation times can lead to
+	higher transaction throughput.
+	\item
+	\textbf{Economic Security}: Aligns validators' incentives with the
+	long-term health of the blockchain.
+\end{itemize}
+
+\textbf{Disadvantages:}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Stake Centralization}: The ``rich get richer'' problem, where
+	wealth can become concentrated among the largest stakers. A 51\% miner
+	can potentially control the chain forever, as no new powerful miner
+	can emerge as easily as in PoW.
+	\item
+	\textbf{Semi-Permissionless Nature}: One must acquire stake to
+	participate, which typically means buying it from someone, making the
+	system not fully permissionless.
+	\item
+	\textbf{The Nothing-at-Stake Problem}: A validator has an economic
+	incentive to validate blocks on all competing chains in a fork, as
+	there is no additional cost.
+	\item
+	\textbf{Long-Range Attacks}: An adversary can acquire old private keys
+	to rewrite the blockchain's history.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Security Challenges in
+	Proof-of-Stake}\label{section-2-security-challenges-in-proof-of-stake}
+
+\subsubsection{The Nothing-at-Stake
+	Problem}\label{the-nothing-at-stake-problem}
+
+The nothing-at-stake problem is a fundamental challenge where a
+validator, in the event of a fork, can extend two or more conflicting
+blocks without risking their stake, thereby increasing their chance of
+being rewarded. This increases the number of forks and the time to
+finality.
+
+\textbf{Countermeasures:}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Deposit-Based Solutions}: Require nodes to make a deposit that
+	is lost in the case of misbehavior (slashing).
+	\item
+	\textbf{Checkpoints}: Employ ``state freezing'' at periodic snapshots
+	of the blockchain, making it irreversible up to the most recent
+	checkpoint.
+	\item
+	\textbf{Backward Penalization}: Penalizing nodes that produced two
+	conflicting blocks.
+	\item
+	\textbf{BFT Integration}: Combining PoS protocols with Byzantine Fault
+	Tolerance approaches to decrease the probability of forks.
+\end{itemize}
+
+\subsubsection{Grinding Attacks}\label{grinding-attacks}
+
+A grinding attack occurs when a leader, knowing they will produce the
+next block, can bias the process to increase their chances of being
+selected in the future. For example, if the next leader is determined
+solely by the hash of the previous block, the current leader can
+``grind'' through different block configurations to find one that
+results in a favorable outcome for them.
+
+\textbf{Countermeasures:}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Secure Multiparty Computation (SMPC)}: Using a committee of
+	consensus nodes to generate a fresh random number for leader election
+	(e.g., a secure coin-flipping protocol).
+	\item
+	\textbf{Verifiable Random Functions (VRFs)}: Allowing a node to
+	privately check if its VRF output is below a certain stake-specific
+	threshold. The VRF input combines the user's private key and
+	randomness from the previous block, ensuring the current leader cannot
+	bias the outcome.
+\end{itemize}
+
+\subsubsection{2.3: Denial of Service (DoS) on a
+	Leader}\label{denial-of-service-dos-on-a-leader}
+
+If a leader is publicly determined before their turn to produce a block,
+an adversary can launch a DoS attack against them, forcing a round
+restart. This can be repeated until the adversary's desired nodes are
+elected.
+
+\textbf{Countermeasures:}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Private Leader Election (via VRF)}: As pioneered by Algorand,
+	a node privately determines if it is a potential leader and
+	immediately releases a block candidate. By the time the leader is
+	publicly known, it is too late for a DoS attack to be effective.
+\end{itemize}
+
+\subsubsection{Long-Range Attacks}\label{long-range-attacks}
+
+Also known as posterior corruption, this attack involves an adversary
+bribing or stealing the private keys of previously influential consensus
+nodes. Since these nodes may have already exchanged their tokens for
+fiat currency, they have no stake left to lose and no incentive to
+protect their old keys. If the attacker accumulates enough historical
+stake, they can rerun the protocol and rewrite the entire history of the
+blockchain.
+
+\textbf{Countermeasures:}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Extended Deposit Locking}: Locking the stake deposit for a
+	much longer time than the period of participation.
+	\item
+	\textbf{Frequent Checkpoints}: Making the chain irreversible with
+	respect to the last checkpoint. Ethereum PoS uses justified and
+	finalized checkpoints for this purpose.
+	\item
+	\textbf{Key-Evolving Cryptography}: Requiring users to evolve their
+	private keys and erase old ones. While this prevents forging
+	signatures, it doesn't stop dishonest nodes from voluntarily selling
+	their old keys.
+	\item
+	\textbf{Time-Domain Chain Density}: Enforcing rules about the expected
+	number of participants in each round.
+	\item
+	\textbf{Context-Sensitive Transactions}: Including the hash of a
+	recent valid block within a transaction itself, tethering it to a
+	specific point in history.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Prominent Proof-of-Stake
+	Protocols}\label{section-3-prominent-proof-of-stake-protocols}
+
+\subsubsection{Peercoin}\label{peercoin}
+
+Launched in 2012, Peercoin is the first technical realization of PoS,
+using a hybrid PoW/PoS model. Its PoS component is based on
+\textbf{coin-age}, calculated as
+\texttt{(amount\ of\ UTXO)\ ×\ (\#\ of\ blocks\ it\ remains\ unspent)}.
+Miners can balance PoW and coin-age, but it is much easier to find a
+solution by consuming some coin-age.
+
+\subsubsection{Algorand}\label{algorand}
+
+Algorand is a pure PoS protocol with no punishments or locked tokens. It
+uses cryptographic sortition to choose leaders via a Verifiable Random
+Function (VRF). A leader is selected privately and proposes a new block.
+A committee of \textasciitilde1000 nodes, also selected by VRF, then
+votes on the proposed block to ensure Byzantine tolerance.
+
+\subsubsection{Ouroboros}\label{ouroboros}
+
+Ouroboros is a family of provably secure PoS protocols developed for the
+Cardano blockchain.
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Ouroboros Classic}: This version uses a Publicly Verifiable
+	Secret Sharing (PVSS) scheme for randomness generation. Slot leaders
+	are publicly known in advance, making them vulnerable to DoS attacks.
+	The randomness generation is a detailed, five-step process:
+	
+	\begin{enumerate}
+		\def\labelenumi{\arabic{enumi}.}
+		\tightlist
+		\item
+		\textbf{Committee Formation}: Slot leaders form a committee and
+		privately generate random numbers.
+		\item
+		\textbf{Commit}: Members post their PVSS data (a commitment and
+		encrypted shares for every other member).
+		\item
+		\textbf{Reveal}: Members reveal their random numbers.
+		\item
+		\textbf{Recovery}: For any member who did not reveal, other members
+		post their shares to reconstruct the secret.
+		\item
+		\textbf{New Epoch}: The revealed numbers are XORed together to
+		create a seed for picking leaders in the next epoch.
+	\end{enumerate}
+	\item
+	\textbf{Ouroboros Praos}: Inspired by Algorand, this version uses
+	VRFs. Each node knows privately which slots they will lead, mitigating
+	DoS attacks. There can be multiple or no leaders for a given slot.
+\end{itemize}
+
+\subsubsection{Ethereum's PoS (Casper \&
+	Gasper)}\label{ethereums-pos-casper-gasper}
+
+Ethereum's transition to PoS utilizes a combination of protocols.
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Casper the Friendly Finality Gadget (FFG)}: Casper FFG is not
+	a standalone consensus protocol but a ``finality gadget'' that
+	overlays a block proposal mechanism. It introduces checkpoints and
+	attestations (votes).
+	
+	\begin{itemize}
+		\tightlist
+		\item
+		\textbf{Justification}: A checkpoint B is justified if a previously
+		justified checkpoint A exists and there are attestations for the A
+		-\textgreater{} B edge with a total weight of at least 2/3 of the
+		total stake.
+		\item
+		\textbf{Finalization}: A checkpoint A is finalized if it is
+		justified and its immediate successor is also justified. Finalized
+		blocks are considered permanent.
+		%    \pandocbounded{\includegraphics[keepaspectratio,alt={Casper FFG Finalization}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_015.png}}
+		\emph{A diagram illustrating the finalization process in Casper
+			FFG.}
+		\item
+		\textbf{Slashing Conditions}: Validators are slashed for breaking
+		rules, such as:
+		
+		\begin{itemize}
+			\tightlist
+			\item
+			\textbf{S1}: Making two distinct attestations for checkpoints at
+			the same height (i.e., voting for a fork).
+			\item
+			\textbf{S2}: Making an attestation that ``surrounds'' another
+			(e.g., voting for an edge s1 -\textgreater{} t1 and another s2
+			-\textgreater{} t2 where
+			\texttt{height(s1)\ \textless{}\ height(s2)\ \textless{}\ height(t2)\ \textless{}\ height(t1)}).
+		\end{itemize}
+	\end{itemize}
+	\item
+	\textbf{Gasper}: The full protocol used in Ethereum 2.0, which
+	combines the Casper FFG finality gadget with the GHOST (Greediest
+	Heaviest Observed SubTree) fork-choice rule.
+	%  \pandocbounded{\includegraphics[keepaspectratio,alt={Gasper Protocol}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_016.jpg}}
+	\emph{The GHOST rule combined with the Casper finality gadget.}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Oracles and Data
+	Feeds}\label{section-4-oracles-and-data-feeds}
+
+A blockchain is an isolated environment. The ``oracle problem'' is the
+challenge of providing smart contracts with reliable data from the
+external world.
+
+\subsubsection{TownCrier (TC)}\label{towncrier-tc}
+
+TownCrier acts as a trusted proxy between a blockchain and HTTPS
+websites, using a Trusted Execution Environment (TEE) like Intel SGX. *
+\textbf{Pros}: Easy integration, no changes needed for website
+operators. * \textbf{Cons}: Trusts the TEE manufacturer (a single point
+of failure), and several attacks have been demonstrated against Intel
+SGX.
+
+\subsubsection{TLS-N}\label{tls-n}
+
+TLS-N adds a non-repudiation layer to TLS, allowing for the generation
+of privacy-preserving, non-interactive proofs of the contents of a TLS
+session. * \textbf{Pros}: More general and powerful, with extra features
+like privacy. * \textbf{Cons}: Requires changes to the TLS specification
+and updates to TLS servers, making integration difficult and expensive.
+%\pandocbounded{\includegraphics[keepaspectratio,alt={TLS-N Diagram}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_020.jpg}}
+
+\subsubsection{Provable Data Feeds
+	(PDFS)}\label{provable-data-feeds-pdfs}
+
+In this model, data providers maintain an append-only database (like a
+Merkle tree) and sign their contract locations via TLS. The contract API
+allows for updating the database root and proving the authenticity of
+data via Merkle proofs. * \textbf{Pros}: Direct TLS authentication, easy
+integration. * \textbf{Cons}: Website operators have to deploy it.
+%\pandocbounded{\includegraphics[keepaspectratio,alt={PDFS Diagram}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_021.jpg}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Summary / Key Takeaways}\label{summary-key-takeaways}
+
+This section has provided a detailed exploration of Proof-of-Stake
+consensus protocols. We established the motivation for PoS as a more
+energy-efficient alternative to PoW, defined its core concepts, and
+presented a balanced view of its advantages and disadvantages. A key
+focus was the unique security landscape of PoS, including the
+nothing-at-stake problem, grinding attacks, and long-range attacks,
+along with their countermeasures. We surveyed influential PoS protocols
+like Peercoin, Algorand, Ouroboros, and Ethereum's Casper. Finally, we
+addressed the critical oracle problem, examining how external data can
+be securely fed to blockchains.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Keywords}\label{keywords}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Proof-of-Stake (PoS)}: A class of consensus mechanisms that
+	select block creators based on the number of coins they hold and are
+	willing to ``stake.''
+	\item
+	\textbf{Validator}: A participant in a PoS network responsible for
+	validating transactions and creating new blocks.
+	\item
+	\textbf{Slashing}: A penalty mechanism where a validator who acts
+	maliciously has their staked funds confiscated.
+	\item
+	\textbf{Nothing-at-Stake Problem}: A scenario where a validator has no
+	economic disincentive to validate blocks on all competing chains in a
+	fork.
+	\item
+	\textbf{Long-Range Attack}: An attack where an adversary uses old,
+	compromised private keys to create an alternative history of the
+	chain.
+	\item
+	\textbf{Verifiable Random Function (VRF)}: A cryptographic function
+	used for secure and private leader election.
+	\item
+	\textbf{Finality}: The guarantee that a transaction or block is
+	irreversible.
+	\item
+	\textbf{Oracle}: A service that provides external data to a smart
+	contract.
+	\item
+	\textbf{Trusted Execution Environment (TEE)}: A secure area inside a
+	main processor, used by systems like TownCrier.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Further Reading}\label{further-reading}
+
+\begin{itemize}
+	\tightlist
+	\item \textbf{Energy consumption of Bitcoin} \\
+	\url{https://digiconomist.net/bitcoin-energy-consumption}
+	\item \textbf{PeerCoin} \\
+	\url{https://peercoin.net/assets/paper/peercoin-paper.pdf}
+	\item \textbf{Proof-of-Stake in Ethereum} \\
+	\url{https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/}
+	\item \textbf{Gasper} \\
+	\url{https://arxiv.org/pdf/1903.04205}
+	\item \textbf{Ethereum 2.0} \\
+	\url{https://arxiv.org/abs/2003.03052} 
+	\item \textbf{Ouroboros} \\
+	\url{https://www.youtube.com/watch?v=hMgxZOsTlQc} 
+	\item \textbf{TownCrier} \\
+	\url{https://eprint.iacr.org/2016/168.pdf} 
+	\item \textbf{Ouroboros Praos} \\
+	\url{https://eprint.iacr.org/2017/578.pdf} 
+	\item \textbf{PDFS} \\
+	\url{https://arxiv.org/pdf/1808.06641.pdf} 
+\end{itemize}
