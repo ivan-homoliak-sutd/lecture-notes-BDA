@@ -428,22 +428,29 @@ grows.
 Elastico~\cite{luu2016secure} was the first practical sharding protocol proposed for open
 blockchains.
 %
-\textbf{Design:} 1. \textbf{Identity Establishment:} Nodes perform a PoW
-task. The resulting hash determines their identity and committee
-assignment. 2. \textbf{Committee Formation:} Nodes are divided into
-smaller committees (shards) based on their PoW solution. A final
-``directory committee'' is also formed to finalize blocks. 3.
-\textbf{Intra-Committee Consensus:} Each committee processes a subset of
-transactions and reaches consensus using a BFT-like protocol. 4.
-\textbf{Final Consensus:} The directory committee collects the processed
-blocks from each shard and broadcasts a final, unified block to the
-network (see also \autoref{fig:elastico}).
+\textbf{Design:}
+\begin{enumerate}
+	\item \textbf{Identity Establishment:} Nodes perform a PoW
+	task. The resulting hash determines their identity and committee
+	assignment. 
+	
+	\item \textbf{Committee Formation:} Nodes are divided into
+	smaller committees (shards) based on their PoW solution. A final
+	``directory committee'' is also formed to finalize blocks. 
+	\item \textbf{Intra-Committee Consensus:} Each committee processes a subset of
+	transactions and reaches consensus using a BFT-like protocol. 
+	\item \textbf{Final Consensus:} The directory committee collects the processed
+	blocks from each shard and broadcasts a final, unified block to the
+	network (see also \autoref{fig:elastico}).
+	
+\end{enumerate}
+
 
 \begin{figure}[b]
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{./figs/elastico.png}
-		\caption{Elastico stages of committee formation.}		
+		\caption{Elastico stages of committee formation~\cite{luuElastico2016secure}.}		
 		\label{fig:elastico}
 	\end{center}	
 \end{figure}
@@ -463,17 +470,21 @@ secure cross-shard transactions.
 \paragraph{OmniLedger.}\label{omniledger}
 
 OmniLedger~\cite{kokoris2018omniledger} builds upon Elastico with several key improvements.
-\textbf{Design Goals:}  \textbf{Security:} Full decentralization, shard
-robustness, and secure cross-shard transactions.  \textbf{Performance:}
-Scale-out, low storage, and low latency.
+Its design Goals were oriented on security (i.e., Full decentralization, shard
+robustness, and secure cross-shard transactions) and high performance (i.e., scale-out, low storage, and low latency).
 
-\textbf{Key Innovations:} \textbf{RandHound:} A secure and unbiased
-randomness protocol used for validator assignment to shards, preventing
-adversarial manipulation. \textbf{Atomix:} A protocol for secure,
-atomic cross-shard transactions. It ensures that transactions spanning
-multiple shards either commit atomically or abort completely.
-\textbf{ByzCoinX:} A robust and efficient intra-shard BFT consensus
-protocol.
+\textbf{Key Innovations:} 
+\begin{itemize}
+	\item \textbf{RandHound:} A secure and unbiased
+	randomness protocol used for validator assignment to shards, preventing
+	adversarial manipulation. 
+	\item \textbf{Atomix:} A protocol for secure,
+	atomic cross-shard transactions. It ensures that transactions spanning
+	multiple shards either commit atomically or abort completely.
+	\item \textbf{ByzCoinX:} A robust and efficient intra-shard BFT consensus
+	protocol.
+\end{itemize}
+
 
 %\begin{figure}
 %\centering
@@ -493,8 +504,11 @@ gains over previous systems, achieving high throughput with low latency.
 \paragraph{RapidChain.}\label{rapidchain}
 
 RapidChain~\cite{zamani2018rapidchain} aims for \textbf{full sharding}, partitioning not only
-computation but also storage and communication. This approach promises
-even greater scalability by minimizing redundancy across the network.
+computation but also storage and communication. 
+%This approach promiseseven greater scalability by minimizing redundancy across the network.
+The protocol runs in epochs. In each epoch, a reference committee produces fresh epoch randomness and a reconfiguration block that defines shard memberships for the next epoch, which limits adversarial ``join and leav'' concentration in any shard. 
+Transactions are sent to arbitrary nodes then routed to the output shard that should include them. 
+Inside a shard, members disseminate the block efficiently using an information dispersal style gossip and then run a Byzantine consensus to agree on the block header such as the Merkle root, after which the block becomes final within the shard.
 
 %\begin{figure}
 %\centering
@@ -623,7 +637,7 @@ Byzantine Fault Tolerance (BFT).
   \textbf{Hyperledger Fabric and BESU:} A popular enterprise-grade framework that
   uses a modular architecture with components for ordering services,
   membership providers, and smart contract execution.
-  However, a single point of failure of Hyperledger Fabric~\cite{hyperledger} is a centralized ordering service. 
+  However, a single-point-of-failure of Hyperledger Fabric~\cite{hyperledger} is a centralized ordering service. 
   In contrast, Hyperledger BESU is using a variant of BFT, called IBFT, which has security properties of standard BFT consensus protocols.
   
   
@@ -642,7 +656,43 @@ Example of technologies are Intel SGX, ARM TrustZone, Keystone Enclave.
 In this systems, even remote client can verify what code is running within the enclave -- this process is called remote attestation.
 There have been many attacks on TEE platform in the past, such as VoltPillager~\cite{chen2021voltpillager} or Plundervolt~\cite{murdock2020plundervolt}.
 
-There were proposed some blockchain and centralized ledgers~\cite{homoliak2020aquareum} that utilize TEE to increase the processing throughput and/or to provide privacy of transactions~\cite{cheng2019ekiden}.  
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{./figs/overview-normal-operation-simple.pdf}
+		\caption{Auqareum overview~\cite{homoliak2020aquareum}.}		
+		\label{fig:aquareum}
+	\end{center}	
+\end{figure}
+
+\paragraph{Aquareum.}\label{sec:aquareum}
+There were proposed blockchain-based semi-centralized ledgers (such as Aquareum~\cite{homoliak2020aquareum} -- see \autoref{fig:aquareum}) that utilize TEE to increase the processing throughput and/or to provide privacy of transactions~\cite{cheng2019ekiden}.  
+%
+Aquareum ledger is initialized by an operator ($\mathbb{O}$) who creates an internal ledger ($L$) that will store all transactions processed and the state that they render.  
+Initially, $L$ contains an empty transaction set and a null state.
+During the initialization, $\mathbb{O}$ creates a TEE enclave ($\mathbb{E}$) whose role is to execute updates of $L$ and verify consistency of $L$ before each update.
+Initialization of $\mathbb{E}$ involves the generation of two public private key pairs -- one for the signature scheme of TEE (i.e.,  $PK_{\mathbb{E}}^{tee}, SK_{\mathbb{E}}^{tee}$) and one for the signature scheme of the public blockchain (i.e., $PK_{\mathbb{E}}^{pb}, SK_{\mathbb{E}}^{pb}$).\footnote{Note that neither of the private keys ever leaves $\mathbb{E}$.}
+The code of $\mathbb{E}$ is public and it can be remotely attested with the TEE infrastructure by any client.
+
+
+
+Multiple independent general-purpose centralized ledgers (such as Aquareum) can be securely interconnected through interoperability protocol~\cite{homoliak2023cbdc} and thus provide a  means for decentralized trust-less communication of such centralized systems.
+CBDC-Aquasphere is an example of Aquareum's application to the environment of CBDC instances -- each CBDC instance is represented by a single Aquareum instance -- see \autoref{}.
+
+
+\begin{figure*}[t]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./figs/cbdc-architecture.pdf}
+	%	\vspace{-0.3cm}
+	\caption{Overview of our CBDC architecture supporting interoperability among multiple CBDC instances (i.e., banks). The schema depicts two instances, where each of them has its own centralized ledger $L$ modified in a secure way through TEE of $\mathbb{E}$, while its integrity is ensured by periodic integrity snapshots to the integrity preserving smart contract ($\mathbb{IPSC}$) in a public blockchain $PB$. Each CBDC instance is registered in the identity management smart contract $\mathbb{IMSC}$ of a public blockchain, serving as a global registry of bank instances. A client who makes an inter-bank transfer communicates with her bank and the counter-party bank utilizing interoperability micro contracts ($\mathbb{IOMC}$), running in the TEE. Any censored request of a client is resolved by $\mathbb{IPSC}$ of a particular bank and can be initiated by its client or a counter-party client. 
+		%		\ih{maybe label censorship requests and integrity check of snapshots at IPSC}
+	}
+	\label{fig:architecture}
+\end{figure*}
+
+
+
 
 %\begin{figure}
 %\centering
