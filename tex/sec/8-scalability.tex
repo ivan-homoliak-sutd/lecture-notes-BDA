@@ -38,7 +38,7 @@ evolution of blockchain technology: scalability. As decentralized
 networks gain mainstream adoption, their ability to process a high
 volume of transactions in a timely and cost-effective manner becomes
 paramount. We will begin by exploring the conceptual framework of the
-``blockchain trilemma,'' a term coined by Vitalik Buterin, which posits
+``blockchain trilemma,'' which posits
 that it is inherently difficult to simultaneously optimize for
 scalability, security, and decentralization.
 
@@ -54,8 +54,8 @@ blockchain structure.
 
 Furthermore, we will consider the role of permissioned blockchains and
 Trusted Execution Environments (TEEs) in achieving scalability,
-acknowledging the trade-offs they entail in terms of decentralization.
-By the end of this section, you will have a nuanced understanding of the
+acknowledging the trade-offs they entail in terms of trust and decentralization.
+By the end of this section, the reader will have a nuanced understanding of the
 complex and multifaceted challenge of blockchain scalability and the
 diverse range of solutions that are being developed to address it.
 
@@ -104,10 +104,11 @@ ways:
   handle a growing amount of work, measured by the number of actions
   (transactions) processed in a given time frame. It is commonly
   expressed in \textbf{transactions per second (TPS)}.
+  Even though the term throughput is more precise for TPS, it is used very rarely, while the  term scalability is used more often for this purpose.
 \item
   \textbf{Number of Nodes:} This refers to the ability of the network to
   maintain its performance (e.g., TPS) as the number of participating
-  nodes grows. A truly scalable system should not see its performance
+  nodes grows. A truly scalable system should not experience its performance
   degrade as more nodes join the network.
 \end{enumerate}
 
@@ -279,7 +280,7 @@ a blockchain:
   \textbf{Stale Block Rate:} The percentage of mined blocks that are
   orphaned.
 \item
-  \textbf{Fairness:} The proportion of rewards relative to the invested
+  \textbf{Fairness:} The proportion of earned rewards relative to the invested
   mining power.
 \end{itemize}
 
@@ -337,13 +338,20 @@ Bitcoin-NG~\cite{eyal2016bitcoinNG} is a more sophisticated Layer 1 scaling solu
 improves throughput by decoupling leader election from transaction
 serialization.
 
-\textbf{Principle:} 1. \textbf{Leader Election (Key Blocks):} A leader
-is elected via Proof-of-Work, creating a ``key block.'' This block does
-not contain transactions but secures the leader's right to publish
-transactions. 2. \textbf{Transaction Serialization (Microblocks):} The
-elected leader then serially publishes transactions in smaller
-``microblocks'' without needing to perform PoW for each one (see \autoref{fig:bitcoin-ng}). This
-continues until a new leader mines a new key block.
+\textbf{Principle:}
+\begin{enumerate}
+	\item \textbf{Leader Election (Key Blocks):} A leader
+	is elected via Proof-of-Work, creating a ``key block.'' This block does
+	not contain transactions but secures the leader's right to publish
+	transactions. 
+
+	\item \textbf{Transaction Serialization (Microblocks):} The
+	elected leader then serially publishes transactions in smaller
+	``microblocks'' without needing to perform PoW for each one (see \autoref{fig:bitcoin-ng}). This
+	continues until a new leader mines a new key block.
+	
+\end{enumerate}
+
 
 %\begin{figure}
 %\centering
@@ -354,8 +362,8 @@ continues until a new leader mines a new key block.
 This approach allows for much higher transaction throughput, as it is
 limited only by the network's propagation capacity and the leader's
 processing power, not by the PoW mining interval. However, it introduces
-a new vulnerability: the leader becomes a single point of failure and a
-target for Denial-of-Service (DoS) attacks. 
+a new vulnerability: the leader becomes a single-point-of-failure and a
+target for Denial-of-Service (DoS) attacks~\cite{homoliak2020security,burianova2025secret}. 
 Bitcoin-NG shows significantly better scalability
 than Bitcoin, although it does not achieve perfect linear scaling.
 The transaction fees are split across the current and the next leader in ratio 40\% vs. 60\% to incetivize the next miner on continuing of the most recent chain of blocks (see \autoref{fig:bitcoin-ng2}).
@@ -366,7 +374,7 @@ The transaction fees are split across the current and the next leader in ratio 4
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{./figs/bitcoin-ng.png}
-		\caption{Bitcoin-NG principle.}		
+		\caption{Bitcoin-NG principle~\cite{eyal2016bitcoinNG}.}		
 		\label{fig:bitcoin-ng}
 	\end{center}	
 \end{figure}
@@ -381,7 +389,7 @@ The transaction fees are split across the current and the next leader in ratio 4
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{./figs/bitcoin-ng2.png}
-		\caption{Bitcoin-NG: split of transaction fees.}		
+		\caption{Bitcoin-NG: split of transaction fees~\cite{eyal2016bitcoinNG}.}		
 		\label{fig:bitcoin-ng2}
 	\end{center}	
 \end{figure}
@@ -410,7 +418,7 @@ grows.
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{./figs/sharding.png}
-		\caption{Sharding: splitting the validators into committees.}		
+		\caption{Sharding: splitting the validators into committees~\cite{alchemy_sharding_2023}.}		
 		\label{fig:sharding}
 	\end{center}	
 \end{figure}
@@ -518,25 +526,28 @@ and lower confirmation times (see example in \autoref{fig:dag}).
 	\end{center}	
 \end{figure}
 
-However, DAGs introduce new challenges, such as achieving a total
-ordering of transactions, which is an NP-hard problem. Protocols like
- \textbf{PHANTOM} and its optimization \textbf{GHOSTDAG}~\cite{sompolinsky2020phantom}  have been developed to address these challenges, but they remain an active area of research.
-Phantom is a generalization of Nakamoto’s PoW longest chain protocol that utilized DAGs instead of a single chain. 
-The complexity of recursively determining the order of the blocks it contains is impractical for efficient use and requires solving an NP-hard problem (the maximal k-cluster SubDAG problem). Therefore, a greedy algorithm called GHOSTDAG has been developed.
-The key idea of this protocol is that it performs a complete ordering of all blocks (transactions) and includes orphaned blocks, except an attacker-created blocks that are weakly connected.
-The general problem of such DAG-based designs is that they rely on random transation selection to avoid duplicates across blocks. 
-However, a greedy rational attacker might ignore such an altruistic choice and select transactions based the highest fees to maximize their profit~\cite{perevsini2023incentive,perevsini2021dag}.
-This has an adversarial effect on the effective throughput of the network, having much more transaction duplicates across different blocks.
 
-
-\begin{figure}[t]
+\begin{figure}[b]
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{./figs/PHANTOM.png}
+		\includegraphics[width=0.7\textwidth]{./figs/PHANTOM.png}
 		\caption{Ordering of blocks in PHANTOM and elimination of weakly connected blocks.}		
 		\label{fig:phantom}
 	\end{center}	
 \end{figure}
+
+However, DAGs introduce new challenges, such as achieving a total
+ordering of transactions, which is an NP-hard problem. Protocols like
+ \textbf{PHANTOM} and its optimization \textbf{GHOSTDAG}~\cite{sompolinsky2020phantom}  have been developed to address these challenges, but they remain an active area of research.
+Phantom is a generalization of Nakamoto’s PoW longest chain protocol that utilized DAGs instead of a single chain. 
+The complexity of recursively determining the order of the blocks it contains is impractical for efficient use and requires solving an NP-hard problem (the maximal k-cluster SubDAG problem). Therefore, a greedy algorithm called GHOSTDAG has been developed (see \autoref{fig:phantom}).
+The key idea of this protocol is that it performs a complete ordering of all blocks (transactions) and includes orphaned blocks, except an attacker-created blocks that are weakly connected.
+The general problem of such DAG-based designs is that they rely on random transaction selection to avoid duplicates across blocks. 
+However, a greedy rational attacker might ignore such an altruistic choice and select transactions based the highest fees to maximize their profit~\cite{perevsini2023incentive,perevsini2021dag}.
+This has an adversarial effect on the effective throughput of the network, having much more transaction duplicates across different blocks.
+
+
+
  
 
 \paragraph{Sycomore.}\label{sycomore}
@@ -612,7 +623,7 @@ Byzantine Fault Tolerance (BFT).
   \textbf{Hyperledger Fabric and BESU:} A popular enterprise-grade framework that
   uses a modular architecture with components for ordering services,
   membership providers, and smart contract execution.
-  However, a single point of failure of Hyperledger fabric is a centralized ordering service. 
+  However, a single point of failure of Hyperledger Fabric~\cite{hyperledger} is a centralized ordering service. 
   In contrast, Hyperledger BESU is using a variant of BFT, called IBFT, which has security properties of standard BFT consensus protocols.
   
   
