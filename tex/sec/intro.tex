@@ -68,13 +68,12 @@ The following listings contains current and former course instructors who helped
 	the Singapore University of Technology and Design (SUTD), where his
 	research was centered on blockchains and cybersecurity. His
 	habilitation, titled ``Towards Secure Consensus Protocols and
-	Decentralized Applications in Blockchains,'' \ih{cite} underscores his deep
-	expertise in the field. Dr.~Homoliak's research interests are
-	extensive and include electronic voting in blockchains~\cite{homoliak2023bbb,venugopalan2023always,stanvcikova2022sbvote,homoliak2025votemate}, the security
-	and scalability of consensus protocols~\cite{perevsini2023incentive,perevsini2021dag,perevsini2023dag,budinsky2023fee}, the intersection of Trusted
+	Decentralized Applications in Blockchains,''~\cite{homoliak2025towards} focuses on several research topics including standardization of threat modeling~\cite{homoliak2020security}  electronic voting in blockchains~\cite{homoliak2023bbb,venugopalan2023always,stanvcikova2022sbvote,homoliak2025votemate}, the security
+	and scalability of consensus protocols~\cite{perevsini2023incentive,perevsini2021dag,perevsini2023dag,budinsky2023fee,homoliak2025pos}, the intersection of Trusted
 	Execution Environments (TEE) with blockchain technology~\cite{homoliak2020aquareum}, Central Bank
-	Digital Currencies (CBDC)~\cite{homoliak2023cbdc}, and the application of zero-knowledge
-	cryptography~\cite{perevsini2025featherwallet} \ih{todo}.
+	Digital Currencies (CBDC)~\cite{homoliak2023cbdc}, authentication/cryptocurrency wallets~\cite{homoliak2024sok,homoliak2020smartotps,perevsini2025featherwallet,drga2023detecting} and mixers~\cite{mariani2025sok}.
+	Besides that, Ivan focuses on other topics in consensus protocols such as DoS on the leader~\cite{burianova2025secret} in PoS consensus protocols, Proof-of-Useful-Work with mining SNARKs/zk-SNARKs~\cite{oleksak2025zk}, and Proof-of-Social-Capital~\cite{mariani2025proof}.
+	
 	\item
 	\textbf{Ing. Vladimír Veselý, Ph.D.} (Guarantor Deputy): Dr.~Veselý's
 	engagement with cryptocurrencies dates back to 2011, when he began
@@ -82,27 +81,29 @@ The following listings contains current and former course instructors who helped
 	Ph.D.~from FIT@BUT. He serves as a consultant for law enforcement
 	agencies on cryptocurrency-related crimes, a role that leverages his
 	deep understanding of forensic analysis and the tracking of illicit
-	activities on the blockchain. His research has involved correlating
-	dark market activities with cryptocurrency transactions\ih{cite} and exploring
-	the use of blockchains for storing personal named records\ih{cite}.
+	activities on the blockchain. His related research has involved correlating
+	dark market activities with cryptocurrency transactions~\cite{dolejvska2022shedding,dolejvska2023busting}, blockchain forensics~\cite{vesely2019detect}, and exploring
+	the use of blockchains for storing personal named records~\cite{koutensky2025using}.
+	
 	\item
 	\textbf{Martin Perešíni}: A Ph.D.~student (under supervision of Dr. Homoliak) whose research is
 	concentrated on the security and scalability of consensus protocols.
 	His work includes the study of Directed Acyclic Graph (DAG) based
 	protocols~\cite{perevsini2023incentive,perevsini2021dag,perevsini2023dag}, which offer a promising alternative to traditional
 	single-chain blockchains for enhancing throughput. He also
-	investigates incentive schemes and threats such as selfish mining \ih{cite}.
+	investigates incentive schemes and threats such as selfish mining \ih{cite }).
+	
 	\item
 	\textbf{Samuel Olekšák}: A Ph.D.~student (under supervision of Dr. Homoliak) specializing in the
 	application of zero-knowledge cryptography in blockchains and
 	consensus protocols. His research explores innovative concepts such as
-	Proof of Useful Work for mining zero-knowledge proofs\ih{cite}, aiming to make
-	the mining process more computationally meaningful.
+	Proof-of-Useful-Work for mining zero-knowledge proofs~\cite{oleksak2025zk}, aiming to make the mining process more computationally meaningful.
+	
 	\item
 	\textbf{Ivana Stančíková}: A former Ph.D. student (under supervision of Dr. Homoliak) whose focus revolved around blockchain-based e-voting protocols and the problem of their scalability~\cite{venugopalan2023always,stanvcikova2022sbvote}.
 \end{itemize}
 
-\subsubsection{1.2: Motivation and Expected
+\subsubsection{Motivation and Expected
 	Outcomes}\label{motivation-and-expected-outcomes}
 
 The proliferation of blockchain technology has created a significant
@@ -746,7 +747,7 @@ the overall operation and security of the system (see \autoref{fig:participants}
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{./figs/participants.png} 
-		\caption{Participants in blockchains.}		
+		\caption{Participants in blockchains~\cite{homoliak2019security}.}		
 		\label{fig:participants}
 	\end{center}	
 \end{figure}
@@ -795,9 +796,10 @@ small number of peers (e.g., 8-50). When a new node joins the network,
 it scans a list of hard-coded directory nodes (DNS seeders) to find
 peers.
 
-The network propagation delay is a crucial factor. A 2013 study on
+The network propagation delay is a crucial factor. 
+A 2013 study on
 Bitcoin showed that the mean time for a block to be seen by 95\% of the
-nodes was 12.6 seconds, with a maximum of 40 seconds \ih{cite}.
+nodes was 12.6 seconds, with a maximum of 40 seconds~\cite{decker2013information}.
 
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
