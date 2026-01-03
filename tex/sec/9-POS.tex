@@ -1,5 +1,5 @@
-This section provides a comprehensive examination of Proof-of-Stake
-(PoS) consensus mechanisms, which have emerged as a significant
+This section provides explanation of Proof-of-Stake
+(PoS) consensus mechanisms, which have emerged as a potential
 alternative to the energy-intensive Proof-of-Work (PoW) systems. We will
 explore the foundational principles of PoS, where the right to
 validate transactions and create new blocks is granted based on the
@@ -26,12 +26,13 @@ mitigate these risks.
 
 We will then survey several prominent PoS protocols that have been
 deployed in real-world blockchain systems, including \textbf{Peercoin, Algorand,
-Ouroboros, and Ethereum's Casper and Gasper}. Finally, we will explore
-the related challenge of blockchain \textbf{oracles} and how systems can securely
+Ouroboros, and Ethereum's Casper and Gasper}. 
+%
+Finally, we will explore
+the challenge of blockchain \textbf{oracles} and how systems can securely
 access external data, covering solutions like \textbf{TownCrier, TLS-N, and
-PDFS}. Through this exploration, readers will gain a nuanced
-understanding of the theoretical underpinnings and practical
-implementations of Proof-of-Stake and its surrounding ecosystem.
+PDFS}. 
+%Through this exploration, readers will gain an understanding of the theoretical underpinnings and practical implementations of Proof-of-Stake and its surrounding ecosystem.
 
 \subsection{Learning Objectives}\label{learning-objectives}
 
@@ -64,15 +65,13 @@ implementations of Proof-of-Stake and its surrounding ecosystem.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Introduction to
-	Proof-of-Stake}\label{section-1-introduction-to-proof-of-stake}
+\subsection{Introduction to	Proof-of-Stake}\label{section-1-introduction-to-proof-of-stake}
 
-\subsubsection{The Motivation for
-	Proof-of-Stake}\label{the-motivation-for-proof-of-stake}
+\subsubsection{The Motivation}\label{the-motivation-for-proof-of-stake}
 
 The primary impetus for the creation of Proof-of-Stake consensus
 mechanisms was the growing concern over the immense energy consumption
-of Proof-of-Work (PoW) blockchains.
+of Proof-of-Work (PoW) blockchains -- see example of the Bitcoin in \autoref{fig:btc-energy-consumption} and \autoref{fig:btc-energy-footprint}.
 %
 %\pandocbounded{\includegraphics[keepaspectratio,alt={PoW Energy Consumption}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_004.jpg}}
 
@@ -80,10 +79,19 @@ of Proof-of-Work (PoW) blockchains.
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
-%		\includegraphics[width=0.9\textwidth]{./figs/btc-energy-consumption.png}
-	\ih{todo}
-	\caption{A visual representation of Bitcoin's energy consumption over time.}
+	\includegraphics[width=0.9\textwidth]{./figs/bitcoin-energy-consumpti.png}
+	\caption{A visual representation of Bitcoin's energy consumption over time~
+		\cite{statista_bitcoin_energy_consumption_2025}.}
 		\label{fig:btc-energy-consumption}
+	\end{center}	
+\end{figure}
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{./figs/bitcoin-footprints.png}
+		\caption{Annualized total Bitcoin footprints~\cite{digiconomist_bitcoin_energy_consumption}.}
+		\label{fig:btc-energy-footprint}
 	\end{center}	
 \end{figure}
 
@@ -146,7 +154,7 @@ concepts:
 	\textbf{Reduced Barriers to Entry}: PoS does not require investment in
 	specialized, high-cost mining hardware.
 	\item
-	\textbf{Higher Throughput}: Faster block creation times can lead to
+	\textbf{Higher Throughput}: Faster block creation times might lead to
 	higher transaction throughput.
 	\item
 	\textbf{Economic Security}: Aligns validators' incentives with the
@@ -233,7 +241,7 @@ results in a favorable outcome for them.
 	bias the outcome.
 \end{itemize}
 
-\subsubsection{2.3: Denial of Service (DoS) on a
+\subsubsection{Denial of Service (DoS) on a
 	Leader}\label{denial-of-service-dos-on-a-leader}
 
 If a leader is publicly determined before their turn to produce a block,
@@ -245,12 +253,49 @@ elected.
 
 \begin{itemize}
 	\tightlist
-	\item
-	\textbf{Private Leader Election (via VRF)}: As pioneered by Algorand,
+	\item \textbf{Private Leader Election (via VRF)}: As pioneered by Algorand~\cite{gilad2017algorand},
 	a node privately determines if it is a potential leader and
 	immediately releases a block candidate. By the time the leader is
 	publicly known, it is too late for a DoS attack to be effective.
+	
+	\item \textbf{Whisk}: Designed for Ethereum's PoS. It conceals block proposers' identities until their assigned slot by shuffling a candidate list using verifiable random permutations and ZKPs. 
+	Operating in a pipelined mode (shown in \autoref{fig:whisk-tereza}), current-round proposers prepare the shuffle for the next round, enabling scalability while preserving pre-slot anonymity.
+	
+		
+	\item \textbf{Homomorphic sortition}: is a cryptographic mechanism that leverages threshold fully homomorphic encryption (ThFHE) to perform proposer selection over encrypted data~\cite{freitas2022homomorphic}. This approach ensures that proposers cannot be identified until a joint decryption is completed (see \autoref{fig:hs-tereza}).
+	
+	\item \textbf{Network-Level Deanonymization} --
+	can be leveraged to enhance validator anonymity. 
+	Dandelion++ and RLN~\cite{dandelion} aimed to obfuscate the origin of consensus messages by routing them through a private sub-network. 
+	%While conceptually promising, the final analysis concluded that the approach is not feasible for Ethereum’s consensus layer due to strict latency constraints and high implementation complexity, especially under the tightened timing rules. 
+	%The trade-offs ultimately limited its applicability despite its strong anonymity model. 
+	%
+	Polkadot's Sassafras~\cite{sassafras}  combines an SSLE-based leader election with network-layer anonymity. It complements consensus-layer protection with mechanisms to conceal proposer network traffic, offering a more comprehensive defense against deanonymization and targeted attacks.
+	%
+	CoPoR-PoS \ih{cite !!!} proposed embedding annonymization layer into the consesnus protocol itself.
+	
 \end{itemize}
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{./figs/whisk-tereza.png}
+		\caption{The pipeline of the Whisk proposer protection mechanism~\cite{burianova2025secret}.}
+		\label{fig:whisk-tereza}
+	\end{center}	
+\end{figure}
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{./figs/hs-tereza.png}
+		\caption{Homomorphic sortition protocol~\cite{burianova2025secret}.}
+		\label{fig:hs-tereza}
+	\end{center}	
+\end{figure}
+
+
 
 \subsubsection{Long-Range Attacks}\label{long-range-attacks}
 
@@ -262,7 +307,7 @@ protect their old keys. If the attacker accumulates enough historical
 stake, they can rerun the protocol and rewrite the entire history of the
 blockchain.
 
-\textbf{Countermeasures:}
+\textbf{Countermeasures~\cite{homoliak2020security}:}
 
 \begin{itemize}
 	\tightlist
@@ -285,12 +330,18 @@ blockchain.
 	\textbf{Context-Sensitive Transactions}: Including the hash of a
 	recent valid block within a transaction itself, tethering it to a
 	specific point in history.
+
+	
+	
+	
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{Prominent Proof-of-Stake
 	Protocols}\label{section-3-prominent-proof-of-stake-protocols}
+
+\ih{bookmark}
 
 \subsubsection{Peercoin}\label{peercoin}
 
