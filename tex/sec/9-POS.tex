@@ -356,13 +356,14 @@ solution by consuming some coin-age.
 
 Algorand is a pure PoS protocol with no punishments or locked tokens. It
 uses cryptographic sortition to choose leaders via a Verifiable Random
-Function (VRF). A leader is selected privately and proposes a new block.
-A committee of \textasciitilde1000 nodes, also selected by VRF, then
+Function (VRF) to avoid DoS on the leader attack (see \autoref{denial-of-service-dos-on-a-leader}). A leader is selected privately and proposes a new block.
+Since there can exist multiple leaders meeting the threshold for VRF, Agorand requires additional round to vote on the best one.\footnote{Therefore, Algorand belongs to the family of Non-Single Secret Leader Election (NSSLE) protocols.}
+For this purpose a committee of \textasciitilde1000 nodes, also selected by VRF, then
 votes on the proposed block to ensure Byzantine tolerance.
 
 \subsubsection{Ouroboros}\label{ouroboros}
 
-Ouroboros is a family of provably secure PoS protocols developed for the
+Ouroboros~\cite{kiayias2017ouroboros} is a family of provably secure PoS protocols developed for the
 Cardano blockchain.
 
 \begin{itemize}
@@ -402,10 +403,32 @@ Cardano blockchain.
 
 Ethereum's transition to PoS utilizes a combination of protocols.
 
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{./figs/casper1.png}
+		\caption{Finalization in Casper FFG~\cite{buterin2017casper}. The setup assumes 3 validators holding the majority of the stake.}
+		\label{fig:casper-forks}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./figs/casper2.png}
+		\caption{Forks and finalization in Casper FFG~\cite{buterin2017casper}. The branch with the majority of validators (the upper one) will resume finalizing checkpoints first. The setup assumes}
+		\label{fig:casper-forks2}
+	\end{center}	
+\end{figure}
+
+
 \begin{itemize}
 	\tightlist
 	\item
-	\textbf{Casper the Friendly Finality Gadget (FFG)}: Casper FFG is not
+	\textbf{Casper the Friendly Finality Gadget (FFG)}: Casper FFG~\cite{buterin2017casper} is not
 	a standalone consensus protocol but a ``finality gadget'' that
 	overlays a block proposal mechanism. It introduces checkpoints and
 	attestations (votes).
@@ -420,13 +443,22 @@ Ethereum's transition to PoS utilizes a combination of protocols.
 		\item
 		\textbf{Finalization}: A checkpoint A is finalized if it is
 		justified and its immediate successor is also justified. Finalized
-		blocks are considered permanent.
+		blocks are considered permanent (see \autoref{fig:casper-forks} and \autoref{fig:casper-forks2}).
 		%    \pandocbounded{\includegraphics[keepaspectratio,alt={Casper FFG Finalization}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_015.png}}
-		\emph{A diagram illustrating the finalization process in Casper
-			FFG.}
+		%\emph{A diagram illustrating the finalization process in CasperFFG.}
 		\item
 		\textbf{Slashing Conditions}: Validators are slashed for breaking
 		rules, such as:
+		
+		\begin{figure}[b]
+			%	\vspace{-0.3cm}
+			\begin{center}
+				\includegraphics[width=0.4\textwidth]{./figs/ghost.png}
+				\caption{The GHOST fork-choice rule.}
+				\label{fig:ghost}
+			\end{center}	
+		\end{figure}
+		
 		
 		\begin{itemize}
 			\tightlist
@@ -443,53 +475,99 @@ Ethereum's transition to PoS utilizes a combination of protocols.
 	\item
 	\textbf{Gasper}: The full protocol used in Ethereum 2.0, which
 	combines the Casper FFG finality gadget with the GHOST (Greediest
-	Heaviest Observed SubTree) fork-choice rule.
+	Heaviest Observed SubTree) fork-choice rule (see \autoref{fig:ghost}).
 	%  \pandocbounded{\includegraphics[keepaspectratio,alt={Gasper Protocol}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_016.jpg}}
-	\emph{The GHOST rule combined with the Casper finality gadget.}
 \end{itemize}
+
+
+
+
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{Oracles and Data
 	Feeds}\label{section-4-oracles-and-data-feeds}
 
-A blockchain is an isolated environment. The ``oracle problem'' is the
+A blockchain (and its smart contracts) is an isolated environment and by default has no access to data in external world. The ``oracle problem'' is the
 challenge of providing smart contracts with reliable data from the
 external world.
+There are several approaches to oracle that we will briefly describe.
 
 \subsubsection{TownCrier (TC)}\label{towncrier-tc}
 
-TownCrier acts as a trusted proxy between a blockchain and HTTPS
-websites, using a Trusted Execution Environment (TEE) like Intel SGX. *
+TownCrier~\cite{zhang2016town} acts as a trusted proxy between a blockchain and HTTPS
+websites, using a Trusted Execution Environment (TEE) like Intel SGX (see \autoref{fig:oracles-tc}).
 \textbf{Pros}: Easy integration, no changes needed for website
-operators. * \textbf{Cons}: Trusts the TEE manufacturer (a single point
+operators. \textbf{Cons}: Trusts the TEE manufacturer (a single point
 of failure), and several attacks have been demonstrated against Intel
 SGX.
 
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{./figs/oracle-problem.png}
+		\caption{Oracle problem.}
+		\label{fig:oracles}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}[b]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.95\textwidth]{./figs/tc1.png}
+		\caption{TownCrier~\cite{zhang2016town}.}
+		\label{fig:oracles-tc}
+	\end{center}	
+\end{figure}
+
 \subsubsection{TLS-N}\label{tls-n}
 
-TLS-N adds a non-repudiation layer to TLS, allowing for the generation
+TLS-N~\cite{ritzdorf2018tls} adds a non-repudiation layer to TLS, allowing for the generation
 of privacy-preserving, non-interactive proofs of the contents of a TLS
-session. * \textbf{Pros}: More general and powerful, with extra features
-like privacy. * \textbf{Cons}: Requires changes to the TLS specification
+session (see overview in \autoref{fig:tlsn}). 
+It uses efficient Merkle-tree-based authentication and produces TLS-N proofs that can be verified by smart contracts.
+\textbf{Pros}: More general and powerful, with extra features
+like privacy. \textbf{Cons}: Requires changes to the TLS specification
 and updates to TLS servers, making integration difficult and expensive.
 %\pandocbounded{\includegraphics[keepaspectratio,alt={TLS-N Diagram}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_020.jpg}}
 
-\subsubsection{Provable Data Feeds
+\subsubsection{Practical Data Feed Service
 	(PDFS)}\label{provable-data-feeds-pdfs}
 
-In this model, data providers maintain an append-only database (like a
-Merkle tree) and sign their contract locations via TLS. The contract API
+In PDFS~\cite{guarnizo2019pdfs}, data providers maintain an append-only database (like a
+Merkle tree) and sign their contract locations via TLS (see \autoref{fig:pdfs}). The contract API
 allows for updating the database root and proving the authenticity of
-data via Merkle proofs. * \textbf{Pros}: Direct TLS authentication, easy
-integration. * \textbf{Cons}: Website operators have to deploy it.
+data via Merkle proofs. \textbf{Pros}: Direct TLS authentication, easy
+integration. \textbf{Cons}: Website operators have to deploy it.
 %\pandocbounded{\includegraphics[keepaspectratio,alt={PDFS Diagram}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_021.jpg}}
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{./figs/TLSN.png}
+		\caption{TLS-N overview~\cite{ritzdorf2018tls}.}
+		\label{fig:tlsn}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{./figs/pdfs.png}
+		\caption{PDFS overview~\cite{guarnizo2018pdfs}.}
+		\label{fig:pdfs}
+	\end{center}	
+\end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{Summary / Key Takeaways}\label{summary-key-takeaways}
 
-This section has provided a detailed exploration of Proof-of-Stake
+This section has provided a brief exploration of Proof-of-Stake
 consensus protocols. We established the motivation for PoS as a more
 energy-efficient alternative to PoW, defined its core concepts, and
 presented a balanced view of its advantages and disadvantages. A key
