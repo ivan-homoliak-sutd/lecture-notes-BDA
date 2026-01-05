@@ -1,0 +1,468 @@
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+This chapter introduces a comprehensive, layered security model for
+blockchain technology, providing a structured framework for analyzing
+the diverse security and privacy challenges inherent in decentralized
+systems. Drawing an analogy to the well-established ISO/OSI model for
+computer networks, this framework, termed the Security Reference
+Architecture (SRA), deconstructs the complex blockchain ecosystem into
+four distinct, manageable layers: the network layer, the consensus
+layer, the replicated state machine (RSM) layer, and the application
+layer.
+
+Throughout this chapter, we will systematically explore the unique
+security threats, vulnerabilities, and potential countermeasures
+pertinent to each layer. This structured approach allows for a granular
+understanding of how security is enforced at different levels of the
+blockchain stack, from the fundamental peer-to-peer communication
+protocols to the sophisticated decentralized applications (DApps) that
+users interact with.
+
+Furthermore, we will examine a broad spectrum of blockchain
+applications, categorizing them from foundational ecosystem components,
+such as wallets and tokens, to higher-level, real-world use cases like
+e-voting, supply chain management, and digital notarization. By applying
+the SRA framework to these applications, we can better appreciate their
+specific security considerations and the interplay between the different
+layers in ensuring their overall resilience and integrity.
+
+\hypertarget{learning-objectives}{%
+\subsection{Learning Objectives}\label{learning-objectives}}
+
+\begin{itemize}
+\tightlist
+\item
+  Understand the concept and utility of a layered security model for
+  analyzing blockchain systems.
+\item
+  Identify the four layers of the Security Reference Architecture (SRA):
+  network, consensus, replicated state machine, and application.
+\item
+  Recognize and describe the primary security threats and defensive
+  mechanisms at the network layer, including DNS attacks, routing
+  attacks, and eclipse attacks.
+\item
+  Analyze the security vulnerabilities at the consensus layer, such as
+  51\% attacks, double-spending, and selfish mining.
+\item
+  Evaluate the security risks at the replicated state machine (RSM)
+  layer, with a focus on smart contract bugs and data privacy.
+\item
+  Categorize and explore the security considerations for a wide range of
+  blockchain applications, from ecosystem-level tools to higher-level
+  use cases.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-1-the-security-reference-architecture-sra-for-blockchains}{%
+\subsection{Section 1: The Security Reference Architecture (SRA) for
+Blockchains}\label{section-1-the-security-reference-architecture-sra-for-blockchains}}
+
+\hypertarget{a-layered-approach-to-blockchain-security}{%
+\subsubsection{A Layered Approach to Blockchain
+Security}\label{a-layered-approach-to-blockchain-security}}
+
+The Security Reference Architecture (SRA) for blockchains~\cite{homoliak2020security} provides a
+conceptual model for organizing and understanding the multifaceted
+security aspects of decentralized ledger technology. By dividing the
+system into layers, we can isolate and analyze specific functionalities
+and their associated vulnerabilities. The four layers of the SRA are:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Network Layer}: This foundational layer deals with the
+  peer-to-peer (P2P) communication protocols that enable nodes to
+  connect, discover each other, and exchange data. It encompasses
+  everything from peer discovery and message routing to the underlying
+  Internet protocols upon which the blockchain network is built.
+\item
+  \textbf{Consensus Layer}: This is the core of the blockchain,
+  responsible for the mechanism by which all nodes in the network agree
+  on a single, consistent, and immutable order of transactions. This
+  layer includes the specific consensus algorithms, such as
+  Proof-of-Work (PoW) or Proof-of-Stake (PoS), that ensure the integrity
+  of the ledger.
+\item
+  \textbf{Replicated State Machine (RSM) Layer}: This layer is
+  responsible for interpreting the ordered transactions provided by the
+  consensus layer and executing them to update the state of the
+  blockchain. It includes the virtual machine (e.g., the EVM) that runs
+  smart contracts and the logic for processing transactions.
+\item
+  \textbf{Application Layer}: This is the topmost layer, consisting of
+  the decentralized applications (DApps), user interfaces, and external
+  services (like oracles) that are built on top of the blockchain
+  infrastructure to provide specific functionalities to end-users.
+\end{itemize}
+
+\hypertarget{threat-risk-assessment-model-for-blockchains}{%
+\subsubsection{Threat Risk Assessment Model for
+Blockchains}\label{threat-risk-assessment-model-for-blockchains}}
+
+The SRA framework is conceptually grounded in the Threat Risk Assessment
+(TRA) model, which is a standard methodology for security analysis,
+notably detailed in the ISO 15408 (Common Criteria) standard. The TRA
+model provides a systematic process for: 1. Identifying valuable
+\textbf{assets} within the system. 2. Recognizing potential
+\textbf{threats} to those assets. 3. Assessing the
+\textbf{vulnerabilities} that could be exploited by those threats. 4.
+Evaluating the \textbf{risks} associated with these vulnerabilities. 5.
+Implementing \textbf{countermeasures} to mitigate the identified risks
+to an acceptable level.
+
+To better visualize these relationships in the context of blockchains,
+we can use \textbf{Vulnerability, Threat, and Defense (VTD) graphs}.
+These graphs map out the connections between specific vulnerabilities,
+the threats that exploit them, and the defenses designed to counter
+them, providing a clear and structured view of the security landscape at
+each layer.
+
+{[}DIAGRAM\_PLACEHOLDER: Threat Risk Assessment Model for Blockchains{]}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-2-security-at-each-layer}{%
+\subsection{Section 2: Security at Each
+Layer}\label{section-2-security-at-each-layer}}
+
+\hypertarget{network-layer-security}{%
+\subsubsection{Network Layer
+Security}\label{network-layer-security}}
+
+The network layer is the backbone of any blockchain, and its security is
+paramount. As blockchain networks are typically overlays on top of the
+public Internet, they inherit many of its vulnerabilities.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{DNS Attacks}: Many blockchain nodes initially find peers
+  through DNS seeds. An attacker who can compromise these DNS records
+  (e.g., through DNS cache poisoning) can redirect new nodes to a
+  network partition controlled by the attacker.
+\item
+  \textbf{Routing Attacks}: Attacks on the Internet's routing
+  infrastructure, such as BGP hijacking, can be used to intercept or
+  partition blockchain network traffic, isolating certain regions or
+  nodes from the rest of the network.
+\item
+  \textbf{Eclipse Attacks}: A more targeted attack where an adversary
+  monopolizes all of a victim node's incoming and outgoing connections.
+  The eclipsed node is thus isolated from the honest network and can be
+  fed false information, potentially leading it to accept fraudulent
+  transactions or waste its consensus power on an invalid chain.
+\item
+  \textbf{Denial-of-Service (DoS) Attacks}: These attacks aim to disrupt
+  the network by overwhelming nodes with traffic or resource-intensive
+  requests. A specific example is the ``penny-flooding'' attack, where
+  an attacker spams the network with a large number of low-fee
+  transactions to clog the mempool (the holding area for unconfirmed
+  transactions) and potentially crash nodes.
+\end{itemize}
+
+{[}DIAGRAM\_PLACEHOLDER: VTD Graph for Private and Public Networks{]}
+
+\hypertarget{consensus-layer-security}{%
+\subsubsection{Consensus Layer
+Security}\label{consensus-layer-security}}
+
+The consensus layer is where the ``truth'' of the blockchain is decided,
+making it a high-value target for attackers.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Generic Attacks}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{51\% Attacks}: The most well-known consensus attack, where
+    an attacker (or a coalition of attackers) controls a majority of the
+    network's consensus power (e.g., hashing power in PoW, or stake in
+    PoS). With this control, the attacker can prevent new transactions
+    from gaining confirmations, halt payments between some or all users,
+    and reverse transactions that were completed while they were in
+    control (double-spending).
+  \item
+    \textbf{Double-Spending Attacks}: This is a primary goal of many
+    consensus-level attacks. An attacker sends a transaction to a
+    recipient (e.g., paying for goods), waits for the recipient to
+    accept the payment, and then uses their consensus power to create a
+    longer, alternative chain in which the transaction never occurred,
+    allowing them to spend the same coins again.
+  \end{itemize}
+\item
+  \textbf{Attacks on Proof-of-Resource (PoR) Protocols}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Feather Forking}: An attacker announces they will censor
+    certain transactions, creating an incentive for rational miners to
+    join the censorship to avoid mining blocks that will be orphaned.
+  \item
+    \textbf{Bribery Attacks}: Offering direct rewards to miners to
+    reorder or exclude transactions, often for the attacker's financial
+    benefit (e.g., front-running).
+  \item
+    \textbf{Pool Hopping}: Miners switch between mining pools to
+    maximize their rewards, exploiting pools that pay per share.
+  \item
+    \textbf{Block Withholding}: A mining pool finds a block but doesn't
+    publish it, sabotaging the main chain.
+  \end{itemize}
+\item
+  \textbf{Attacks on Proof-of-Stake (PoS) Protocols}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Nothing-at-Stake}: Validators can vote for multiple
+    conflicting blocks without penalty, increasing network forks and
+    slowing down finality.
+  \item
+    \textbf{Grinding Attack}: An attacker attempts to influence the
+    selection of future block proposers to increase their own chances of
+    being selected.
+  \item
+    \textbf{Long-Range Attack}: An attacker obtains the keys of early,
+    ``retired'' validators to create a long alternative chain from the
+    genesis block, potentially rewriting the entire history of the
+    blockchain.
+  \end{itemize}
+\item
+  \textbf{Attacks on BFT Protocols}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{DoS on a Leader}: In protocols with a known leader, an
+    attacker can perform a DoS attack on the leader to disrupt the
+    consensus process.
+  \item
+    \textbf{Posterior Corruption}: An attacker acquires the keys of a
+    supermajority of validators (e.g., 2/3) and uses them to
+    illegitimately control the network.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{replicated-state-machine-rsm-layer-security}{%
+\subsubsection{Replicated State Machine (RSM) Layer
+Security}\label{replicated-state-machine-rsm-layer-security}}
+
+The RSM layer executes the logic defined in transactions and smart
+contracts. Flaws at this layer can lead to direct financial loss.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Smart Contract Bugs}: This is a vast category of
+  vulnerabilities stemming from errors in the code of smart contracts.
+  Famous examples include:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Reentrancy}: Where an attacker can repeatedly call back into
+    a vulnerable contract before its state is updated, allowing them to
+    drain its funds (e.g., The DAO hack).
+  \item
+    \textbf{Integer Overflow/Underflow}: Where arithmetic operations on
+    numbers exceed the maximum or minimum size for the data type,
+    causing the value to wrap around, which can be exploited to
+    manipulate balances or other critical parameters.
+  \item
+    \textbf{Access Control Issues}: Where functions that should be
+    restricted to certain users (e.g., the contract owner) are left
+    public, allowing unauthorized access.
+  \end{itemize}
+\item
+  \textbf{Privacy Threats}: By default, all transactions and smart
+  contract states are public on most blockchains. This can lead to the
+  leakage of sensitive business or personal information if not properly
+  managed through cryptographic techniques like zero-knowledge proofs or
+  the use of private sidechains.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-3-the-application-layer}{%
+\subsection{The Application
+Layer}\label{section-3-the-application-layer}}
+
+The application layer is where users interact with the blockchain. The
+security of DApps depends not only on the robustness of the underlying
+layers but also on the design and implementation of the application
+itself.
+
+\hypertarget{ecosystem-applications}{%
+\subsubsection{Ecosystem
+Applications}\label{ecosystem-applications}}
+
+These are foundational applications that enable the broader blockchain
+ecosystem to function.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tokens}: Both fungible (ERC-20) and non-fungible (ERC-721)
+  tokens are essentially smart contracts that manage balances. They are
+  subject to all the standard smart contract vulnerabilities.
+\item
+  \textbf{Wallets}: Software or hardware used to manage private keys.
+  Hosted wallets (where a third party holds the keys) introduce
+  custodial risk, while self-sovereign wallets place the full
+  responsibility for key security on the user, making them vulnerable to
+  malware, phishing, and physical loss.
+\item
+  \textbf{Exchanges}: Both centralized (CEX) and decentralized (DEX)
+  exchanges are prime targets for hackers. CEXs are vulnerable to
+  traditional web security breaches, while DEXs, being composed of smart
+  contracts, are susceptible to exploits that can drain their liquidity
+  pools. Atomic swaps are a specific type of cross-chain exchange
+  protocol.
+\item
+  \textbf{Oracles}: Services that provide external, real-world data to
+  smart contracts. The security of oracles is critical, as a compromised
+  oracle can feed false data to a smart contract, triggering incorrect
+  and potentially catastrophic outcomes.
+\item
+  \textbf{Distributed Filesystems}: Systems like IPFS and Storj provide
+  decentralized data storage. They are vulnerable to attacks such as
+  Sybil attacks (a malicious node pretending to be many nodes),
+  de-duplication attacks (colluding nodes claiming to store multiple
+  copies of data when only one exists), and outsourcing attacks (a node
+  claiming to store more data than it actually does).
+\end{itemize}
+
+{[}DIAGRAM\_PLACEHOLDER: Application Layer Diagrams{]}
+
+\hypertarget{higher-level-applications}{%
+\subsubsection{Higher-Level
+Applications}\label{higher-level-applications}}
+
+These applications leverage the unique properties of blockchain for
+specific use cases.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{E-voting}: While blockchain can offer transparency and
+  tamper-resistance, implementing a secure e-voting system is fraught
+  with challenges, including ensuring voter privacy, preventing
+  coercion, and providing a secure and accessible voting mechanism for
+  all users.
+\item
+  \textbf{Reputation Systems}: These systems use the blockchain to
+  create a persistent record of user reputations. They are vulnerable to
+  Sybil attacks (where a user creates many fake identities to boost
+  their reputation) and ``whitewashing'' (where a user with a bad
+  reputation simply creates a new identity).
+\item
+  \textbf{Supply Chain Management}: Using a blockchain to track the
+  provenance of goods can enhance transparency. However, the ``garbage
+  in, garbage out'' problem is a major challenge; the system's integrity
+  depends on trusted oracles or IoT devices to ensure that the data
+  entered onto the blockchain accurately reflects the state of the
+  physical goods.
+\item
+  \textbf{Notarization}: Using the blockchain as a decentralized
+  timestamping service to prove the existence of a document at a certain
+  point in time. The security here relies on the immutability of the
+  underlying blockchain.
+\item
+  \textbf{Direct Trading}: This involves the exchange of crypto-tokens
+  for off-chain goods. It faces the ``buyer/seller dilemma'' and relies
+  on the seller's reputation.
+\item
+  \textbf{Escrows}: To solve the direct trading problem without a
+  trusted seller, a third-party mediator (escrow) can be used to hold
+  funds until both parties are satisfied.
+\item
+  \textbf{Auctions}: Blockchain-based auctions need to ensure the
+  privacy of bids and be resistant to DoS attacks.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{summary-key-takeaways}{%
+\subsection{Summary / Key Takeaways}\label{summary-key-takeaways}}
+
+This chapter has presented the Security Reference Architecture (SRA) as
+a structured model for dissecting and analyzing the security of
+blockchain systems. By examining the distinct security challenges and
+countermeasures at the network, consensus, replicated state machine, and
+application layers, we gain a more holistic understanding of the complex
+threat landscape of decentralized technology.
+
+We have seen that security in a blockchain is not a monolithic property
+but rather a cumulative result of the defenses implemented at each
+layer. A vulnerability at a lower layer, such as a network partitioning
+attack, can undermine the guarantees of all layers above it. Conversely,
+a secure underlying infrastructure is not sufficient to protect against
+a poorly coded smart contract at the application layer.
+
+By understanding this layered model, developers, security auditors, and
+users can better identify potential risks, implement appropriate
+defenses, and make more informed decisions when building and interacting
+with decentralized systems.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{keywords}{%
+\subsection{Keywords}\label{keywords}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Security Reference Architecture (SRA)}: A layered model for
+  analyzing the security of blockchain systems, comprising the network,
+  consensus, RSM, and application layers.
+\item
+  \textbf{VTD Graph}: A graph that maps Vulnerabilities, Threats, and
+  Defenses.
+\item
+  \textbf{Network Layer}: The foundational layer of the SRA responsible
+  for peer-to-peer communication between nodes.
+\item
+  \textbf{Consensus Layer}: The layer of the SRA responsible for
+  achieving agreement on the order and validity of transactions.
+\item
+  \textbf{Replicated State Machine (RSM) Layer}: The layer of the SRA
+  that interprets transactions and executes smart contracts to update
+  the blockchain's state.
+\item
+  \textbf{Application Layer}: The highest layer of the SRA, consisting
+  of the DApps and user-facing services built on the blockchain.
+\item
+  \textbf{Eclipse Attack}: A network-level attack where an adversary
+  isolates a node by controlling all of its network connections.
+\item
+  \textbf{51\% Attack}: A consensus-level attack where an entity
+  controlling a majority of the network's consensus power can manipulate
+  the blockchain.
+\item
+  \textbf{Reentrancy}: A common smart contract vulnerability where an
+  attacker can repeatedly call a function before the contract's state is
+  updated.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{further-reading}{%
+\subsection{Further Reading}\label{further-reading}}
+
+\begin{itemize}
+\tightlist
+\item
+  Homoliak, Ivan, et al. "The security reference architecture for blockchains: Toward a standardized model for studying vulnerabilities, threats, and defenses." IEEE Communications Surveys \& Tutorials 23.1 (2020): 341-390.
+\item
+  ISO/IEC 15408-1:2009, \emph{Information technology --- Security
+  techniques --- Evaluation criteria for IT security --- Part 1:
+  Introduction and general model}.
+\end{itemize}
