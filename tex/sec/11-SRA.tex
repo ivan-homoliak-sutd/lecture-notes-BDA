@@ -2,13 +2,13 @@
 \hypertarget{introduction}{%
 \subsection{Introduction}\label{introduction}}
 
-This chapter introduces a comprehensive, layered security model for
+This chapter introduces a layered security model for
 blockchain technology, providing a structured framework for analyzing
 the diverse security and privacy challenges inherent in decentralized
 systems. Drawing an analogy to the well-established ISO/OSI model for
 computer networks, this framework, termed the Security Reference
-Architecture (SRA), deconstructs the complex blockchain ecosystem into
-four distinct, manageable layers: the network layer, the consensus
+Architecture (SRA)~\cite{homoliak2019security}, deconstructs the complex blockchain ecosystem into
+four distinct layers: the network layer, the consensus
 layer, the replicated state machine (RSM) layer, and the application
 layer.
 
@@ -58,8 +58,7 @@ layers in ensuring their overall resilience and integrity.
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{section-1-the-security-reference-architecture-sra-for-blockchains}{%
-\subsection{Section 1: The Security Reference Architecture (SRA) for
-Blockchains}\label{section-1-the-security-reference-architecture-sra-for-blockchains}}
+\subsection{The Security Reference Architecture for Blockchains}\label{section-1-the-security-reference-architecture-sra-for-blockchains}}
 
 \hypertarget{a-layered-approach-to-blockchain-security}{%
 \subsubsection{A Layered Approach to Blockchain
@@ -69,7 +68,17 @@ The Security Reference Architecture (SRA) for blockchains~\cite{homoliak2020secu
 conceptual model for organizing and understanding the multifaceted
 security aspects of decentralized ledger technology. By dividing the
 system into layers, we can isolate and analyze specific functionalities
-and their associated vulnerabilities. The four layers of the SRA are:
+and their associated vulnerabilities. The four layers of the SRA are (see also \autoref{fig:SRA-overview}):
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/overview-SRA.pdf}
+		\caption{Overview of SRA~\cite{homoliak2020security}.}		
+		\label{fig:SRA-overview}
+	\end{center}	
+\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -99,20 +108,44 @@ and their associated vulnerabilities. The four layers of the SRA are:
   infrastructure to provide specific functionalities to end-users.
 \end{itemize}
 
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.95\textwidth]{./figs/threat-risk-assessment.png}
+		\caption{Threat-risk assessment according to ISO/IEC15408.}		
+		\label{fig:thread-risk-assessment}
+	\end{center}	
+\end{figure}
+
+
 \hypertarget{threat-risk-assessment-model-for-blockchains}{%
 \subsubsection{Threat Risk Assessment Model for
 Blockchains}\label{threat-risk-assessment-model-for-blockchains}}
 
 The SRA framework is conceptually grounded in the Threat Risk Assessment
-(TRA) model, which is a standard methodology for security analysis,
-notably detailed in the ISO 15408 (Common Criteria) standard. The TRA
-model provides a systematic process for: 1. Identifying valuable
-\textbf{assets} within the system. 2. Recognizing potential
-\textbf{threats} to those assets. 3. Assessing the
-\textbf{vulnerabilities} that could be exploited by those threats. 4.
-Evaluating the \textbf{risks} associated with these vulnerabilities. 5.
-Implementing \textbf{countermeasures} to mitigate the identified risks
-to an acceptable level.
+(TRA) model, which is a standard methodology for security analysis of centralized systems,
+notably detailed in the ISO 15408 (Common Criteria) standard (see \autoref{fig:thread-risk-assessment}). 
+The TRA
+model provides a systematic process for: 
+\begin{enumerate}
+	\item Identifying valuable
+	\textbf{assets} within the system. 
+	
+	\item  Recognizing potential
+	\textbf{threats} to those assets. 
+	
+	\item  Assessing the
+	\textbf{vulnerabilities} that could be exploited by those threats. 
+	
+	\item  Evaluating the \textbf{risks} associated with these vulnerabilities. 
+
+	\item  Implementing \textbf{countermeasures} to mitigate the identified risks
+	to an acceptable level.
+	
+\end{enumerate}
+The projection of SRA to TRA is depicted in \autoref{fig:thread-risk-assessment-SRA}, and it enriches TRA with the environment of blockchain and its specific aspects.
+
 
 To better visualize these relationships in the context of blockchains,
 we can use \textbf{Vulnerability, Threat, and Defense (VTD) graphs}.
@@ -121,21 +154,29 @@ the threats that exploit them, and the defenses designed to counter
 them, providing a clear and structured view of the security landscape at
 each layer.
 
-{[}DIAGRAM\_PLACEHOLDER: Threat Risk Assessment Model for Blockchains{]}
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/ISO-SRA.pdf}
+		\caption{Threat-risk assessment model adapted to SRA~\cite{homoliak2019security}.}		
+		\label{fig:thread-risk-assessment-SRA}
+	\end{center}	
+\end{figure}
+
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{section-2-security-at-each-layer}{%
-\subsection{Section 2: Security at Each
-Layer}\label{section-2-security-at-each-layer}}
+%\hypertarget{section-2-security-at-each-layer}{%
+%\subsection{Security at Each
+%Layer}\label{section-2-security-at-each-layer}}
 
 \hypertarget{network-layer-security}{%
-\subsubsection{Network Layer
-Security}\label{network-layer-security}}
+\subsection{Network Layer}\label{network-layer-security}}
 
 The network layer is the backbone of any blockchain, and its security is
 paramount. As blockchain networks are typically overlays on top of the
-public Internet, they inherit many of its vulnerabilities.
+public Internet, they inherit many of its vulnerabilities (see also \autoref{fig:vtd-network-public}) such as:
 
 \begin{itemize}
 \tightlist
@@ -164,14 +205,38 @@ public Internet, they inherit many of its vulnerabilities.
   transactions) and potentially crash nodes.
 \end{itemize}
 
-{[}DIAGRAM\_PLACEHOLDER: VTD Graph for Private and Public Networks{]}
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-network-public.pdf}
+		\caption{VTD graph of the network layer -- public networks~\cite{homoliak2019security}.}		
+		\label{fig:vtd-network-public}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-network-private.pdf}
+		\caption{VTD graph of the network layer -- private networks~\cite{homoliak2019security}.}		
+		\label{fig:vtd-network-private}
+	\end{center}	
+\end{figure}
+
+
+Besides public network of permissionless and semi-permissionless blockchains, there exist private networks of permissioned blockchains, which might contain different types of vulnerabilities and threats (see \autoref{fig:vtd-network-private}) related to centralization of control, such as external targeted attacks and insider threat~\cite{homoliak2018insight}.
+
 
 \hypertarget{consensus-layer-security}{%
-\subsubsection{Consensus Layer
-Security}\label{consensus-layer-security}}
+\subsection{Consensus Layer}\label{consensus-layer-security}}
 
-The consensus layer is where the ``truth'' of the blockchain is decided,
+\ih{bookmark}
+
+The consensus layer is where the ``truth'' of the blockchain is decided through inclusion and ordering of transactions,
 making it a high-value target for attackers.
+The potential threats of this layer can be further divided according to the type of consensus protocol into as follows.
 
 \begin{itemize}
 \tightlist
