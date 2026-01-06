@@ -8,9 +8,9 @@ the diverse security and privacy challenges inherent in decentralized
 systems. Drawing an analogy to the well-established ISO/OSI model for
 computer networks, this framework, termed the Security Reference
 Architecture (SRA)~\cite{homoliak2019security}, deconstructs the complex blockchain ecosystem into
-four distinct layers: the network layer, the consensus
+four distinct layers: \textbf{the network layer, the consensus
 layer, the replicated state machine (RSM) layer, and the application
-layer.
+layer.}
 
 Throughout this chapter, we will systematically explore the unique
 security threats, vulnerabilities, and potential countermeasures
@@ -196,52 +196,64 @@ public Internet, they inherit many of its vulnerabilities (see also \autoref{fig
   The eclipsed node is thus isolated from the honest network and can be
   fed false information, potentially leading it to accept fraudulent
   transactions or waste its consensus power on an invalid chain.
+  
+  \begin{figure}[t]
+  	%	\vspace{-0.3cm}
+  	\begin{center}
+  		\includegraphics[width=0.55\textwidth]{./figs/attacks-network-public.pdf}
+  		\caption{VTD graph of the network layer -- public networks~\cite{homoliak2019security}.}		
+  		\label{fig:vtd-network-public}
+  	\end{center}	
+  \end{figure}
+  
+  
+  \begin{figure}[t]
+  	%	\vspace{-0.3cm}
+  	\begin{center}
+  		\includegraphics[width=0.55\textwidth]{./figs/attacks-network-private.pdf}
+  		\caption{VTD graph of the network layer -- private networks~\cite{homoliak2019security}.}		
+  		\label{fig:vtd-network-private}
+  	\end{center}	
+  \end{figure}
+  
+  
 \item
   \textbf{Denial-of-Service (DoS) Attacks}: These attacks aim to disrupt
   the network by overwhelming nodes with traffic or resource-intensive
   requests. A specific example is the ``penny-flooding'' attack, where
   an attacker spams the network with a large number of low-fee
   transactions to clog the mempool (the holding area for unconfirmed
-  transactions) and potentially crash nodes.
+  transactions) and potentially crash nodes -- these are DoS attacks on local resources.
+  DoS attacks on network connectivity reduce effective consensus power and reward opportunities for honest nodes. 
+  
+  \item \textbf{Identity Revealing Attacks} are aimed at linking IP address with the blockchain address extracted from a transaction.
+  
+  
 \end{itemize}
 
 
-\begin{figure}[t]
-	%	\vspace{-0.3cm}
-	\begin{center}
-		\includegraphics[width=0.55\textwidth]{./figs/attacks-network-public.pdf}
-		\caption{VTD graph of the network layer -- public networks~\cite{homoliak2019security}.}		
-		\label{fig:vtd-network-public}
-	\end{center}	
-\end{figure}
-
-
-\begin{figure}[t]
-	%	\vspace{-0.3cm}
-	\begin{center}
-		\includegraphics[width=0.55\textwidth]{./figs/attacks-network-private.pdf}
-		\caption{VTD graph of the network layer -- private networks~\cite{homoliak2019security}.}		
-		\label{fig:vtd-network-private}
-	\end{center}	
-\end{figure}
 
 
 Besides public network of permissionless and semi-permissionless blockchains, there exist private networks of permissioned blockchains, which might contain different types of vulnerabilities and threats (see \autoref{fig:vtd-network-private}) related to centralization of control, such as external targeted attacks and insider threat~\cite{homoliak2018insight}.
 
 
+
 \hypertarget{consensus-layer-security}{%
 \subsection{Consensus Layer}\label{consensus-layer-security}}
 
-\ih{bookmark}
-
 The consensus layer is where the ``truth'' of the blockchain is decided through inclusion and ordering of transactions,
 making it a high-value target for attackers.
-The potential threats of this layer can be further divided according to the type of consensus protocol into as follows.
+The potential threats of this layer can be divided according to the type of consensus protocol as follows.
+
+
+
+
+
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Generic Attacks}:
+  \textbf{Generic Attacks} are depicted in \autoref{fig:sra-cons-gen} and they mostly involve:
 
   \begin{itemize}
   \tightlist
@@ -260,48 +272,77 @@ The potential threats of this layer can be further divided according to the type
     accept the payment, and then uses their consensus power to create a
     longer, alternative chain in which the transaction never occurred,
     allowing them to spend the same coins again.
+    
+    \item \textbf{Breaking network assumptions:}
+    Consensus protocols assume some bounds on message delivery and connectivity. Partitions and high delays can violate these assumptions, then safety or liveness can fail even if cryptography remains intact.
+    
+    \item \textbf{Time computation weaknesses:}
+    Nodes often estimate network time from peers. If an attacker can bias a victim's perception of time, the victim's blocks can be rejected due to time constraints. 
+    
+    \item \textbf{Shard attacks:} become feasible because each shard has fewer validators, so obtaining a local majority can be easier than attacking the whole system.
+    
   \end{itemize}
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.63\textwidth]{./figs/attacks-consensus-generic.pdf}
+		\caption{VTD graph of the consensus layer -- generic attacks~\cite{homoliak2019security}.}		
+		\label{fig:sra-cons-gen}
+	\end{center}	
+\end{figure}
+
 \item
-  \textbf{Attacks on Proof-of-Resource (PoR) Protocols}:
+  \textbf{Attacks on Proof-of-Resource (PoR) Protocols} are depicted in \autoref{fig:sra-cons-por} and interesting ones involve:
 
   \begin{itemize}
   \tightlist
+
+	\item \textbf{Selfish mining}: the attacker withholds blocks strategically, releases them to invalidate honest work, and gains a higher reward share than their resource share would suggest. This also increases the chance of reorgs, which hurts applications that assume ``a few confirmations is enough.''	
+	
   \item
     \textbf{Feather Forking}: An attacker announces they will censor
     certain transactions, creating an incentive for rational miners to
     join the censorship to avoid mining blocks that will be orphaned.
   \item
-    \textbf{Bribery Attacks}: Offering direct rewards to miners to
+    \textbf{Bribery Attacks and Transaction Reordering}: Offering direct rewards to miners to
     reorder or exclude transactions, often for the attacker's financial
     benefit (e.g., front-running).
-  \item
-    \textbf{Pool Hopping}: Miners switch between mining pools to
-    maximize their rewards, exploiting pools that pay per share.
-  \item
-    \textbf{Block Withholding}: A mining pool finds a block but doesn't
-    publish it, sabotaging the main chain.
-  \end{itemize}
-\item
-  \textbf{Attacks on Proof-of-Stake (PoS) Protocols}:
+  
+  \item \textbf{Time spoofing attacks}: a miner publishes blocks with delayed timestamps to signal that puzzles are ``too hard'' causing difficulty to drop over time, which reduces the attacker's future cost to win blocks.
 
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figs/attacks-consensus-PoR.pdf}
+		\caption{VTD graph of the consensus layer -- attacks on PoR protocols~\cite{homoliak2019security}.}		
+		\label{fig:sra-cons-por}
+	\end{center}	
+\end{figure}
+
+
+	\item \textbf{Pool-specific Attacks}
   \begin{itemize}
-  \tightlist
-  \item
-    \textbf{Nothing-at-Stake}: Validators can vote for multiple
-    conflicting blocks without penalty, increasing network forks and
-    slowing down finality.
-  \item
-    \textbf{Grinding Attack}: An attacker attempts to influence the
-    selection of future block proposers to increase their own chances of
-    being selected.
-  \item
-    \textbf{Long-Range Attack}: An attacker obtains the keys of early,
-    ``retired'' validators to create a long alternative chain from the
-    genesis block, potentially rewriting the entire history of the
-    blockchain.
+		  \item
+		    \textbf{Pool Hopping}: Miners switch between mining pools to
+		    maximize their rewards, exploiting pools that pay per share.
+		  \item
+		    \textbf{Block Withholding}: A mining pool finds a block but doesn't
+		    publish it, sabotaging the main chain.
+		    
+		   \item \textbf{Lie-in-wait}: delay submission to increase relative shares before release. 
+		   		   
+		   \item \textbf{Selfish Mining on a Subchain}: exploit decentralized pool mechanics by selectively dropping honest shares. 
+	\end{itemize}
   \end{itemize}
+
+
+
 \item
-  \textbf{Attacks on BFT Protocols}:
+  \textbf{Attacks on BFT Protocols}: are depicted in \autoref{fig:sra-cons-bft} and involve: 
+
+
 
   \begin{itemize}
   \tightlist
@@ -313,29 +354,102 @@ The potential threats of this layer can be further divided according to the type
     \textbf{Posterior Corruption}: An attacker acquires the keys of a
     supermajority of validators (e.g., 2/3) and uses them to
     illegitimately control the network.
+    
+    \begin{figure}[!h]
+    	%	\vspace{-0.3cm}
+    	\begin{center}
+    		\includegraphics[width=0.65\textwidth]{./figs/attacks-consensus-BFT.pdf}
+    		\caption{VTD graph of the consensus layer -- attacks on BFT protocols~\cite{homoliak2019security}.}		
+    		\label{fig:sra-cons-bft}
+    	\end{center}	
+    \end{figure}
   \end{itemize}
+
+
+
+
+
+\item
+\textbf{Attacks on Proof-of-Stake (PoS) Protocols} are depicted in \autoref{fig:sra-cons-pos} and involve:
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Nothing-at-Stake}: Validators can vote for multiple
+	conflicting blocks without penalty, increasing network forks and
+	slowing down finality.
+	\item
+	\textbf{Grinding Attack}: An attacker attempts to influence the
+	selection of future block proposers to increase their own chances of
+	being selected.
+	\item
+	\textbf{Long-Range Attack}: An attacker obtains the keys of early,
+	``retired'' validators to create a long alternative chain from the
+	genesis block, potentially rewriting the entire history of the
+	blockchain.
+	
+	\item \textbf{DoS on leader or committee}: attackers repeatedly DoS elected leaders or committees until favorable participants appear, which degrades liveness and can bias progress.
 \end{itemize}
 
+\end{itemize}
+
+
+\begin{figure}[t]
+%	\vspace{-0.3cm}
+\begin{center}
+	\includegraphics[width=0.65\textwidth]{./figs/attacks-consensus-PoS.pdf}
+	\caption{VTD graph of the consensus layer -- attacks on PoS protocols~\cite{homoliak2019security}.}		
+	\label{fig:sra-cons-pos}
+\end{center}	
+\end{figure}
+
+
+
+
+
 \hypertarget{replicated-state-machine-rsm-layer-security}{%
-\subsubsection{Replicated State Machine (RSM) Layer
+\subsection{Replicated State Machine (RSM) Layer
 Security}\label{replicated-state-machine-rsm-layer-security}}
 
 The RSM layer executes the logic defined in transactions and smart
-contracts. Flaws at this layer can lead to direct financial loss.
+contracts. It splits into (1) privacy of users and transaction data and (2) smart contract security and safety. % Flaws at this layer can lead to direct financial loss.
+
+
+\subsubsection{Transaction Protection and Privacy Threats}
+Transactions are signed and verifiable, but identities are pseudonymous and can be traced to IP addresses by an eavesdropping adversary.
+Many platforms expose transaction data by default, so confidentiality is not ensured unless additional mechanisms are used.
+
+Privacy threats are depicted in \autoref{fig:sra-rsm-priv} and are as follows:
+\begin{itemize}
+	
+	\item \textbf{Revealing user identities}: Deanonymization techniques include network flow analysis, address clustering, and transaction fingerprinting.
+	
+	\item \textbf{Revealing sensitive data}: Plaintext transaction payloads, contract inputs, or logged events can disclose business logic, private attributes, or strategic intent, which can then be exploited at the application layer, for example trading strategies.
+\end{itemize}
+
+
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-RSM-TXs.pdf}
+		\caption{VTD graph of the RSM layer -- privacy threats~\cite{homoliak2019security}.}		
+		\label{fig:sra-rsm-priv}
+	\end{center}	
+\end{figure}
+
+
+\subsubsection{Smart Contract Threats}
+The vast category of vulnerabilities stem from errors in the code of smart contracts (see \autoref{fig:sra-rsm-sc})
+Famous examples include:
 
 \begin{itemize}
 \tightlist
-\item
-  \textbf{Smart Contract Bugs}: This is a vast category of
-  vulnerabilities stemming from errors in the code of smart contracts.
-  Famous examples include:
 
-  \begin{itemize}
-  \tightlist
   \item
     \textbf{Reentrancy}: Where an attacker can repeatedly call back into
     a vulnerable contract before its state is updated, allowing them to
-    drain its funds (e.g., The DAO hack).
+    drain its funds (e.g., The DAO hack~\cite{DAO}).
   \item
     \textbf{Integer Overflow/Underflow}: Where arithmetic operations on
     numbers exceed the maximum or minimum size for the data type,
@@ -345,14 +459,28 @@ contracts. Flaws at this layer can lead to direct financial loss.
     \textbf{Access Control Issues}: Where functions that should be
     restricted to certain users (e.g., the contract owner) are left
     public, allowing unauthorized access.
-  \end{itemize}
-\item
-  \textbf{Privacy Threats}: By default, all transactions and smart
-  contract states are public on most blockchains. This can lead to the
-  leakage of sensitive business or personal information if not properly
-  managed through cryptographic techniques like zero-knowledge proofs or
-  the use of private sidechains.
+    
+  \item \textbf{Unchecked return values}: failure signals ignored, then state updates proceed incorrectly.
+  
+  \item \textbf{Delegatecall misuse}: untrusted code executes in caller context.
+  
+  \item \textbf{Weak randomness sources}: block number or timestamp are predictable or biasable.
+  
+  \item \textbf{Transaction order dependency and front-running}: attackers see pending transactions and win ordering by fees.
+  
+  \item \textbf{Timestamp dependency}: malicious producers can adjust timestamps within protocol constraints and trigger or prevent events.
+  
 \end{itemize}
+
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-RSM-SC.pdf}
+		\caption{VTD graph of the RSM layer -- smart contract threats~\cite{homoliak2019security}.}		
+		\label{fig:sra-rsm-sc}
+	\end{center}	
+\end{figure}
+
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
