@@ -489,9 +489,16 @@ Famous examples include:
 Layer}\label{section-3-the-application-layer}}
 
 The application layer is where users interact with the blockchain. The
-security of DApps depends not only on the robustness of the underlying
+security of DAPPs depends not only on the robustness of the underlying
 layers but also on the design and implementation of the application
 itself.
+The application layer of SRA is divided into two parts -- ecosystem applications and higher-level applications. 
+There exists a hierarchy in inheritance of security aspects across categories of the application layer -- see \autoref{fig:sra-app-hierarchy}.
+
+
+
+
+
 
 \hypertarget{ecosystem-applications}{%
 \subsubsection{Ecosystem
@@ -506,6 +513,13 @@ ecosystem to function.
   \textbf{Tokens}: Both fungible (ERC-20) and non-fungible (ERC-721)
   tokens are essentially smart contracts that manage balances. They are
   subject to all the standard smart contract vulnerabilities.
+  %
+%  Token types are as follows: 
+%  1) \textbf{Native crypto-tokens} that come with the blockchain itself.  
+%  2) \textbf{Counter-party tokens} that represent rights against a third party.  
+%  3) \textbf{Ownership or colored tokens} that represent transferable asset ownership, examples include NFTs.
+
+  
 \item
   \textbf{Wallets}: Software or hardware used to manage private keys.
   Hosted wallets (where a third party holds the keys) introduce
@@ -533,7 +547,14 @@ ecosystem to function.
   claiming to store more data than it actually does).
 \end{itemize}
 
-{[}DIAGRAM\_PLACEHOLDER: Application Layer Diagrams{]}
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/dependencies.pdf}
+		\caption{Hierarchy of dependencies in security of application layer subcategories~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-hierarchy}
+	\end{center}	
+\end{figure}
 
 \hypertarget{higher-level-applications}{%
 \subsubsection{Higher-Level
@@ -581,6 +602,11 @@ specific use cases.
   privacy of bids and be resistant to DoS attacks.
 \end{itemize}
 
+
+
+
+
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{summary-key-takeaways}{%
@@ -604,6 +630,66 @@ By understanding this layered model, developers, security auditors, and
 users can better identify potential risks, implement appropriate
 defenses, and make more informed decisions when building and interacting
 with decentralized systems.
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-wallets.pdf}
+		\caption{VTD graph of tokens and wallets category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-wallets}
+	\end{center}	
+\end{figure}
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-exchanges.pdf}
+		\caption{VTD graph of exchanges category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-exchanges}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-oracles.pdf}
+		\caption{VTD graph of oracles category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-oracles}
+	\end{center}	
+\end{figure}
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-DFs}
+		\caption{VTD graph of decentralized filesystems~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-DFs}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-evoting.pdf}
+		\caption{VTD graph of e-voting category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-DFs}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-evoting.pdf}
+		\caption{VTD graph of e-voting category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-DFs}
+	\end{center}	
+\end{figure}
+
+
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
