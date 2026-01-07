@@ -59,7 +59,7 @@ presents several significant challenges:
 	\textbf{Extreme Energy Consumption}: The computational arms race in
 	PoW mining has led to an energy footprint comparable to that of entire
 	countries. 
-	\ih{Put example from PoUW paper.}
+%	\ih{Put example from PoUW paper.}
 	\item
 	\textbf{Centralization via ASICs}: The efficiency of ASICs has
 	rendered mining with commodity hardware (like CPUs and GPUs)
@@ -149,7 +149,7 @@ expensive to integrate into custom chips.
 
 \subsubsection{Scrypt}\label{scrypt}
 
-Scrypt \ih{todo citation} is a \textbf{password-based key derivation function (PBKDF)} designed in
+Scrypt~\cite{percival2009scrypt} is a \textbf{password-based key derivation function (PBKDF)} designed in
 2009 and later adopted as an IETF standard (RFC 7914). Unlike other
 PBKDFs, it was explicitly designed to have high memory requirements to
 defend against brute-force attacks.
@@ -178,7 +178,7 @@ the persistent difficulty of achieving long-term ASIC resistance.
 
 \subsubsection{Argon2}\label{argon2}
 
-Argon2 \ih{citation}, the winner of the 2015 Password Hashing Competition, is a more
+Argon2~\cite{biryukov2016argon2}, the winner of the 2015 Password Hashing Competition, is a more
 modern and robust memory-hard function. It is optimized for modern CPU
 architectures and their cache/memory systems.
 
@@ -221,7 +221,7 @@ intrinsic value beyond securing the ledger. Instead of solving arbitrary
 puzzles, miners contribute to solving real-world scientific or
 mathematical problems.
 
-A notable example is \textbf{PrimeCoin}\ih{citation}, which uses its mining process
+A notable example is \textbf{PrimeCoin}~\cite{king2013primecoin}, which uses its mining process
 to search for special sequences of prime numbers known as
 \textbf{Cunningham chains}. While these chains have applications in
 number theory, a significant challenge in PoUW is integrating a secure
@@ -289,7 +289,7 @@ storage space to the network.
 	\caption{The improved Permacoin lottery, which ties the puzzle to the miner's private.}\label{fig:permacoin2}	
 \end{figure}
 
-Permacoin \ih{citation} is a protocol designed to repurpose mining efforts for
+Permacoin~\cite{miller2014permacoin} is a protocol designed to repurpose mining efforts for
 long-term, distributed data archiving. The core idea is that miners
 collectively store a large, valuable dataset (e.g., a web archive).
 

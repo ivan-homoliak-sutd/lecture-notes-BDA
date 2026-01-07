@@ -156,7 +156,7 @@ original protocol became apparent:
 	alter the signature data of an unconfirmed transaction, thereby
 	changing its transaction ID (TXID) without invalidating the
 	transaction itself. This could cause problems for services that relied
-	on unconfirmed transactions, such as payment processors and exchanges. \ih{check it}
+	on unconfirmed transactions referred by their original IDs, such as payment processors and exchanges. The fix was provided by SeqWit.
 	\item
 	\textbf{Scalability}: The 1 MB block size limit severely restricted
 	the number of transactions that could be processed by the network,
@@ -168,12 +168,12 @@ original protocol became apparent:
 \end{itemize}
 These challenges prompted the
 development of two major upgrades: Segregated Witness (SegWit) and
-Taproot \ih{refs on BIPs}. 
+Taproot. 
 
 \subsubsection{Segregated Witness
 	(SegWit)}\label{segregated-witness-segwit}
 
-Segregated Witness (SegWit) was a soft fork upgrade that was activated
+Segregated Witness (SegWit)~\cite{bip141-segwit} was a soft fork upgrade that was activated
 on the Bitcoin network in August 2017. It addressed the issue of
 transaction malleability by separating the \textbf{signature data}, or
 ``\textbf{witness},'' from the main transaction data. By moving the witness data to a separate data structure, SegWit made it impossible for a third
@@ -203,7 +203,7 @@ Overview of all existing output types in UTXO is depicted in \autoref{fig:btc-sc
 
 \subsubsection{Taproot}\label{taproot}
 
-Taproot is the most significant upgrade to the Bitcoin protocol since
+Taproot~\cite{bip341-taproot} is the most significant upgrade to the Bitcoin protocol since
 SegWit, and it was activated in November 2021. It introduced a number of
 new features that further enhance the privacy, efficiency, and smart
 contract capabilities of the network. I  particular, Taproot introduced the following:
@@ -236,7 +236,7 @@ contract capabilities of the network. I  particular, Taproot introduced the foll
 
 The Taproot upgrade had an unforeseen consequence: the emergence of
 \textbf{Ordinals and Inscriptions}. The Ordinals protocol is a system
-for numbering individual satoshis\ih{check this}, the smallest unit of bitcoin, and
+for numbering individual satoshis, the smallest unit of bitcoin, and
 tracking them across transactions. The Inscriptions protocol allows
 users to inscribe arbitrary data, such as images and text, onto
 individual satoshis.
@@ -293,7 +293,7 @@ thousands of ``altcoins.'' Many of the earliest and most influential
 were forks of Bitcoin, created to experiment with different features.
 The clone ratio of several coins cloned from Bitcoin  is depicted in \autoref{fig:btc-clones}.
 However, cloning the code also implies cloning the vulnerabilities, and if revealed, they should be fixed as soon as possible. 
-Nevertheless, this was not the case, as indicated by the study Hum et al~\cite{}\ih{citation} -- see \autoref{tab:clones}.
+Nevertheless, this was not the case, as indicated by the study Hum et al~\cite{hum2020coinwatch} -- see \autoref{tab:clones}.
 
 
 
@@ -307,7 +307,7 @@ Nevertheless, this was not the case, as indicated by the study Hum et al~\cite{}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{./figs/btc-clones.png}
-	\caption{Bitcoin clones -- ratio of cloned code as of 2020.}\label{fig:btc-clones}
+	\caption{Bitcoin clones -- ratio of cloned code as of 2020~\cite{hum2020coinwatch}.}\label{fig:btc-clones}
 \end{figure}
 
 \begin{table}[bh]
