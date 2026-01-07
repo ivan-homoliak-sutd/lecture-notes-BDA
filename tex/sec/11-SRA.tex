@@ -397,7 +397,7 @@ The potential threats of this layer can be divided according to the type of cons
 \begin{figure}[t]
 %	\vspace{-0.3cm}
 \begin{center}
-	\includegraphics[width=0.65\textwidth]{./figs/attacks-consensus-PoS.pdf}
+	\includegraphics[width=0.55\textwidth]{./figs/attacks-consensus-PoS.pdf}
 	\caption{VTD graph of the consensus layer -- attacks on PoS protocols~\cite{homoliak2019security}.}		
 	\label{fig:sra-cons-pos}
 \end{center}	
@@ -505,14 +505,13 @@ There exists a hierarchy in inheritance of security aspects across categories of
 Applications}\label{ecosystem-applications}}
 
 These are foundational applications that enable the broader blockchain
-ecosystem to function.
+ecosystem to function. In the following, we briefly introduce them, while for the further details, we refer the reader to~\cite{homoliak2019security}.
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Tokens}: Both fungible (ERC-20) and non-fungible (ERC-721)
-  tokens are essentially smart contracts that manage balances. They are
-  subject to all the standard smart contract vulnerabilities.
+  \textbf{Tokens}: All public cryptocurrencies are equipped with the native crypto-tokens. On the other hand smart contract platforms can have programmed tokes, such fungible (ERC-20) and non-fungible (ERC-721) tokens --they are essentially smart contracts that manage balances. They are  subject to all the standard smart contract vulnerabilities.
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-wallets}.  
   %
 %  Token types are as follows: 
 %  1) \textbf{Native crypto-tokens} that come with the blockchain itself.  
@@ -526,6 +525,7 @@ ecosystem to function.
   custodial risk, while self-sovereign wallets place the full
   responsibility for key security on the user, making them vulnerable to
   malware, phishing, and physical loss.
+   The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-wallets}.  
 \item
   \textbf{Exchanges}: Both centralized (CEX) and decentralized (DEX)
   exchanges are prime targets for hackers. CEXs are vulnerable to
@@ -533,11 +533,13 @@ ecosystem to function.
   contracts, are susceptible to exploits that can drain their liquidity
   pools. Atomic swaps are a specific type of cross-chain exchange
   protocol.
+   The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-exchanges}.  
 \item
   \textbf{Oracles}: Services that provide external, real-world data to
   smart contracts. The security of oracles is critical, as a compromised
   oracle can feed false data to a smart contract, triggering incorrect
   and potentially catastrophic outcomes.
+   The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-oracles}.  
 \item
   \textbf{Distributed Filesystems}: Systems like IPFS and Storj provide
   decentralized data storage. They are vulnerable to attacks such as
@@ -545,6 +547,7 @@ ecosystem to function.
   de-duplication attacks (colluding nodes claiming to store multiple
   copies of data when only one exists), and outsourcing attacks (a node
   claiming to store more data than it actually does).
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-DFs}.  
 \end{itemize}
 
 \begin{figure}[t]
@@ -571,35 +574,42 @@ specific use cases.
   with challenges, including ensuring voter privacy, preventing
   coercion, and providing a secure and accessible voting mechanism for
   all users.
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-evoting}.  
 \item
   \textbf{Reputation Systems}: These systems use the blockchain to
   create a persistent record of user reputations. They are vulnerable to
   Sybil attacks (where a user creates many fake identities to boost
   their reputation) and ``whitewashing'' (where a user with a bad
   reputation simply creates a new identity).
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-REP}.  
 \item
-  \textbf{Supply Chain Management}: Using a blockchain to track the
-  provenance of goods can enhance transparency. However, the ``garbage
-  in, garbage out'' problem is a major challenge; the system's integrity
+  \textbf{Data Provenance / Supply Chain Management}: Using a blockchain to track the
+  provenance of goods can enhance transparency. However, the system's integrity
   depends on trusted oracles or IoT devices to ensure that the data
   entered onto the blockchain accurately reflects the state of the
   physical goods.
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-provenance}.  
+  
 \item
   \textbf{Notarization}: Using the blockchain as a decentralized
   timestamping service to prove the existence of a document at a certain
   point in time. The security here relies on the immutability of the
   underlying blockchain.
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-Notaries}.
 \item
   \textbf{Direct Trading}: This involves the exchange of crypto-tokens
   for off-chain goods. It faces the ``buyer/seller dilemma'' and relies
   on the seller's reputation.
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-trading}.
 \item
   \textbf{Escrows}: To solve the direct trading problem without a
   trusted seller, a third-party mediator (escrow) can be used to hold
   funds until both parties are satisfied.
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-escrows}.
 \item
   \textbf{Auctions}: Blockchain-based auctions need to ensure the
   privacy of bids and be resistant to DoS attacks.
+  The overview of vulnerabilities, threats, and defenses of this category is depicted in \autoref{fig:sra-app-auctions}.
 \end{itemize}
 
 
@@ -632,20 +642,81 @@ defenses, and make more informed decisions when building and interacting
 with decentralized systems.
 
 
-\begin{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{keywords}{%
+	\subsection{Keywords}\label{keywords}}
+
+\begin{itemize}
+	\tightlist
+	\item
+	\textbf{Security Reference Architecture (SRA)}: A layered model for
+	analyzing the security of blockchain systems, comprising the network,
+	consensus, RSM, and application layers.
+	\item
+	\textbf{VTD Graph}: A graph that maps Vulnerabilities, Threats, and
+	Defenses.
+	\item
+	\textbf{Network Layer}: The foundational layer of the SRA responsible
+	for peer-to-peer communication between nodes.
+	\item
+	\textbf{Consensus Layer}: The layer of the SRA responsible for
+	achieving agreement on the order and validity of transactions.
+	\item
+	\textbf{Replicated State Machine (RSM) Layer}: The layer of the SRA
+	that interprets transactions and executes smart contracts to update
+	the blockchain's state.
+	\item
+	\textbf{Application Layer}: The highest layer of the SRA, consisting
+	of the DApps and user-facing services built on the blockchain.
+	\item
+	\textbf{Eclipse Attack}: A network-level attack where an adversary
+	isolates a node by controlling all of its network connections.
+	\item
+	\textbf{51\% Attack}: A consensus-level attack where an entity
+	controlling a majority of the network's consensus power can manipulate
+	the blockchain.
+	\item
+	\textbf{Reentrancy}: A common smart contract vulnerability where an
+	attacker can repeatedly call a function before the contract's state is
+	updated.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{further-reading}{%
+	\subsection{Further Reading}\label{further-reading}}
+
+\begin{itemize}
+	\tightlist
+	\item
+	Homoliak, Ivan, et al. "The security reference architecture for blockchains: Toward a standardized model for studying vulnerabilities, threats, and defenses." IEEE Communications Surveys \& Tutorials 23.1 (2020): 341-390.
+	\item
+	ISO/IEC 15408-1:2009, \emph{Information technology --- Security
+		techniques --- Evaluation criteria for IT security --- Part 1:
+		Introduction and general model}.
+\end{itemize}
+
+
+\begin{figure}[h]
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-wallets.pdf}
-		\caption{VTD graph of tokens and wallets category~\cite{homoliak2019security}.}		
+		\caption{VTD graph of the tokens and wallets category~\cite{homoliak2019security}.}		
 		\label{fig:sra-app-wallets}
 	\end{center}	
 \end{figure}
+
+\clearpage
+
+
 
 \begin{figure}
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-exchanges.pdf}
-		\caption{VTD graph of exchanges category~\cite{homoliak2019security}.}		
+		\caption{VTD graph of the exchanges category~\cite{homoliak2019security}.}		
 		\label{fig:sra-app-exchanges}
 	\end{center}	
 \end{figure}
@@ -655,7 +726,7 @@ with decentralized systems.
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-oracles.pdf}
-		\caption{VTD graph of oracles category~\cite{homoliak2019security}.}		
+		\caption{VTD graph of the oracles category~\cite{homoliak2019security}.}		
 		\label{fig:sra-app-oracles}
 	\end{center}	
 \end{figure}
@@ -664,7 +735,7 @@ with decentralized systems.
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-DFs}
-		\caption{VTD graph of decentralized filesystems~\cite{homoliak2019security}.}		
+		\caption{VTD graph of the decentralized filesystems category~\cite{homoliak2019security}.}		
 		\label{fig:sra-app-DFs}
 	\end{center}	
 \end{figure}
@@ -673,9 +744,9 @@ with decentralized systems.
 \begin{figure}
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-evoting.pdf}
-		\caption{VTD graph of e-voting category~\cite{homoliak2019security}.}		
-		\label{fig:sra-app-DFs}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-APP-evoting.pdf}
+		\caption{VTD graph of the e-voting category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-evoting}
 	\end{center}	
 \end{figure}
 
@@ -683,65 +754,60 @@ with decentralized systems.
 \begin{figure}
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.75\textwidth]{./figs/attacks-APP-evoting.pdf}
-		\caption{VTD graph of e-voting category~\cite{homoliak2019security}.}		
-		\label{fig:sra-app-DFs}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-APP-reputation.pdf}
+		\caption{VTD graph of the reputation systems category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-REP}
+	\end{center}	
+\end{figure}
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-APP-provenance.pdf}
+		\caption{VTD graph of the data provenance category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-provenance}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-APP-notaries.pdf}
+		\caption{VTD graph of the notaries category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-Notaries}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-APP-trading.pdf}
+		\caption{VTD graph of the direct trading category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-trading}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-APP-escrows.pdf}
+		\caption{VTD graph of the escrows category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-escrows}
+	\end{center}	
+\end{figure}
+
+
+\begin{figure}
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{./figs/attacks-APP-auctions.pdf}
+		\caption{VTD graph of the auctions category~\cite{homoliak2019security}.}		
+		\label{fig:sra-app-auctions}
 	\end{center}	
 \end{figure}
 
 
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\hypertarget{keywords}{%
-\subsection{Keywords}\label{keywords}}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Security Reference Architecture (SRA)}: A layered model for
-  analyzing the security of blockchain systems, comprising the network,
-  consensus, RSM, and application layers.
-\item
-  \textbf{VTD Graph}: A graph that maps Vulnerabilities, Threats, and
-  Defenses.
-\item
-  \textbf{Network Layer}: The foundational layer of the SRA responsible
-  for peer-to-peer communication between nodes.
-\item
-  \textbf{Consensus Layer}: The layer of the SRA responsible for
-  achieving agreement on the order and validity of transactions.
-\item
-  \textbf{Replicated State Machine (RSM) Layer}: The layer of the SRA
-  that interprets transactions and executes smart contracts to update
-  the blockchain's state.
-\item
-  \textbf{Application Layer}: The highest layer of the SRA, consisting
-  of the DApps and user-facing services built on the blockchain.
-\item
-  \textbf{Eclipse Attack}: A network-level attack where an adversary
-  isolates a node by controlling all of its network connections.
-\item
-  \textbf{51\% Attack}: A consensus-level attack where an entity
-  controlling a majority of the network's consensus power can manipulate
-  the blockchain.
-\item
-  \textbf{Reentrancy}: A common smart contract vulnerability where an
-  attacker can repeatedly call a function before the contract's state is
-  updated.
-\end{itemize}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\hypertarget{further-reading}{%
-\subsection{Further Reading}\label{further-reading}}
-
-\begin{itemize}
-\tightlist
-\item
-  Homoliak, Ivan, et al. "The security reference architecture for blockchains: Toward a standardized model for studying vulnerabilities, threats, and defenses." IEEE Communications Surveys \& Tutorials 23.1 (2020): 341-390.
-\item
-  ISO/IEC 15408-1:2009, \emph{Information technology --- Security
-  techniques --- Evaluation criteria for IT security --- Part 1:
-  Introduction and general model}.
-\end{itemize}
