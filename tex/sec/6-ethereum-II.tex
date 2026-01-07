@@ -153,8 +153,8 @@ Variables in Solidity can be stored in one of three data locations:
 	which is stored on the blockchain. State variables are stored in
 	storage by default. It is the most expensive place in terms of gas since it is permanent.
 	\item
-	\textbf{Memory}: This is a temporary storage location that is cleared
-	between function calls. It is used to store local variables and
+	\textbf{Memory}: This is a temporary storage location and is reset between separate external calls and transactions, and it is not persistent across transactions.
+	It is used to store local variables and
 	function arguments. In general, the memory is not permanent storage and thus operations with memory are cheap in terms of gas.
 	\item
 	\textbf{Calldata}: This is a read-only storage location that is used

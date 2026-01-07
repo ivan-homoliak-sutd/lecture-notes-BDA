@@ -180,10 +180,9 @@ transaction malleability by separating the \textbf{signature data}, or
 party to alter the signature and change the TXID.
 
 In addition to fixing transaction malleability, SegWit also introduced a
-new concept of ``block weight,'' which effectively increased the block
-size limit to 4 MB for blocks containing SegWit transactions. This
-allowed for more transactions to be included in each block, thereby
-improving the scalability of the network.
+new concept of ``block weight,'' which theoretically increased the block
+size limit to 4 MB for blocks containing SegWit transactions.\footnote{The base data has 4x higher weight than witness data, and therefore the block containing only base data has maximum size of 1MB.}
+This slightly improved the scalability of the network.
 
 SegWit also introduced new address formats, known as \textbf{P2WPKH
 (Pay-to-Witness-Public-Key-Hash)} and \textbf{P2WSH (Pay-to-Witness-Script-Hash)},

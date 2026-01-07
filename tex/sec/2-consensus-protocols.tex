@@ -432,7 +432,7 @@ systems, including blockchains.
 	(PBFT)}\label{practical-byzantine-fault-tolerance-pbft}
 
 Practical Byzantine Fault Tolerance (PBFT)~\cite{castro1999practical} is a landmark consensus
-protocol designed to be resilient to Byzantine failures in asynchronous
+protocol designed to be resilient to Byzantine failures in synchronous and eventually synchronous
 systems. Developed by Miguel Castro and Barbara Liskov in 1999, PBFT
 provides a practical solution to the Byzantine Generals Problem, making
 it suitable for use in real-world distributed systems.
@@ -542,7 +542,7 @@ achieve faster finality. However, it also introduces new challenges,
 such as the ``nothing at stake'' problem, where validators have an
 incentive to vote for multiple conflicting chains, and the potential for
 centralization if a small number of entities accumulate a large portion
-of the stake \ih{ref on later}.
+of the stake \autoref{section-11-proof-of-stake-protocols}.
 
 \subsubsection{Proof-of-Authority
 	(PoA)}\label{proof-of-authority-poa}

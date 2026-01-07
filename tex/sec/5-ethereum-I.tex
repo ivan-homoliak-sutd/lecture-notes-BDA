@@ -249,11 +249,11 @@ The simple pseudocode of deducting gas while doing transaction execution in EVM 
 The EIP-1559~\cite{eip1559} was included in London's hardfork that occurred on 5th of August 2021, and its main contribution is to optimize the fee market system.
 In particular, this EIP introduces 3 elements of gas:
 \begin{itemize}
-	\item \textbf{Base fee} -- the minimum amount of gas for a transaction, which is burnt. It is set by the network. Blocks can be extended to 200\% of the base fee.
+	\item \textbf{Base fee} -- price per unit of gas, which is burnt. It is set by the network. Blocks can be extended to 200\%.
 	
 	\item \textbf{Tip} -- is set by the user, and it represents a premium to miners that should prioritize the faster inclusion of their transaction.
 	
-	\item \textbf{Fee cap} -- represents the the maximum amount of gas a user is willing to pay. Therefore, the refund is computed as  fee cap – (base fee + tip).	
+	\item \textbf{Fee cap} -- represents the the maximum amount of gas a user is willing to pay.	
 \end{itemize}
 This EIP improves economics of Ethereum since base we must always be ``payed'' in ETH, while before it could be paid in any currency or token of a the exchange with the full node that handled the fee internally.
 

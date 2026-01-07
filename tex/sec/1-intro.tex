@@ -536,7 +536,7 @@ later.
 	\texttt{H(x)} to Bob. This is the commitment. The use of a hash
 	function guarantees the \textbf{binding} property (the commitment is
 	bound to \texttt{x}), and since Bob doesn't know \texttt{x}, the
-	\textbf{hiding} property is also satisfied.
+	\textbf{hiding} property is also satisfied (assuming the high enough entropy of \texttt{x} that is not guessable).
 	\item
 	\textbf{Reveal}: Alice reveals \texttt{x} to Bob, who can then verify
 	that \texttt{H(x)} matches the commitment he received.
@@ -805,7 +805,7 @@ nodes was 12.6 seconds, with a maximum of 40 seconds~\cite{decker2013information
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.4\textwidth]{./figs/network-overlay.png} 
-		\caption{Overview of network in blockchains.}		
+		\caption{Overview of network in blockchains~\cite{homoliak2020security}.}		
 		\label{fig:network-overlay}
 	\end{center}	
 \end{figure}

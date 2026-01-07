@@ -678,17 +678,17 @@ The code of $\mathbb{E}$ is public and it can be remotely attested with the TEE 
 
 
 Multiple independent general-purpose centralized ledgers (such as Aquareum) can be securely interconnected through interoperability protocol~\cite{homoliak2023cbdc} and thus provide a  means for decentralized trust-less communication of such centralized systems.
-CBDC-Aquasphere is an example of Aquareum's application to the environment of CBDC instances -- each CBDC instance is represented by a single Aquareum instance -- see \autoref{}.
+CBDC-Aquasphere is an example of Aquareum's application to the environment of CBDC instances -- each CBDC instance is represented by a single Aquareum instance -- see \autoref{fig:cbdc-architecture}.
 
 
 \begin{figure*}[t]
 	\centering
 	\includegraphics[width=0.85\textwidth]{./figs/cbdc-architecture.pdf}
 	%	\vspace{-0.3cm}
-	\caption{Overview of our CBDC architecture supporting interoperability among multiple CBDC instances (i.e., banks). The schema depicts two instances, where each of them has its own centralized ledger $L$ modified in a secure way through TEE of $\mathbb{E}$, while its integrity is ensured by periodic integrity snapshots to the integrity preserving smart contract ($\mathbb{IPSC}$) in a public blockchain $PB$. Each CBDC instance is registered in the identity management smart contract $\mathbb{IMSC}$ of a public blockchain, serving as a global registry of bank instances. A client who makes an inter-bank transfer communicates with her bank and the counter-party bank utilizing interoperability micro contracts ($\mathbb{IOMC}$), running in the TEE. Any censored request of a client is resolved by $\mathbb{IPSC}$ of a particular bank and can be initiated by its client or a counter-party client. 
+	\caption{Overview of CBDC architecture in~\cite{homoliak2023cbdc} supporting interoperability among multiple CBDC instances (i.e., banks). The schema depicts two instances, where each of them has its own centralized ledger $L$ modified in a secure way through TEE of $\mathbb{E}$, while its integrity is ensured by periodic integrity snapshots to the integrity preserving smart contract ($\mathbb{IPSC}$) in a public blockchain $PB$. Each CBDC instance is registered in the identity management smart contract $\mathbb{IMSC}$ of a public blockchain, serving as a global registry of bank instances. A client who makes an inter-bank transfer communicates with her bank and the counter-party bank utilizing interoperability micro contracts ($\mathbb{IOMC}$), running in the TEE. Any censored request of a client is resolved by $\mathbb{IPSC}$ of a particular bank and can be initiated by its client or a counter-party client. 
 		%		\ih{maybe label censorship requests and integrity check of snapshots at IPSC}
 	}
-	\label{fig:architecture}
+	\label{fig:cbdc-architecture}
 \end{figure*}
 
 
