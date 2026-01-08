@@ -1,6 +1,6 @@
 %\subsection{Introduction}\label{introduction}
 
-This section serves as a  introduction to the course of
+This section serves as an  introduction to the course of
 Blockchains and Decentralized Applications (BDA). It begins by outlining
 the course's core objectives, which are designed to provide both
 theoretical knowledge and practical skills in this rapidly evolving
@@ -33,10 +33,10 @@ blockchains are built.
 \begin{itemize}
 	\tightlist
 	\item
-	Gain theoretical and practical knowledge in the field of BDA, their
-	types, consensual protocols, and pros/cons.
+	Gain theoretical and practical knowledge in the field of blockchains and decentralized applications, 
+	types of blockchains, their consensual protocols, and pros/cons.
 	\item
-	Understand the terminology, unique properties of blockchain,
+	Understand the terminology, unique properties of blockchains,
 	integrity-preserving data structures, and algorithms.
 	\item
 	Learn about practical use cases and their potential vulnerabilities.
@@ -58,7 +58,7 @@ blockchains are built.
 The course is led by a team of experienced researchers and practitioners
 in the field of blockchain technology, each bringing a unique set of
 skills and experiences to the curriculum.
-The following listings contains current and former course instructors who helped in running this course.
+The following list contains current and former course instructors who helped in running this course.
 \begin{itemize}
 	\item
 	\textbf{doc. Ing. Ivan Homoliak, Ph.D.} (Guarantor): Dr.~Homoliak is
@@ -68,11 +68,11 @@ The following listings contains current and former course instructors who helped
 	the Singapore University of Technology and Design (SUTD), where his
 	research was centered on blockchains and cybersecurity. His
 	habilitation, titled ``Towards Secure Consensus Protocols and
-	Decentralized Applications in Blockchains,''~\cite{homoliak2025towards} focuses on several research topics including standardization of threat modeling~\cite{homoliak2020security}  electronic voting in blockchains~\cite{homoliak2023bbb,venugopalan2023always,stanvcikova2022sbvote,homoliak2025votemate}, the security
+	Decentralized Applications in Blockchains,''~\cite{homoliak2025towards} focuses on several research topics including standardization of threat modeling~\cite{homoliak2020security},  electronic voting in blockchains~\cite{homoliak2023bbb,venugopalan2023always,stanvcikova2022sbvote,homoliak2025votemate}, the security
 	and scalability of consensus protocols~\cite{perevsini2023incentive,perevsini2021dag,perevsini2023dag,budinsky2023fee,homoliak2025pos}, the intersection of Trusted
 	Execution Environments (TEE) with blockchain technology~\cite{homoliak2020aquareum}, Central Bank
 	Digital Currencies (CBDC)~\cite{homoliak2023cbdc}, authentication/cryptocurrency wallets~\cite{homoliak2024sok,homoliak2020smartotps,perevsini2025featherwallet,drga2023detecting} and mixers~\cite{mariani2025sok}.
-	Besides that, Ivan focuses on other topics in consensus protocols such as DoS on the leader~\cite{burianova2025secret} in PoS consensus protocols, Proof-of-Useful-Work with mining SNARKs/zk-SNARKs~\cite{oleksak2025zk}, and Proof-of-Social-Capital~\cite{mariani2025proof}.
+	In addition, Ivan focuses on other topics in consensus protocols such as DoS on the leader~\cite{burianova2025secret} in PoS consensus protocols, Proof-of-Useful-Work with mining SNARKs/zk-SNARKs~\cite{oleksak2025zk}, and Proof-of-Social-Capital~\cite{mariani2025proof}.
 	
 	\item
 	\textbf{Ing. Vladimír Veselý, Ph.D.} (Course Coordinator): Dr.~Veselý's
@@ -112,7 +112,7 @@ principles and applications. This course is motivated by the observation
 that many recent graduates and industry practitioners lack the
 specialized knowledge required to navigate this complex landscape. The
 curriculum is therefore designed to bridge this gap by providing a
-rigorous and  education in the technical aspects of BDA.
+rigorous education in the technical aspects of BDA.
 
 A key motivation is the need to empower students to critically evaluate
 the suitability of blockchain technology for various use cases. The hype
@@ -349,8 +349,7 @@ essential properties:
 	preventing an attacker from creating a fraudulent document that has
 	the same hash as a legitimate one.
 	\item
-	\textbf{Collision Resistance}: This is the strongest of the three
-	properties and implies the other two. It asserts that it is
+	\textbf{Collision Resistance}: Collision resistance is typically considered stronger than pre-image and second pre-image resistance. It asserts that it is
 	computationally infeasible to find any two distinct inputs \texttt{x}
 	and \texttt{x\textquotesingle{}} that produce the same hash output.
 	The ``Birthday Paradox'' illustrates that finding a collision is
@@ -578,7 +577,7 @@ The fundamental operations of a digital signature scheme are as follows:
 	\item
 	\textbf{Signing}: To sign a message, the user applies a signing
 	algorithm to the message and their private key. This produces a
-	digital signature, which is a fixed-size string of data (see \autoref{fig:signatures}.
+	digital signature, which is a fixed-size string of data (see \autoref{fig:signatures}).
 	\item
 	\textbf{Verification}: 
 %	To verify a signature, a recipient uses the
@@ -588,7 +587,7 @@ The fundamental operations of a digital signature scheme are as follows:
 	To verify a signature, the
 	recipient uses the sender's public key, the message, and the signature.
 	The verification algorithm returns a boolean value indicating whether
-	the signature is valid (see \autoref{fig:signatures}.
+	the signature is valid (see \autoref{fig:signatures}).
 \end{itemize}
 
 \begin{figure}[t]
@@ -880,7 +879,7 @@ the overall operation and security of the system (see \autoref{fig:participants}
 	Communicate}\label{how-participants-communicate}
 
 Participants in a blockchain network communicate through a peer-to-peer
-(P2P) network over-layed over underlying network using a gossiping protocol (see \autoref{fig:network-overlay}). Messages are sent only to a
+(P2P) network overlaid on the underlying network using a gossiping protocol (see \autoref{fig:network-overlay}). Messages are sent only to a
 small number of peers (e.g., 8-50). When a new node joins the network,
 it scans a list of hard-coded directory nodes (DNS seeders) to find
 peers.
@@ -893,7 +892,7 @@ nodes was 12.6 seconds, with a maximum of 40 seconds~\cite{decker2013information
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.4\textwidth]{./figs/network-overlay.png} 
+		\includegraphics[width=0.6\textwidth]{./figs/network-overlay.png} 
 		\caption{Overview of network in blockchains~\cite{homoliak2020security}.}		
 		\label{fig:network-overlay}
 	\end{center}	
@@ -946,7 +945,7 @@ in a blockchain network, from lightweight clients to consensus nodes.
 	computers so that any involved record cannot be altered retroactively,
 	without the alteration of all subsequent blocks.
 	\item
-	\textbf{Decentralized Application (DApp)}: An application that is run
+	\textbf{Decentralized Application (DAPP)}: An application that is run
 	by many users on a decentralized network with trustless protocols.
 	They are designed to avoid any single point of failure.
 	\item

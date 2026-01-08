@@ -253,9 +253,9 @@ In particular, this EIP introduces 3 elements of gas:
 	
 	\item \textbf{Tip} -- is set by the user, and it represents a premium to miners that should prioritize the faster inclusion of their transaction.
 	
-	\item \textbf{Fee cap} -- represents the the maximum amount of gas a user is willing to pay.	
+	\item \textbf{Fee cap} -- represents the maximum amount of gas a user is willing to pay.	
 \end{itemize}
-This EIP improves economics of Ethereum since base we must always be ``payed'' in ETH, while before it could be paid in any currency or token of a the exchange with the full node that handled the fee internally.
+This EIP improves economics of Ethereum since base we must always be ``paid'' in ETH, while before it could be paid in any currency or token of the exchange with the full node that handled the fee internally.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -393,7 +393,7 @@ MPT contains 3 types of nodes:
 	\item \textbf{Branch nodes}: splits the path according to the current symbol in the key.
 	\item \textbf{Leaf nodes}: they store data of the account states (or storages).	
 \end{compactenum}
-The example of ste state trie built using MPT is depicted in \autoref{fig:eth-mpt}, and it contains 4 accounts.
+The example of the state trie built using MPT is depicted in \autoref{fig:eth-mpt}, and it contains 4 accounts.
 
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
@@ -421,19 +421,19 @@ structure that can quickly test whether an element is a member of a set.
 While it can produce false positives, it will never produce a false
 negative.
 
-Bloom filter is an $m$ bit array that requires $k$ different (cryptographically insecure) hash functions, where $k << m$. 
+Bloom filter is an $m$-bit array that requires $k$ different (cryptographically insecure) hash functions, where $k << m$. 
 Bloom filter supports 2 operations:
 \begin{compactenum}
-	\item \textbf{Add element} -- we hash new element with k hash functions and set 1 on obtained positions.
-	\item \textbf{Query element} -- we hash queried element with k hash functions and if 1 is on all positions, return true. Otherwise, return false (see \autoref{fig:eth-bloom-filter}).
+	\item \textbf{Add element} -- we hash a new element with k hash functions and set 1 on obtained positions.
+	\item \textbf{Query element} -- we hash a queried element with k hash functions and if 1 is on all positions, return true. Otherwise, return false (see \autoref{fig:eth-bloom-filter}).
 \end{compactenum}
-Bloom filter is often use as a pre-filter for expensive storage-lookup queries (see \autoref{fig:bloom-app}).
+Bloom filter is often used as a prefilter for expensive storage-lookup queries (see \autoref{fig:bloom-app}).
 
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./figs/bloom.png}
-		\caption{An example of the Bloom filter with 3 hashing functions  and 3 elements. Element w in query is not included in the Bloom filter.}		
+		\caption{An example of the Bloom filter with 3 hashing functions  and 3 elements. Element w in the query is not included in the Bloom filter.}		
 		\label{fig:eth-bloom-filter}
 	\end{center}	
 \end{figure}
