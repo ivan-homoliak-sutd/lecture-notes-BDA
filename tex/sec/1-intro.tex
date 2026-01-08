@@ -176,42 +176,39 @@ hands-on application.
 
 \begin{itemize}
 	\item
-	\textbf{Lectures}: The lecture series is designed to cover a wide
-	spectrum of topics, beginning with the fundamental principles of
-	cryptography and distributed systems. The curriculum then progresses
-	to explore the intricacies of existing blockchain platforms, their
-	unique characteristics, and their inherent challenges. A significant
-	portion of the lectures is dedicated to security and privacy
-	considerations, which are paramount in the design of robust
-	decentralized systems. The course culminates in practical instruction
-	on the development of decentralized applications (DAPPs) and smart
-	contracts, equipping students with the skills to build and deploy
-	their own blockchain-based solutions.
+%	\textbf{Lectures}: The lecture series is designed to cover a wide
+%	spectrum of topics, beginning with the fundamental principles of
+%	cryptography and distributed systems. The curriculum then progresses
+%	to explore the intricacies of existing blockchain platforms, their
+%	unique characteristics, and their inherent challenges. A significant
+%	portion of the lectures is dedicated to security and privacy
+%	considerations, which are paramount in the design of robust
+%	decentralized systems. The course culminates in practical instruction
+%	on the development of decentralized applications (DAPPs) and smart
+%	contracts, equipping students with the skills to build and deploy
+%	their own blockchain-based solutions.
+	The lecture series covers a range of topics, starting with the basic principles of cryptography and distributed systems. The curriculum then moves on to examine existing blockchain platforms, their unique features, and the challenges they face. A large portion of the lectures focuses on security and privacy issues, which are essential for designing strong decentralized systems. The course ends with practical training on developing decentralized applications (DAPPs) and smart contracts, giving students the skills they need to create and deploy their own blockchain solutions.
+
 	\item
-	\textbf{Project}: A central component of the course is a semester-long
-	project, which accounts for 40 points of the final grade. Students are
-	required to obtain a minimum of one point to pass. The project offers
-	two distinct tracks:
+%	\textbf{Project}: A central component of the course is a semester-long
+%	project, which accounts for 40 points of the final grade. Students are
+%	required to obtain a minimum of one point to pass. The project offers
+%	two distinct tracks:
+	A key part of the course is a semester-long project, which is worth 40 points of the final grade. Students need to earn at least one point to pass. The project has two options:
 	
 	\begin{itemize}
 		\tightlist
 		\item
-		\textbf{Mainstream Track}: This option involves a standardized task,
-		such as extending the functionality of an ERC20 token. This track is
-		designed to provide a solid foundation in smart contract
-		development.
+		\textbf{Mainstream Track}: This choice involves a standardized task, such as extending the functionality of an ERC20 token. This track aims to give students a solid foundation in smart contract development.
 		\item
-		\textbf{Individual Track}: This option allows students to pursue a
-		project tailored to their specific interests, which can be aligned
-		with their bachelor's or master's thesis. This provides an
-		opportunity for in-depth research and development in a specialized
-		area of blockchain technology.
+		\textbf{Individual Track}: This option lets students work on a project that matches their specific interests, which can relate to their bachelor's or master's thesis. This allows for in-depth research and development in a focused area of blockchain technology.
 	\end{itemize}
 	\item
-	\textbf{Final Exam}: A final exam will be administered
-	at the end of the semester, covering all the topics discussed in the
-	lectures. The exam is worth 60 points, and a minimum score of 30 is
-	required to pass the course. There will be no mid-term exam.
+%	\textbf{Final Exam}: A final exam will be administered
+%	at the end of the semester, covering all the topics discussed in the
+%	lectures. The exam is worth 60 points, and a minimum score of 30 is
+%	required to pass the course. There will be no mid-term exam.
+	A final exam will take place at the end of the semester, covering all the topics discussed in the lectures. The exam is worth 60 points, and students must score at least 30 to pass the course. There will be no mid-term exam.
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -222,73 +219,92 @@ hands-on application.
 \subsubsection{Cryptography \& System
 	Security}\label{cryptography-system-security}
 
-The security of any system, particularly a decentralized one like a
-blockchain, is predicated on a clear and well-defined \textbf{attacker
-	model}. This model serves as a formal specification of the capabilities
-and resources of a potential adversary. By establishing a robust
-attacker model, we can design and analyze systems with a precise
-understanding of the threats they are intended to withstand. In the
-context of blockchain security, the attacker model typically includes
-the following assumptions:
+%The security of any system, particularly a decentralized one like a
+%blockchain, is predicated on a clear and well-defined \textbf{attacker
+%	model}. This model serves as a formal specification of the capabilities
+%and resources of a potential adversary. By establishing a robust
+%attacker model, we can design and analyze systems with a precise
+%understanding of the threats they are intended to withstand. In the
+%context of blockchain security, the attacker model typically includes
+%the following assumptions:
+The security of a system, especially a decentralized one like blockchain, relies on a clear and detailed \textbf{attacker model}. This model outlines the capabilities and resources of a potential attacker. By establishing a strong attacker model, we can design and assess systems with a clear understanding of the threats they are meant to counter. In blockchain security, the attacker model usually includes the following assumptions:
+
 
 \begin{itemize}
 	\tightlist
 	\item
-	\textbf{Network-Level Attacks}: The attacker is assumed to have
-	control over the network, enabling them to perform actions such as
-	eavesdropping on communication channels and executing
-	man-in-the-middle (MITM) attacks. This assumption acknowledges that
-	the underlying communication infrastructure is not inherently secure.
+%	\textbf{Network-Level Attacks}: The attacker is assumed to have
+%	control over the network, enabling them to perform actions such as
+%	eavesdropping on communication channels and executing
+%	man-in-the-middle (MITM) attacks. This assumption acknowledges that
+%	the underlying communication infrastructure is not inherently secure.
+The attacker is assumed to have control over the network, allowing actions such as eavesdropping on communication and performing man-in-the-middle (MITM) attacks. This assumption reflects the fact that the communication infrastructure is not inherently secure.
+
 	\item
-	\textbf{Cryptographic Primitives}: A fundamental assumption is that
-	the cryptographic primitives used in the blockchain, such as hash
-	functions and digital signature schemes, are computationally secure.
-	This means that the attacker is unable to break these primitives with
-	any realistic amount of computational power.
+%	\textbf{Cryptographic Primitives}: A fundamental assumption is that
+%	the cryptographic primitives used in the blockchain, such as hash
+%	functions and digital signature schemes, are computationally secure.
+%	This means that the attacker is unable to break these primitives with
+%	any realistic amount of computational power.
+	It is assumed that the cryptographic primitives used in the blockchain, like hash functions and digital signature schemes, are secure. This means the attacker cannot break these primitives with any realistic computational power.
 	\item
-	\textbf{Authentication Factors}: In systems that employ multi-factor
-	authentication, it is often assumed that an attacker cannot compromise
-	more than a specified number of authentication factors. For example,
-	in a two-factor authentication scheme, the attacker is assumed to be
-	unable to steal both factors.
+	\textbf{Authentication Factors}: 
+%	In systems that employ multi-factor
+%	authentication, it is often assumed that an attacker cannot compromise
+%	more than a specified number of authentication factors. For example,
+%	in a two-factor authentication scheme, the attacker is assumed to be
+%	unable to steal both factors.
+	In systems that use multi-factor authentication, it is often assumed that an attacker cannot compromise more than a certain number of authentication factors. For example, in a two-factor authentication scheme, the attacker is assumed to be unable to steal both factors.
 	\item
-	\textbf{Consensus Power}: A critical assumption in permissionless
-	blockchains is that an attacker cannot gain control of more than a
-	certain threshold of the network's consensus power. In Proof-of-Work
-	systems like Bitcoin, this threshold is typically 51\% of the total
-	hash rate. In Proof-of-Stake and Proof-of-Authority systems, it is often 33\% of the total
-	staked capital or the number of equal consensus nodes, respectively.
+	\textbf{Consensus Power}: 
+%	A critical assumption in permissionless
+%	blockchains is that an attacker cannot gain control of more than a
+%	certain threshold of the network's consensus power. In Proof-of-Work
+%	systems like Bitcoin, this threshold is typically 51\% of the total
+%	hash rate. In Proof-of-Stake and Proof-of-Authority systems, it is often 33\% of the total
+%	staked capital or the number of equal consensus nodes, respectively.
+	A key assumption in permissionless blockchains is that an attacker cannot control more than a specific threshold of the network's consensus power. In Proof-of-Work systems like Bitcoin, this threshold is usually 51\% of the total hash rate. In Proof-of-Stake and Proof-of-Authority systems, it is often 33\% of the total staked capital or the number of equal consensus nodes, respectively.
 \end{itemize}
 
-It is crucial to recognize that cryptography, while essential, is not a
-panacea for all security challenges. The practical security of a
-blockchain system is also contingent on several other factors:
+%It is crucial to recognize that cryptography, while essential, is not a
+%panacea for all security challenges. The practical security of a
+%blockchain system is also contingent on several other factors:
+It is essential to understand that while cryptography is important, it is not the solution to all security problems. The practical security of a blockchain system also depends on several other factors:
 
 \begin{itemize}
 	\tightlist
 	\item
-	\textbf{Implementation Issues}: Flaws in the implementation of
-	cryptographic protocols can introduce vulnerabilities, even if the
-	underlying cryptographic primitives are secure. A discrepancy between
-	the mathematical definition of a protocol and its software
-	implementation is a common source of security breaches.
+	\textbf{Implementation Issues}: 
+%	Flaws in the implementation of
+%	cryptographic protocols can introduce vulnerabilities, even if the
+%	underlying cryptographic primitives are secure. A discrepancy between
+%	the mathematical definition of a protocol and its software
+%	implementation is a common source of security breaches.
+	Flaws in implementing cryptographic protocols can create vulnerabilities, even if the underlying cryptographic primitives are secure. A gap between the mathematical definition of a protocol and its software implementation is a common cause of security issues.
 	\item
-	\textbf{Side-Channel Attacks}: These attacks exploit information
-	leaked from the physical implementation of a system, rather than from
-	theoretical weaknesses in the algorithms. For example, an attacker
-	might analyze the power consumption or electromagnetic radiation of a
-	device to infer secret keys.
+	\textbf{Side-Channel Attacks}: 
+%	These attacks exploit information
+%	leaked from the physical implementation of a system, rather than from
+%	theoretical weaknesses in the algorithms. For example, an attacker
+%	might analyze the power consumption or electromagnetic radiation of a
+%	device to infer secret keys.
+	These attacks take advantage of information leaked from the physical implementation of a system, rather than weaknesses in the algorithms. For example, an attacker might examine the power use or electromagnetic radiation of a device to discover secret keys.
 	\item
-	\textbf{Key Management}: The secure generation, storage, and
-	management of cryptographic keys are of paramount importance. A
-	compromised private key can undermine the security of the entire
-	system, regardless of the strength of the cryptographic algorithms.
+	\textbf{Key Management}: 
+%	The secure generation, storage, and
+%	management of cryptographic keys are of paramount importance. A
+%	compromised private key can undermine the security of the entire
+%	system, regardless of the strength of the cryptographic algorithms.
+	Proper generation, storage, and management of cryptographic keys are crucial. A compromised private key can threaten the security of the entire system, no matter how strong the cryptographic algorithms are.
+	
 	\item
-	\textbf{Performance Trade-offs}: There is often a trade-off between
-	security and performance. For instance, while zero-knowledge proofs
-	can provide strong privacy guarantees, their computational overhead
-	can be significant, impacting the scalability and efficiency of the
-	system.
+	\textbf{Performance Trade-offs}: 
+%	There is often a trade-off between
+%	security and performance. For instance, while zero-knowledge proofs
+%	can provide strong privacy guarantees, their computational overhead
+%	can be significant, impacting the scalability and efficiency of the
+%	system.
+	There is frequently a trade-off between security and performance. For instance, while zero-knowledge proofs can provide strong privacy guarantees, their computational demands can be high, affecting the scalability and efficiency of the system.
 \end{itemize}
 
 \subsubsection{Cryptographic Hash
@@ -564,10 +580,15 @@ The fundamental operations of a digital signature scheme are as follows:
 	algorithm to the message and their private key. This produces a
 	digital signature, which is a fixed-size string of data (see \autoref{fig:signatures}.
 	\item
-	\textbf{Verification}: To verify a signature, a recipient uses the
-	sender's public key, the message, and the signature. The verification
-	algorithm returns a boolean value indicating whether the signature is
-	valid (see \autoref{fig:signatures}.
+	\textbf{Verification}: 
+%	To verify a signature, a recipient uses the
+%	sender's public key, the message, and the signature. The verification
+%	algorithm returns a boolean value indicating whether the signature is
+%	valid (see \autoref{fig:signatures}.
+	To verify a signature, the
+	recipient uses the sender's public key, the message, and the signature.
+	The verification algorithm returns a boolean value indicating whether
+	the signature is valid (see \autoref{fig:signatures}.
 \end{itemize}
 
 \begin{figure}[t]
@@ -579,38 +600,69 @@ The fundamental operations of a digital signature scheme are as follows:
 	\end{center}	
 \end{figure}
 
-Digital signatures provide several crucial security properties:
+Digital signatures offer several important security features:
 
 \begin{itemize}
 	\tightlist
 	\item
-	\textbf{Authenticity}: A valid signature confirms that the message was
-	signed by the owner of the corresponding private key. This is because
-	only the owner of the private key could have produced a valid
-	signature that can be verified with the public key.
+%	\textbf{Authenticity}: A valid signature confirms that the message was
+%	signed by the owner of the corresponding private key. This is because
+%	only the owner of the private key could have produced a valid
+%	signature that can be verified with the public key.
+	A signature that is valid shows that the
+	message was actually signed by the holder of the corresponding private
+	key. It is because the owner of the private key would be the only
+	person able to create a valid signature that can be verified by the
+	public key.
+	
 	\item
-	\textbf{Integrity}: The signature ensures that the message has not
-	been altered since it was signed. Any modification to the message
-	would result in an invalid signature.
+	\textbf{Integrity}: 
+%	The signature ensures that the message has not
+%	been altered since it was signed. Any modification to the message
+%	would result in an invalid signature.
+	The signature guarantees that the message has not been
+	modified after it was signed. If any changes are made to the message,
+	the signature will become invalid.
 	\item
-	\textbf{Non-Repudiation}: The signer cannot plausibly deny having
-	signed the message, as only they have access to the private key.
-	However, it is important to note that this property can be challenged
-	if the signer can plausibly claim that their private key was
-	compromised.
+	\textbf{Non-Repudiation}: 
+%	The signer cannot plausibly deny having
+%	signed the message, as only they have access to the private key.
+%	However, it is important to note that this property can be challenged
+%	if the signer can plausibly claim that their private key was
+%	compromised.
+	The signer cannot reasonably deny that they signed
+	the message, as only they have the private key. It is worth
+	mentioning, however, that this property may be challenged if the
+	signer can legitimately claim that their private key was compromised.
+	
 	\item
-	\textbf{Unforgeability}: It is computationally infeasible for an
-	attacker to forge a valid signature for a new message without access
-	to the private key. This property is based on the computational
-	difficulty of the underlying mathematical problems, such as the
-	discrete logarithm problem or the integer factorization problem.
+	\textbf{Unforgeability}: 
+%	It is computationally infeasible for an
+%	attacker to forge a valid signature for a new message without access
+%	to the private key. This property is based on the computational
+%	difficulty of the underlying mathematical problems, such as the
+%	discrete logarithm problem or the integer factorization problem.
+	Without access to the private key, it would be
+	computationally impossible for an attacker to produce a valid
+	signature for a new message. This property depends on the
+	computational hardness of the mathematical problems, e.g., the discrete
+	logarithm problem or the integer factorization problem that
+	underpin the cryptographic primitives.
 \end{itemize}
 
-In the context of blockchains, digital signatures are used to authorize
-transactions. When a user wants to send cryptocurrency or interact with
-a smart contract, they sign the transaction with their private key. This
-signature proves that they are the legitimate owner of the funds or
-assets being transferred and that they have authorized the transaction.
+%In the context of blockchains, digital signatures are used to authorize
+%transactions. When a user wants to send cryptocurrency or interact with
+%a smart contract, they sign the transaction with their private key. This
+%signature proves that they are the legitimate owner of the funds or
+%assets being transferred and that they have authorized the transaction.
+
+Within the domain of blockchains, digital signatures serve the purpose
+of transaction authorization. A user signing a transaction with their
+private key is what a cryptocurrency transfer or smart contract
+interaction requires. They, by their signature, prove their
+ownership of the funds or assets and that they have approved the
+transaction.
+
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -619,69 +671,107 @@ assets being transferred and that they have authorized the transaction.
 
 \subsubsection{Why Blockchains?}\label{why-blockchains}
 
-The advent of blockchain technology was driven by the inherent
-limitations of traditional centralized information systems. These
-systems, while ubiquitous, suffer from a number of vulnerabilities that
-can compromise their security, reliability, and trustworthiness.
+%The advent of blockchain technology was driven by the inherent
+%limitations of traditional centralized information systems. These
+%systems, while ubiquitous, suffer from a number of vulnerabilities that
+%can compromise their security, reliability, and trustworthiness.
+
+A key impetus behind blockchain technology was the fixed
+disadvantages of the existing traditional centralized information
+systems. These systems, despite the fact that they are widely used,
+have a number of vulnerabilities that can compromise their security,
+reliability, and trustworthiness.
 
 \begin{itemize}
 	\tightlist
 	\item
-	\textbf{Single Point of Failure}: Centralized systems are susceptible
-	to a single point of failure. A hardware malfunction, a software bug,
-	or a successful denial-of-service (DDoS) attack on a central server
-	can render the entire system inoperable.
+%	\textbf{Single Point of Failure}: Centralized systems are susceptible
+%	to a single point of failure. A hardware malfunction, a software bug,
+%	or a successful denial-of-service (DDoS) attack on a central server
+%	can render the entire system inoperable.
+	Centralized systems are vulnerable to
+	failure of one component. If a central server's hardware malfunctions, a
+	software bug is introduced, or the server is targeted successfully during
+	a denial-of-service (DDoS) attack, the entire system will become
+	nonfunctional.
+
 	\item
 	\textbf{Censorship}: A central authority has the power to censor users
 	or transactions at its discretion, often without any mechanism for
 	appeal or recourse. This can lead to arbitrary exclusion and a lack of
 	fairness.
+
 	\item
 	\textbf{Limited Availability}: While cloud service providers often
 	advertise high availability, achieving 100\% uptime is practically
 	impossible in a centralized architecture. Outages can and do occur,
 	leading to service disruptions.
+
 	\item
-	\textbf{Lack of Data Integrity}: In a centralized database, a
-	malicious actor with sufficient privileges can alter or delete data
-	without leaving a trace. This makes it difficult to guarantee the
-	integrity and authenticity of the data.
+	\textbf{Lack of Data Integrity}: A sinister insider with access privileges may
+	compromise the data in a centralized database by making changes and
+	deletions that will be untraceable. Consequently, it is a challenge to
+	guarantee the authenticity and integrity of the data.
 	\item
-	\textbf{Lack of Transparency}: The inner workings of centralized
-	systems are often opaque to users. There is no way to independently
-	verify that the system is operating as intended or that the data is
-	being handled correctly.
+%	\textbf{Lack of Transparency}: The inner workings of centralized
+%	systems are often opaque to users. There is no way to independently
+%	verify that the system is operating as intended or that the data is
+%	being handled correctly.
+	Users are usually kept in the dark about the
+	internal processes of centralized systems. There is no way for
+	outsiders to verify objectively whether the system is being used in
+	the intended manner or whether the data is being managed properly.
 \end{itemize}
 
 Blockchain technology offers a paradigm shift, providing a decentralized
-alternative that addresses these challenges through its inherent
+alternative that addresses these challenges by its inherent
 properties:
 
 \begin{itemize}
 	\tightlist
 	\item
-	\textbf{Decentralization}: By distributing the ledger across a network
-	of nodes, blockchains eliminate the single point of failure. The
-	system can continue to operate even if some nodes go offline.
+%	\textbf{Decentralization}: By distributing the ledger across a network
+%	of nodes, blockchains eliminate the single point of failure. The
+%	system can continue to operate even if some nodes go offline.
+	Distribution of the ledger over a network of
+	nodes allows blockchains to get rid of a single point of failure. The
+	network will remain functional even if some nodes are disconnected.
 	\item
-	\textbf{Censorship Resistance}: In a permissionless blockchain, all
-	valid transactions are eventually processed. No single entity has the
-	power to censor transactions, ensuring that the network remains open
-	and accessible to all.
+%	\textbf{Censorship Resistance}: In a permissionless blockchain, all
+%	valid transactions are eventually processed. No single entity has the
+%	power to censor transactions, ensuring that the network remains open
+%	and accessible to all.
+	All valid transactions are eventually included
+	in a permissionless blockchain. There is no individual who can forbid
+	the transactions, thereby ensuring that the network stays free and
+	accessible to everyone.
 	\item
-	\textbf{Immutability}: The append-only nature of the blockchain,
-	enforced by cryptographic hashes, makes it extremely difficult to
-	alter or delete past transactions. This creates a permanent and
-	tamper-evident record of all activity on the network.
+%	\textbf{Immutability}: The append-only nature of the blockchain,
+%	enforced by cryptographic hashes, makes it extremely difficult to
+%	alter or delete past transactions. This creates a permanent and
+%	tamper-evident record of all activity on the network.
+	Since a blockchain's structure is inherently
+	append-only, cryptographic hashes provide the necessary security to
+	prevent or at least drastically limit the ability to change or remove
+	old transactions. Hence, the network has a permanent and tamper-evident
+	record of all its activities.
 	\item
-	\textbf{Auditability}: The entire history of the blockchain is
-	available for anyone to inspect and verify. This allows for
-	independent auditing of the system, ensuring that all transactions are
-	valid and that the rules of the protocol have been followed.
+%	\textbf{Auditability}: The entire history of the blockchain is
+%	available for anyone to inspect and verify. This allows for
+%	independent auditing of the system, ensuring that all transactions are
+%	valid and that the rules of the protocol have been followed.
+	Anyone can unravel and verify the full blockchain's
+	history. Thus the system can be independently audited to confirm the
+	validity of all transactions and the correct implementation of the
+	protocol.
 	\item
-	\textbf{Transparency}: All transactions on a public blockchain are
-	visible to all participants. This transparency fosters trust and
-	accountability, as all actions are open to scrutiny.
+%	\textbf{Transparency}: All transactions on a public blockchain are
+%	visible to all participants. This transparency fosters trust and
+%	accountability, as all actions are open to scrutiny.
+	All transactions taking place on public blockchains
+	can be seen by every participant. This open nature of the network
+	characterized by full disclosure of information strengthens trust and
+	accountability, given that anyone's actions may be publicly reviewed
 \end{itemize}
 
 \subsubsection{High-Level View of Blockchains}\label{high-level-view-of-blockchains}
