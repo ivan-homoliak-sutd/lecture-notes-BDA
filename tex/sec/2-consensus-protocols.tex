@@ -1,51 +1,99 @@
 %\subsection{Introduction}\label{in/troduction}
 
-This section delves into the fundamental mechanisms that underpin the
-operation of decentralized networks: consensus protocols. These
-protocols are the cornerstone of any blockchain, as they provide the
-means for a distributed network of independent and potentially
-untrusting nodes to reach an agreement on the state of the ledger. As we
-will learn, achieving this ``agreement'' or ``consensus'' in a
-decentralized environment is a non-trivial challenge, especially when
-considering the potential for network delays, failures, and even
-malicious participants.
+%This section delves into the fundamental mechanisms that underpin the
+%operation of decentralized networks: consensus protocols. These
+%protocols are the cornerstone of any blockchain, as they provide the
+%means for a distributed network of independent and potentially
+%untrusting nodes to reach an agreement on the state of the ledger. As we
+%will learn, achieving this ``agreement'' or ``consensus'' in a
+%decentralized environment is a non-trivial challenge, especially when
+%considering the potential for network delays, failures, and even
+%malicious participants.
+%
+%We will begin by exploring the theoretical foundations of consensus,
+%including the different types of blockchain networks and how they manage
+%access and participation. We will dissect the inherent trade-offs in
+%distributed systems as encapsulated by the famous CAP theorem, and
+%understand why blockchains must often prioritize availability and
+%partition tolerance, leading to a model of ``eventual consistency.'' We
+%will also define the critical properties that a robust consensus
+%protocol must satisfy -- namely \textbf{safety, liveness, and finality} -- to
+%ensure the network remains secure and functional.
+%
+%The section will then proceed to examine the two primary paradigms for
+%achieving consensus: \textbf{lottery-based} and \textbf{voting-based} mechanisms. We will
+%analyze the respective strengths and weaknesses of each approach,
+%considering factors such as scalability, network overhead, and the time
+%it takes for transactions to be irreversibly confirmed. A significant
+%portion of the section will be dedicated to understanding the concept of
+%\textbf{forks} -- a natural consequence of the probabilistic nature of some
+%consensus protocols -- and the mechanisms used to resolve them.
+%
+%Furthermore, we will explore the classic \textbf{Byzantine Generals Problem},
+%which provides a powerful analogy for understanding the challenges of
+%achieving consensus in the presence of malicious actors. This will lead
+%to a discussion of Byzantine Fault Tolerance (BFT) and its practical
+%implementation in the form of the Practical Byzantine Fault Tolerance
+%(PBFT) algorithm, a protocol foundational to many permissioned
+%blockchains.
+%
+%Finally, we will examine the most prominent consensus protocols used in
+%practice today. This includes Proof-of-Work (PoW), the original,
+%resource-intensive mechanism of Bitcoin; Proof-of-Stake (PoS), a more
+%energy-efficient alternative that has been adopted by many modern
+%blockchains like Ethereum; and \textbf{Proof-of-Authority} (PoA), a
+%reputation-based mechanism well-suited for private, permissioned
+%networks. We will also discuss the crucial role of incentive schemes in
+%securing permissionless networks and the complex challenges of managing
+%decentralized names and identities.
 
-We will begin by exploring the theoretical foundations of consensus,
-including the different types of blockchain networks and how they manage
-access and participation. We will dissect the inherent trade-offs in
-distributed systems as encapsulated by the famous CAP theorem, and
-understand why blockchains must often prioritize availability and
-partition tolerance, leading to a model of ``eventual consistency.'' We
-will also define the critical properties that a robust consensus
-protocol must satisfy -- namely \textbf{safety, liveness, and finality} -- to
-ensure the network remains secure and functional.
+This section aims to uncover consensus protocols that are
+essential for the operation of decentralized networks. These
+protocols are the foundation of any blockchain since they allow
+a distributed network consisting of independent and possibly
+untrusting nodes to agree on the ledger's state. As we shall see,
+getting this ``agreement" or ``consensus" in a
+decentralized setting is quite difficult particularly when
+there is network latency, breakdowns, and even
+malicious parties.
 
-The section will then proceed to examine the two primary paradigms for
-achieving consensus: \textbf{lottery-based} and \textbf{voting-based} mechanisms. We will
-analyze the respective strengths and weaknesses of each approach,
-considering factors such as scalability, network overhead, and the time
-it takes for transactions to be irreversibly confirmed. A significant
-portion of the section will be dedicated to understanding the concept of
-\textbf{forks} -- a natural consequence of the probabilistic nature of some
-consensus protocols -- and the mechanisms used to resolve them.
+First, we will discuss the theoretical background of consensus
+including the different types of blockchain networks and their
+methods of managing access and participation. We will describe
+the inherent compromises in distributed systems as represented by the
+well-known CAP theorem, and comprehend why blockchains have to
+favor availability and partition tolerance thus leading to a
+model of ``\textbf{eventual consistency.}'' We will also point out the
+essential characteristics that a resilient consensus
+protocol must have -- namely \textbf{safety, liveness, and finality} --
+to keep the network secure and operational.
+The section will go on to review the major two approaches for
+attaining consensus: \textbf{lottery-based} and \textbf{voting-based}
+mechanisms. We will evaluate the pros and cons of both methods
+with respect to aspects such as scalability, network overhead, and
+the duration for transactions to be permanently confirmed. Most of
+the section will deal with explanation of the notion of
+\textbf{forks} -- the direct product of the random nature of some
+consensus protocols -- as well as the methods used to settle
+them.
+On top of that, we will be touching on the well-known
+\textbf{Byzantine Generals Problem}, which is a striking metaphor for grasping the difficulties of
+reaching consensus in a hostile environment. This will transition
+us to the subject of Byzantine Fault Tolerance (BFT) protocols and their real-world model known as Practical Byzantine Fault Tolerance (PBFT) protocol, an algorithm that is central to many permissioned blockchains.
 
-Furthermore, we will explore the classic \textbf{Byzantine Generals Problem},
-which provides a powerful analogy for understanding the challenges of
-achieving consensus in the presence of malicious actors. This will lead
-to a discussion of Byzantine Fault Tolerance (BFT) and its practical
-implementation in the form of the Practical Byzantine Fault Tolerance
-(PBFT) algorithm, a protocol foundational to many permissioned
-blockchains.
-
-Finally, we will examine the most prominent consensus protocols used in
-practice today. This includes Proof-of-Work (PoW), the original,
-resource-intensive mechanism of Bitcoin; Proof-of-Stake (PoS), a more
-energy-efficient alternative that has been adopted by many modern
-blockchains like Ethereum; and \textbf{Proof-of-Authority} (PoA), a
-reputation-based mechanism well-suited for private, permissioned
-networks. We will also discuss the crucial role of incentive schemes in
-securing permissionless networks and the complex challenges of managing
+We will end the section by identifying the leading consensus
+protocols that are extensively employed nowadays. This covers
+Proof-of-Work (PoW), which is the first and Bitcoin's
+original, energy-consuming, validation mechanism; Proof-of-Stake (PoS),
+a more eco-friendly substitute that is in line with the
+requirements of many new blockchains such as Ethereum; and
+\textbf{Proof-of-Authority} (PoA), a
+trust-based method that fits networks which are private and
+permissioned. We will also illustrate how incentive systems
+play an important part in the security of permissionless networks
+and the intricate problems that come with the governance of
 decentralized names and identities.
+
 
 \subsection{Learning Objectives}\label{learning-objectives}
 
