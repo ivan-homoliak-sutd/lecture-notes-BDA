@@ -316,7 +316,7 @@ See examples of abstract contract and interface in \autoref{fig:inteface}.
 
 
 \subsubsection{Libraries}\label{sec:libs}
-Libraries are similar to contracts but they are deployed only once and their code is reused using the DELEGATECALL instruction.
+Libraries are similar to contracts but they are deployed only once and their code is reused using the \texttt{DELEGATECALL} instruction.
 If library functions are called, their code is executed in the context of the calling contract (especially modifying the storage of the calling contract).
 Therefore, libraries are assumed to be stateless.
 Libraries can be also seen as implicit base contracts of the contracts that use them.
@@ -421,7 +421,7 @@ security is of paramount importance. Some of the most common security
 vulnerabilities include:
 
 \begin{itemize}
-	\tightlist
+	
 	\item
 	\textbf{Reentrancy Attacks}: This is a type of attack where a
 	malicious contract can repeatedly call a function on a victim contract
@@ -429,6 +429,28 @@ vulnerabilities include:
 	from the victim contract if it does not follow the
 	checks-effects-interactions pattern. The infamous DAO attack was a
 	result of a reentrancy vulnerability (see \autoref{fig:dao-bug}).
+	
+		\item
+	\textbf{Integer Overflows and Underflows}: These vulnerabilities occur
+	when an arithmetic operation results in a value that is outside the
+	range of the data type. This can lead to unexpected behavior and can
+	be exploited by attackers to manipulate the state of the contract.
+	It can, for example, cause out of gas exception due to comparing mismatching data types:  \verb| for (var i = 0; i < 2000; i++) { ... } |. Note that i is of type uint8 and thus will never reach the value 2000.
+	
+	%	\begin{figure}[t]
+	%		%	\vspace{-0.3cm}
+	%		\begin{center}
+	%			\includegraphics[width=0.8\textwidth]{./figs/underflow.png }
+	%			\caption{Out of gas exception due to integer underflow.}		
+	%			\label{fig:underflow}
+	%		\end{center}	
+	%	\end{figure}
+	
+	\item
+	\textbf{Denial-of-Service (DoS) Attacks}: An attacker can exploit
+	certain vulnerabilities to render a contract unusable, for example, by
+	causing it to run out of gas or by making it impossible for other
+	users to interact with it.
 \end{itemize}
 
 
@@ -441,30 +463,6 @@ vulnerabilities include:
 	\end{center}	
 \end{figure}
 
-\begin{itemize}
-	\tightlist
-	\item
-	\textbf{Integer Overflows and Underflows}: These vulnerabilities occur
-	when an arithmetic operation results in a value that is outside the
-	range of the data type. This can lead to unexpected behavior and can
-	be exploited by attackers to manipulate the state of the contract.
-	It can, for example, cause out of gas exception due to comparing mismatching data types:  \verb| for (var i = 0; i < 2000; i++) { ... } |. Note that i is of type uint8 and thus will never reach the value 2000.
-	
-%	\begin{figure}[t]
-%		%	\vspace{-0.3cm}
-%		\begin{center}
-%			\includegraphics[width=0.8\textwidth]{./figs/underflow.png }
-%			\caption{Out of gas exception due to integer underflow.}		
-%			\label{fig:underflow}
-%		\end{center}	
-%	\end{figure}
-	
-	\item
-	\textbf{Denial-of-Service (DoS) Attacks}: An attacker can exploit
-	certain vulnerabilities to render a contract unusable, for example, by
-	causing it to run out of gas or by making it impossible for other
-	users to interact with it.
-\end{itemize}
 
 Another notable example of smart contract vulnerabilities is the Parity
 Wallet bug, which led to the freezing of millions of dollars worth of

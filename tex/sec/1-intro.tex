@@ -61,7 +61,7 @@ skills and experiences to the curriculum.
 The following list contains current and former course instructors who helped in running this course.
 \begin{itemize}
 	\item
-	\textbf{doc. Ing. Ivan Homoliak, Ph.D.} (Guarantor): Dr.~Homoliak is
+	\textbf{Ivan Homoliak} (Course Guarantor). Ivan is
 	an associate professor at the Faculty of Information Technology, Brno
 	University of Technology (FIT@BUT). His academic journey includes a
 	Ph.D.~from FIT@BUT in 2016, followed by a postdoctoral fellowship at
@@ -75,7 +75,7 @@ The following list contains current and former course instructors who helped in 
 	In addition, Ivan focuses on other topics in consensus protocols such as DoS on the leader~\cite{burianova2025secret} in PoS consensus protocols, Proof-of-Useful-Work with mining SNARKs/zk-SNARKs~\cite{oleksak2025zk}, and Proof-of-Social-Capital~\cite{mariani2025proof}.
 	
 	\item
-	\textbf{Ing. Vladimír Veselý, Ph.D.} (Course Coordinator): Dr.~Veselý's
+	\textbf{Vladimír Veselý} (Course Coordinator). Vladimír's
 	engagement with cryptocurrencies dates back to 2011, when he began
 	mining Bitcoin. His practical experience is complemented by a
 	Ph.D.~from FIT@BUT. He serves as a consultant for law enforcement
@@ -86,7 +86,7 @@ The following list contains current and former course instructors who helped in 
 	the use of blockchains for storing personal named records~\cite{koutensky2025using}.
 	
 	\item
-	\textbf{Martin Perešíni} (Teaching Assistant): A Ph.D.~student (under supervision of Dr. Homoliak) whose research is
+	\textbf{Martin Perešíni} (Teaching Assistant). Martin is a Ph.D.~student (under supervision of Dr. Homoliak) whose research is
 	concentrated on the security and scalability of consensus protocols.
 	His work includes the study of Directed Acyclic Graph (DAG) based
 	protocols~\cite{perevsini2023incentive,perevsini2021dag,perevsini2023dag}, which offer a promising alternative to traditional
@@ -94,13 +94,13 @@ The following list contains current and former course instructors who helped in 
 	investigates incentive schemes and threats such as selfish mining~\cite{peresini2026selfish}.
 	
 	\item
-	\textbf{Samuel Olekšák} (Teaching Assistant): A Ph.D.~student (under supervision of Dr. Homoliak) specializing in the
+	\textbf{Samuel Olekšák} (Teaching Assistant). Samuel is a Ph.D.~student (under supervision of Dr. Homoliak) specializing in the
 	application of zero-knowledge cryptography in blockchains and
 	consensus protocols. His research explores innovative concepts such as
 	Proof-of-Useful-Work for mining zero-knowledge proofs~\cite{oleksak2025zk}, aiming to make the mining process more computationally meaningful.
 	
 	\item
-	\textbf{Ivana Stančíková} (Teaching Assistant): A former Ph.D. student (under supervision of Dr. Homoliak) whose focus revolved around blockchain-based e-voting protocols and the problem of their scalability~\cite{venugopalan2023always,stanvcikova2022sbvote}.
+	\textbf{Ivana Stančíková} (Teaching Assistant). Ivana is A former Ph.D. student (under supervision of Dr. Homoliak) whose focus revolved around blockchain-based e-voting protocols and the problem of their scalability~\cite{venugopalan2023always,stanvcikova2022sbvote}.
 \end{itemize}
 
 \subsubsection{Motivation and Expected
@@ -167,6 +167,8 @@ advice or recommendations on specific projects or cryptocurrencies. The
 focus is strictly on the technical and academic aspects of the
 technology.
 
+\iffalse
+
 \subsubsection{Course Structure and
 	Assignments}\label{course-structure-and-assignments}
 
@@ -210,6 +212,8 @@ hands-on application.
 %	required to pass the course. There will be no mid-term exam.
 	A final exam will take place at the end of the semester, covering all the topics discussed in the lectures. The exam is worth 60 points, and students must score at least 30 to pass the course. There will be no mid-term exam.
 \end{itemize}
+\fi
+
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -439,9 +443,9 @@ provide timestamping and unforgeability.
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{./figs/hash-chain-with-data.png} 
+		\includegraphics[width=0.7\textwidth]{./figs/hash-chain-with-data.pdf} 
 
-		\caption{Hash chain with data.}		
+		\caption{Hash chain with data~\cite{hash-link}.}		
 		\label{fig:hash-chain-data}
 
 	\end{center}	
@@ -459,10 +463,10 @@ every non-leaf node is the hash of the concatenation of its children's
 hashes (see \autoref{fig:merkle-tree}). This structure allows for efficient and secure verification of
 the contents of large data sets.
 
-\begin{figure}[t]
+\begin{figure}[b]
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{./figs/merkle-tree.png} 
+		\includegraphics[width=0.6\textwidth]{./figs/merkle-tree.pdf} 
 
 		\caption{Merkle tree.}		
 		\label{fig:merkle-tree}
@@ -508,7 +512,7 @@ chain.
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./figs/combination-mk-hc.png} 
+		\includegraphics[width=0.9\textwidth]{./figs/combination-mk-hc.jpg} 
 
 		\caption{A combination of Merkle tree and hash chains.}		
 		\label{fig:combination}
@@ -528,7 +532,7 @@ of an email has to perform some work to send it, making it expensive to
 send large volumes of spam. The proof generation is expensive, but the
 verification is cheap.
 
-\begin{figure}[!b]
+\begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{./figs/pow.png} 

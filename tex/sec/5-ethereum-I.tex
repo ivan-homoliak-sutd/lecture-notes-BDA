@@ -16,7 +16,7 @@ which is used to meter the computational resources of the network.
 
 A significant portion of this section will be dedicated to understanding
 the technical underpinnings of Ethereum, including the structure of
-transactions and blocks, and the use of Merkle-Patricia trees to
+transactions and blocks, and the use of Merkle-Patricia Tries to
 efficiently store and verify the global state of the network. By the end
 of this section, you will have a solid understanding of the fundamental
 principles of Ethereum and the key technological innovations that have
@@ -46,7 +46,7 @@ applications.
 	\item
 	Gain insight into the structure of Ethereum transactions and blocks.
 	\item
-	Understand the purpose and function of the Merkle-Patricia Tree in
+	Understand the purpose and function of the Merkle-Patricia Trie in
 	managing Ethereum's global state.
 \end{itemize}
 
@@ -184,7 +184,7 @@ Nonce field has context-based interpretation and based on the account type.
 In the case of EOA account, the value of nonce represents the number of transactions sent from this account while in the case of smart contract account, the nonce value represents the number of smart contract creations made by tbe smart contract account.
 Note that the code hash stands for the cryptographically hashed EVM bytecode of the smart contract account, while the code fragments are stored in a dedicated state database, under their hashes -- this is to efficiently optimize the storage for the same codes. The code hash field is immutable (unlike other fields).
 
-\subsubsection{The concept of Gas}\label{gas-and-the-ethereum-virtual-machine-evm}
+\subsubsection{The Concept of Gas}\label{gas-and-the-ethereum-virtual-machine-evm}
 
 To prevent the network from being bogged down by infinite loops or other
 forms of computational abuse, Ethereum incorporates a mechanism known as
@@ -226,21 +226,21 @@ See the example of gas prices of various instructions in \autoref{fig:eth-gas-pr
 The simple pseudocode of deducting gas while doing transaction execution in EVM is described in the following listing:
 \begin{enumerate}
 	\tightlist
-	\item Specify startGas and gasPrice
-	\item  Assert(startGas*gasPrice $\leq$ balanceOfCaller)
-	\item  balanceOfCaller -= startGas*gasPrice
-	\item tmpGas = startGas ; gasRefund = 0
-	\item Execute code, deducting from tmpGas
+	\item Specify \texttt{startGas} and \texttt{gasPrice}
+	\item  Assert(\texttt{startGas}*\texttt{gasPrice} $\leq$ \texttt{balanceOfCaller})
+	\item  \texttt{balanceOfCaller} -= \texttt{startGas}*\texttt{gasPrice}
+	\item \texttt{tmpGas} = \texttt{startGas} ; \texttt{gasRefund} = 0
+	\item Execute code, deducting from \texttt{tmpGas}
 	\begin{itemize}
-		\item deducted = ExecutionCost(tx)
-		\item \textbf{If} deducted $<$ 0 \textbf{then} \\
-		\hspace{0.5cm} ~~~~gasRefund += $|$deducted$|$ \\
+		\item \texttt{deducted} = ExecutionCost(tx)
+		\item \textbf{If} \texttt{deducted} $<$ 0 \textbf{then} \\
+		\hspace{0.5cm} ~~~~\texttt{gasRefund} += $|$\texttt{deducted}$|$ \\
 		\textbf{else} \\
-		\hspace{0.5cm} ~~~~tmpGas -= deducted \\
-		\item Assert(tmpGas$\geq$ 0)
+		\hspace{0.5cm} ~~~~\texttt{tmpGas} -= \texttt{deducted} \\
+		\item Assert(\texttt{tmpGas}$\geq$ 0)
 	\end{itemize}
 	
-	\item Refund gasRefund + tmpGas to balanceOfCaller	
+	\item Refund \texttt{gasRefund} + \texttt{tmpGas} to \texttt{balanceOfCaller}	
 \end{enumerate}
 
 
@@ -249,11 +249,11 @@ The simple pseudocode of deducting gas while doing transaction execution in EVM 
 The EIP-1559~\cite{eip1559} was included in London's hardfork that occurred on 5th of August 2021, and its main contribution is to optimize the fee market system.
 In particular, this EIP introduces 3 elements of gas:
 \begin{itemize}
-	\item \textbf{Base fee} -- price per unit of gas, which is burnt. It is set by the network. Blocks can be extended to 200\%.
+	\item \textbf{Base Fee} -- price per unit of gas, which is burnt. It is set by the network. Blocks can be extended to 200\%.
 	
 	\item \textbf{Tip} -- is set by the user, and it represents a premium to miners that should prioritize the faster inclusion of their transaction.
 	
-	\item \textbf{Fee cap} -- represents the maximum amount of gas a user is willing to pay.	
+	\item \textbf{Fee Cap} -- represents the maximum amount of gas a user is willing to pay.	
 \end{itemize}
 This EIP improves economics of Ethereum since base we must always be ``paid'' in ETH, while before it could be paid in any currency or token of the exchange with the full node that handled the fee internally.
 
@@ -320,7 +320,7 @@ The block header (of legacy Ethereum v1.0) contains several crucial pieces of in
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{./figs/eth-block.png}
+		\includegraphics[width=0.7\textwidth]{./figs/eth-block.jpg}
 		\caption{A structure of the header in Ethereum v1.0.}		
 		\label{fig:eth-eth-header}
 	\end{center}	
@@ -348,7 +348,7 @@ The block header (of legacy Ethereum v1.0) contains several crucial pieces of in
 	the block.
 	\item
 	\textbf{State Root, Transaction Root, and Receipt Root}: The root
-	hashes of three Merkle-Patricia trees that store the global state, the
+	hashes of three Merkle-Patricia Tries that store the global state, the
 	transactions, and the transaction receipts, respectively.
 	\item \textbf{ExtraData}: arbitrary data of max. 32B. (e.g., name of the mining pool)
 	\item
@@ -357,7 +357,7 @@ The block header (of legacy Ethereum v1.0) contains several crucial pieces of in
 \end{itemize}
 
 \subsubsection{The Global State and Merkle-Patricia
-	Trees}\label{the-global-state-and-merkle-patricia-trees}
+	Tries}\label{the-global-state-and-merkle-patricia-trees}
 
 The \textbf{global state} of Ethereum is a massive data structure that
 contains a mapping of all account addresses to their corresponding
@@ -370,7 +370,7 @@ The example of a transaction that calls smart contract account and thus changes 
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{./figs/eth-state-change.png}
+		\includegraphics[width=0.7\textwidth]{./figs/eth-state-change.jpg}
 		\caption{A transaction call that changes the state of the smart contract and its value.}		
 		\label{fig:eth-state-change}
 	\end{center}	
@@ -378,7 +378,7 @@ The example of a transaction that calls smart contract account and thus changes 
 
 
 To efficiently store and verify the global state, Ethereum uses a
-sophisticated data structure called a \textbf{Merkle-Patricia Tree
+sophisticated data structure called a \textbf{Merkle-Patricia Trie
 	(MPT)}. The MPT is a hybrid data structure that combines the properties
 of a Merkle tree (for integrity) and a Radix/Patricia trie (for
 efficient lookups). This allows for efficient verification of the state
@@ -424,21 +424,20 @@ negative.
 Bloom filter is an $m$-bit array that requires $k$ different (cryptographically insecure) hash functions, where $k << m$. 
 Bloom filter supports 2 operations:
 \begin{compactenum}
-	\item \textbf{Add element} -- we hash a new element with k hash functions and set 1 on obtained positions.
-	\item \textbf{Query element} -- we hash a queried element with k hash functions and if 1 is on all positions, return true. Otherwise, return false (see \autoref{fig:eth-bloom-filter}).
+	\item \textbf{Add Element}: we hash a new element with k hash functions and set 1 on obtained positions.
+	\item \textbf{Query Element}: we hash a queried element with k hash functions and if 1 is on all positions, return true. Otherwise, return false (see \autoref{fig:eth-bloom-filter}).
 \end{compactenum}
 Bloom filter is often used as a prefilter for expensive storage-lookup queries (see \autoref{fig:bloom-app}).
-
+%
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./figs/bloom.png}
-		\caption{An example of the Bloom filter with 3 hashing functions  and 3 elements. Element w in the query is not included in the Bloom filter.}		
+		\caption{An example of the Bloom filter with 3 hashing functions  and 3 elements. Element $w$ in the query is not included in the Bloom filter.}		
 		\label{fig:eth-bloom-filter}
 	\end{center}	
 \end{figure}
-
-
+%
 \begin{figure}[t]
 	%	\vspace{-0.3cm}
 	\begin{center}
@@ -447,9 +446,7 @@ Bloom filter is often used as a prefilter for expensive storage-lookup queries (
 		\label{fig:bloom-app}
 	\end{center}	
 \end{figure}
-
-
-
+%
 In Ethereum, each transaction receipt contains a Bloom filter of its logs, and the
 block header contains a cumulative Bloom filter that aggregates the
 filters from all transaction receipts in the block. This allows DAPPs
@@ -491,7 +488,7 @@ ecosystem, including:
 	\textbf{Gas}: The mechanism for metering the computational resources
 	of the network, preventing abuse and compensating miners.
 	\item
-	\textbf{Merkle-Patricia Trees}: The sophisticated data structure used
+	\textbf{Merkle-Patricia Tries}: The sophisticated data structure used
 	to efficiently and securely store the global state of all accounts.
 	\item
 	\textbf{Bloom Filters}: A probabilistic data structure used to make
@@ -525,7 +522,7 @@ ecosystem, including:
 	state of the blockchain is represented as a set of accounts, each with
 	its own balance, storage, and code.
 	\item
-	\textbf{Merkle-Patricia Tree (MPT)}: A hybrid data structure that
+	\textbf{Merkle-Patricia Trie (MPT)}: A hybrid data structure that
 	combines a Merkle tree and a Patricia trie to efficiently store and
 	verify the global state of the Ethereum network.
 	\item
