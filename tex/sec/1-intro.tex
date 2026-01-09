@@ -427,6 +427,17 @@ registered hash. This process can be repeated for subsequent
 authentications, with the client revealing the next pre-image in the
 sequence each time.
 
+\begin{figure}[t]
+	%	\vspace{-0.3cm}
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{./figs/hash-chain-with-data.pdf} 
+		
+		\caption{Hash chain with data~\cite{hash-link}.}		
+		\label{fig:hash-chain-data}
+		
+	\end{center}	
+\end{figure}
+
 While simple and effective, hash chains have certain limitations. The
 number of OTPs is finite and determined by the length of the chain. Once
 all the pre-images have been revealed, a new chain must be generated and
@@ -440,16 +451,7 @@ is also known as \textbf{linked timestamping}. The principle is to link data to
 the hash chain to ensure its integrity and to publish some outputs to
 provide timestamping and unforgeability.
 
-\begin{figure}[t]
-	%	\vspace{-0.3cm}
-	\begin{center}
-		\includegraphics[width=0.7\textwidth]{./figs/hash-chain-with-data.pdf} 
 
-		\caption{Hash chain with data~\cite{hash-link}.}		
-		\label{fig:hash-chain-data}
-
-	\end{center}	
-\end{figure}
 
 This approach, however, does not scale well with the number of documents
 being logged. To address this, documents can be aggregated using data
