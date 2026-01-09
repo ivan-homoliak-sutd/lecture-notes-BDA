@@ -16,7 +16,7 @@ PoS, including the roles of validators, the process of staking, and the
 mechanisms for leader election. A balanced analysis of the advantages
 and disadvantages of PoS will be presented, addressing its potential for
 both decentralization and wealth concentration.
-
+%
 A significant portion of the section is dedicated to analysis
 of the security vulnerabilities inherent in PoS protocols. We will
 dissect critical issues such as the \textbf{``nothing-at-stake'' problem,
@@ -249,8 +249,8 @@ an adversary can launch a DoS attack against them, forcing a round
 restart. This can be repeated until the adversary's desired nodes are
 elected.
 
+\medskip
 \textbf{Countermeasures:}
-
 \begin{itemize}
 	\tightlist
 	\item \textbf{Private Leader Election (via VRF)}: As pioneered by Algorand~\cite{gilad2017algorand},
@@ -307,8 +307,9 @@ protect their old keys. If the attacker accumulates enough historical
 stake, they can rerun the protocol and rewrite the entire history of the
 blockchain.
 
-\textbf{Countermeasures~\cite{homoliak2020security}:}
 
+\medskip
+\textbf{Countermeasures~\cite{homoliak2020security}:}
 \begin{itemize}
 	\tightlist
 	\item
@@ -496,10 +497,16 @@ There are several approaches to oracle that we will briefly describe.
 
 TownCrier~\cite{zhang2016town} acts as a trusted proxy between a blockchain and HTTPS
 websites, using a Trusted Execution Environment (TEE) like Intel SGX (see \autoref{fig:oracles-tc}).
-\textbf{Pros}: Easy integration, no changes needed for website
-operators. \textbf{Cons}: Trusts the TEE manufacturer (a single point
-of failure), and several attacks have been demonstrated against Intel
-SGX.
+\vspace{-0.3cm}
+\begin{itemize}
+	\tightlist
+	\item \textbf{Pros}: Easy integration, no changes needed for website
+	operators. 
+	
+	\item \textbf{Cons}: Trusts the TEE manufacturer (a single point
+	of failure), and several attacks have been demonstrated against Intel
+	SGX.	
+\end{itemize}
 
 
 \begin{figure}[t]
@@ -515,7 +522,7 @@ SGX.
 \begin{figure}[b]
 	%	\vspace{-0.3cm}
 	\begin{center}
-		\includegraphics[width=0.95\textwidth]{./figs/tc1.png}
+		\includegraphics[width=0.85\textwidth]{./figs/tc1.png}
 		\caption{TownCrier~\cite{zhang2016town}.}
 		\label{fig:oracles-tc}
 	\end{center}	
@@ -527,9 +534,16 @@ TLS-N~\cite{ritzdorf2018tls} adds a non-repudiation layer to TLS, allowing for t
 of privacy-preserving, non-interactive proofs of the contents of a TLS
 session (see overview in \autoref{fig:tlsn}). 
 It uses efficient Merkle-tree-based authentication and produces TLS-N proofs that can be verified by smart contracts.
-\textbf{Pros}: More general and powerful, with extra features
-like privacy. \textbf{Cons}: Requires changes to the TLS specification
-and updates to TLS servers, making integration difficult and expensive.
+\begin{itemize}
+	\tightlist
+	
+	\item \textbf{Pros}: More general and powerful, with extra features
+	like privacy. 
+	\item \textbf{Cons}: Requires changes to the TLS specification
+	and updates to TLS servers, making integration difficult and expensive.
+	
+\end{itemize}
+
 %\pandocbounded{\includegraphics[keepaspectratio,alt={TLS-N Diagram}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_020.jpg}}
 
 \subsubsection{Practical Data Feed Service
@@ -538,8 +552,15 @@ and updates to TLS servers, making integration difficult and expensive.
 In PDFS~\cite{guarnizo2019pdfs}, data providers maintain an append-only database (like a
 Merkle tree) and sign their contract locations via TLS (see \autoref{fig:pdfs}). The contract API
 allows for updating the database root and proving the authenticity of
-data via Merkle proofs. \textbf{Pros}: Direct TLS authentication, easy
-integration. \textbf{Cons}: Website operators have to deploy it.
+data via Merkle proofs. 
+\vspace{-0.3cm}
+\begin{itemize}
+	\tightlist
+	\item \textbf{Pros}: Direct TLS authentication, easy
+	integration. 
+	\item \textbf{Cons}: Website operators have to deploy it.
+	
+\end{itemize}
 %\pandocbounded{\includegraphics[keepaspectratio,alt={PDFS Diagram}]{../../../Input/BDA-11-Proof-of-Stake-protocols-24.-4.-2025_files/Image_021.jpg}}
 
 

@@ -179,10 +179,10 @@ solutions (see \autoref{tab:throu}).
 	\toprule
 	\textbf{System} & \textbf{Throughput (TPS)} \\
 	\midrule
-	Bitcoin & 3 - 8  \\
-	Ethereum & 15 - 30 \\
+	Bitcoin & 3 -- 8  \\
+	Ethereum & 15 -- 30 \\
 	Solana & 5,000  (lab tested) \\
-	VISA & 11,000 - 25,000  \\
+	Visa & 11,000 -- 25,000  \\
 	\bottomrule
 \end{tabular}
 	\caption{Throughput of various blockchains vs. VISA.}\label{tab:throu}
@@ -222,9 +222,9 @@ Metrics}\label{section-2-forks-finality-and-metrics}
 			\toprule
 			System & Finality Time \\
 			\midrule
-			Bitcoin & \textasciitilde60 min (6 blocks) \\
-			Ethereum PoW & \textasciitilde3 min (12 blocks) \\
-			Ethereum PoS & \textasciitilde12 min (2 epochs) \\
+			Bitcoin & $\sim$60 min (6 blocks) \\
+			Ethereum PoW & $\sim$3 min (12 blocks) \\
+			Ethereum PoS & $\sim$12 min (2 epochs) \\
 			Algorand & Instant \\
 			\bottomrule
 			
@@ -426,9 +426,8 @@ grows.
 
 \paragraph{Elastico.}\label{elastico}
 Elastico~\cite{luu2016secure} was the first practical sharding protocol proposed for open
-blockchains.
+blockchains. Its principle of operation can be summarized as:
 %
-\textbf{Design:}
 \begin{enumerate}
 	\item \textbf{Identity Establishment:} Nodes perform a PoW
 	task. The resulting hash determines their identity and committee
@@ -473,8 +472,10 @@ OmniLedger~\cite{kokoris2018omniledger} builds upon Elastico with several key im
 Its design Goals were oriented on security (i.e., Full decentralization, shard
 robustness, and secure cross-shard transactions) and high performance (i.e., scale-out, low storage, and low latency).
 
+\medskip
 \textbf{Key Innovations:} 
 \begin{itemize}
+	\tightlist
 	\item \textbf{RandHound:} A secure and unbiased
 	randomness protocol used for validator assignment to shards, preventing
 	adversarial manipulation. 
@@ -776,17 +777,17 @@ of performance, security, and decentralization.
 \tightlist
 \item
   \textbf{The Blockchain Trilemma}:\\
-  \url{https://vitalik.ca/general/2021/04/07/sharding.html}
+  \url{https://www.binance.com/en/academy/articles/what-is-the-blockchain-trilemma}
 \item
   \textbf{Bitcoin-NG: A Scalable Blockchain Protocol}: \\
   \url{https://www.usenix.org/system/files/conference/nsdi16/nsdi16-paper-eyal.pdf}
 \item
   \textbf{Elastico: A Secure Sharding Protocol for Open Blockchains}: \\
-  \url{https://www.comp.nus.edu.sg/\textasciitilde loiluu/papers/elastico.pdf}
+  \url{https://dl.acm.org/doi/10.1145/2976749.2978389}
 \item
   \textbf{OmniLedger: A Secure, Scale-Out, Decentralized Ledger}: \\
   \url{https://eprint.iacr.org/2017/406.pdf}
 \item
   \textbf{RapidChain: A Secure, Fast and Scalable Blockchain}: \\
-  \url{https://www.usenix.org/conference/usenixsecurity19/presentation/zamani}
+  \url{https://eprint.iacr.org/2018/460.pdf}
 \end{itemize}

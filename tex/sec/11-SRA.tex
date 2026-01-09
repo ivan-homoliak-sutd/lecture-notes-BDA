@@ -273,13 +273,13 @@ The potential threats of this layer can be divided according to the type of cons
     longer, alternative chain in which the transaction never occurred,
     allowing them to spend the same coins again.
     
-    \item \textbf{Breaking network assumptions:}
+    \item \textbf{Breaking Network Assumptions:}
     Consensus protocols assume some bounds on message delivery and connectivity. Partitions and high delays can violate these assumptions, then safety or liveness can fail even if cryptography remains intact.
     
-    \item \textbf{Time computation weaknesses:}
+    \item \textbf{Time Computation Weaknesses:}
     Nodes often estimate network time from peers. If an attacker can bias a victim's perception of time, the victim's blocks can be rejected due to time constraints. 
     
-    \item \textbf{Shard attacks:} become feasible because each shard has fewer validators, so obtaining a local majority can be easier than attacking the whole system.
+    \item \textbf{Shard Attacks:} become feasible because each shard has fewer validators, so obtaining a local majority can be easier than attacking the whole system.
     
   \end{itemize}
 
@@ -298,7 +298,7 @@ The potential threats of this layer can be divided according to the type of cons
   \begin{itemize}
   \tightlist
 
-	\item \textbf{Selfish mining}: the attacker withholds blocks strategically, releases them to invalidate honest work, and gains a higher reward share than their resource share would suggest. This also increases the chance of reorgs, which hurts applications that assume ``a few confirmations is enough.''	
+	\item \textbf{Selfish Mining}: the attacker withholds blocks strategically, releases them to invalidate honest work, and gains a higher reward share than their resource share would suggest. This also increases the chance of reorgs, which hurts applications that assume ``a few confirmations is enough.''	
 	
   \item
     \textbf{Feather Forking}: An attacker announces they will censor
@@ -309,7 +309,7 @@ The potential threats of this layer can be divided according to the type of cons
     reorder or exclude transactions, often for the attacker's financial
     benefit (e.g., front-running).
   
-  \item \textbf{Time spoofing attacks}: a miner publishes blocks with delayed timestamps to signal that puzzles are ``too hard'' causing difficulty to drop over time, which reduces the attacker's future cost to win blocks.
+  \item \textbf{Time Spoofing Attacks}: a miner publishes blocks with delayed timestamps to signal that puzzles are ``too hard'' causing difficulty to drop over time, which reduces the attacker's future cost to win blocks.
 
 
 \begin{figure}[t]
@@ -331,7 +331,7 @@ The potential threats of this layer can be divided according to the type of cons
 		    \textbf{Block Withholding}: A mining pool finds a block but doesn't
 		    publish it, sabotaging the main chain.
 		    
-		   \item \textbf{Lie-in-wait}: delay submission to increase relative shares before release. 
+		   \item \textbf{Lie-in-Wait}: delay submission to increase relative shares before release. 
 		   		   
 		   \item \textbf{Selfish Mining on a Subchain}: exploit decentralized pool mechanics by selectively dropping honest shares. 
 	\end{itemize}
